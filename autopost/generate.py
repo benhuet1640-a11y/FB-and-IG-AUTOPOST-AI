@@ -1,13 +1,21 @@
-"""Ask an LLM for one educational carousel post, returned as structured JSON."""
+"""Ask an LLM for one educational carousel post (structured JSON), plus an optional AI cover image."""
+import base64
+import io
 import json
 import os
 
 import requests
+from PIL import Image
 
-PROMPT = """You write educational Instagram/Facebook carousel posts.
+PROMPT = """You write educational Instagram/Facebook carousel posts for {brand}.
+
+About the business (context only, do NOT pitch it on the teaching slides):
+{what_we_do}
+{positioning}
 
 Audience: {audience}
 Tone: {tone}
+
 Pick ONE specific, useful topic related to these themes:
 {themes}
 
@@ -16,22 +24,32 @@ Do NOT repeat or closely resemble any of these recent posts:
 
 Rules:
 - Teach, don't sell. No product mentions, no calls to action, no "DM us" on any slide.
-- Cover slide: a short, curiosity-driving hook title (max 8 words) and a one-line subtitle.
+  (A separate final slide handles the CTA.)
+- Never say or imply AI replaces staff. Where AI comes up, frame it as backup that
+  helps the team.
+- Don't invent statistics, percentages or studies. Use practical, defensible statements.
+- Cover slide: a scroll-stopping hook title (max 8 words) and a one-line subtitle.
 - Exactly {n} content slides. Each has a heading (max 6 words) and a body (max 30 words).
-  One idea per slide, concrete and actionable.
+  One idea per slide, concrete and actionable for a busy owner.
 - Caption: 2-4 short sentences that add value on their own, then a blank line,
   then exactly {h} relevant hashtags.
+- image_prompt: describe ONE simple illustration scene for the cover that fits the topic
+  (e.g. "an HVAC technician on a rooftop with a phone ringing in his pocket").
+  Describe the scene only, not the art style, and don't include any text in the image.
 
 Return ONLY JSON in this exact shape:
 {{"topic": "...", "cover": {{"title": "...", "subtitle": "..."}},
   "slides": [{{"heading": "...", "body": "..."}}],
-  "caption": "..."}}"""
+  "caption": "...", "image_prompt": "..."}}"""
 
 
 def build_prompt(cfg, recent_topics):
-    c = cfg["content"]
+    c, b = cfg["content"], cfg["business"]
     return PROMPT.format(
-        audience=c["audience"],
+        brand=cfg["brand"]["name"],
+        what_we_do=b["what_we_do"].strip(),
+        positioning=b["positioning"].strip(),
+        audience=" ".join(c["audience"].split()),
         tone=c["tone"],
         themes="\n".join(f"- {t}" for t in c["themes"]),
         recent="\n".join(f"- {t}" for t in recent_topics) or "- (none yet)",
@@ -65,7 +83,7 @@ def _openai(prompt, model):
             "messages": [{"role": "user", "content": prompt}],
             "response_format": {"type": "json_object"},
         },
-        timeout=120,
+        timeout=180,
     )
     r.raise_for_status()
     return r.json()["choices"][0]["message"]["content"]
@@ -97,18 +115,39 @@ def generate_post(cfg, recent_topics):
     raise RuntimeError(f"Could not get a valid post from the AI: {last_err}")
 
 
+def generate_cover_image(scene, cfg):
+    """One portrait illustration from OpenAI's image model. Text is added later by render.py."""
+    ai = cfg["ai"]
+    r = requests.post(
+        "https://api.openai.com/v1/images/generations",
+        headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"},
+        json={
+            "model": ai["image_model"],
+            "prompt": f"{scene}\n\nStyle: {' '.join(ai['image_style'].split())}",
+            "size": "1024x1536",
+            "quality": ai["image_quality"],
+            "n": 1,
+        },
+        timeout=300,
+    )
+    if not r.ok:
+        raise RuntimeError(f"OpenAI image error: {r.status_code} {r.text}")
+    return Image.open(io.BytesIO(base64.b64decode(r.json()["data"][0]["b64_json"]))).convert("RGB")
+
+
 SAMPLE_POST = {
-    "topic": "The 5-minute rule for responding to new leads",
+    "topic": "Why the first 5 minutes decide who gets the job",
     "cover": {
-        "title": "Why the first 5 minutes decide the sale",
-        "subtitle": "What fast-responding businesses do differently",
+        "title": "Why the first 5 minutes decide the job",
+        "subtitle": "What fast-responding shops do differently",
     },
     "slides": [
-        {"heading": "Speed beats price", "body": "Most customers hire whoever responds first. A quick, friendly reply often matters more than being the cheapest option."},
-        {"heading": "Interest fades fast", "body": "A lead that's eager right now may already be calling your competitor in 30 minutes. Momentum is everything."},
-        {"heading": "Voicemail is a dead end", "body": "Many callers hang up instead of leaving a message. If nobody answers, assume that lead is gone."},
-        {"heading": "Set a response standard", "body": "Pick a target, like replying within 5 minutes during business hours, and make it the team's non-negotiable."},
-        {"heading": "Track what you miss", "body": "Check your call log weekly. Count missed calls and unanswered forms. You can't fix what you don't measure."},
+        {"heading": "Speed beats price", "body": "Most homeowners book whoever gets back to them first. A quick, friendly reply often matters more than being the cheapest quote."},
+        {"heading": "Interest fades fast", "body": "A customer with a leaking pipe isn't waiting around. If you don't answer, they're already dialing the next number on Google."},
+        {"heading": "Voicemail is a dead end", "body": "Many callers hang up instead of leaving a message. If nobody picks up, assume that job is gone."},
+        {"heading": "Set a callback standard", "body": "Pick a target, like calling back within 5 minutes during business hours, and make it the whole team's rule."},
+        {"heading": "Track what you miss", "body": "Check your call log every Friday. Count missed and unreturned calls. You can't fix what you don't measure."},
     ],
-    "caption": "Most leads don't go cold because of price. They go cold because nobody got back to them fast enough.\n\nSave this for your next team meeting.\n\n#smallbusiness #leadgeneration #customerservice #businesstips #salestips",
+    "caption": "Most jobs aren't lost on price. They're lost because nobody got back to the customer fast enough.\n\nSave this and share it with your office team.\n\n#smallbusiness #homeservices #contractors #customerservice #businesstips",
+    "image_prompt": "a plumber kneeling under a kitchen sink with tools while a phone lights up and rings on the counter behind him",
 }

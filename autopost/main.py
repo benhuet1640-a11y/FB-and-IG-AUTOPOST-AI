@@ -2,17 +2,20 @@
 Usage:
   python -m autopost.main generate      # AI writes a post + renders slides into posts/<id>/
   python -m autopost.main publish <id>  # posts those slides to Instagram/Facebook
-  python -m autopost.main sample        # renders a built-in sample post (no API keys needed)
+  python -m autopost.main sample [img]  # renders a built-in sample post (no API keys needed)
+  python -m autopost.main due           # is it one of the configured posting hours right now?
 """
 import json
 import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import yaml
+from PIL import Image
 
-from autopost.generate import SAMPLE_POST, generate_post
+from autopost.generate import SAMPLE_POST, generate_cover_image, generate_post
 from autopost.render import render_post
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -38,10 +41,10 @@ def set_output(name, value):
             f.write(f"{name}={value}\n")
 
 
-def create(post, cfg):
+def create(post, cfg, cover_img=None):
     post_id = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H%M")
     out = POSTS / post_id
-    paths = render_post(post, cfg, out)
+    paths = render_post(post, cfg, out, cover_img)
     post["images"] = [p.name for p in paths]
     (out / "post.json").write_text(json.dumps(post, indent=2) + "\n")
     print(f"Rendered {len(paths)} slides → {out}")
@@ -53,11 +56,27 @@ def create(post, cfg):
 def cmd_generate():
     cfg = load_config()
     recent = [h["topic"] for h in load_history()[-60:]]
-    create(generate_post(cfg, recent), cfg)
+    post = generate_post(cfg, recent)
+    cover_img = None
+    if cfg["ai"].get("cover_image") and post.get("image_prompt"):
+        try:
+            cover_img = generate_cover_image(post["image_prompt"], cfg)
+        except Exception as e:  # a missing picture shouldn't cost us the post
+            print(f"Cover image failed, using the plain branded cover: {e}", file=sys.stderr)
+    create(post, cfg, cover_img)
 
 
-def cmd_sample():
-    create(dict(SAMPLE_POST), load_config())
+def cmd_sample(image_path=None):
+    cover_img = Image.open(image_path).convert("RGB") if image_path else None
+    create(dict(SAMPLE_POST), load_config(), cover_img)
+
+
+def cmd_due():
+    sched = load_config()["schedule"]
+    hour = datetime.now(ZoneInfo(sched["timezone"])).hour
+    due = hour in sched["post_hours"]
+    print(f"Local hour {hour} → {'posting' if due else 'not a posting hour, skipping'}")
+    set_output("due", str(due).lower())
 
 
 def image_base_url():
@@ -101,6 +120,8 @@ if __name__ == "__main__":
     elif cmd == "publish" and len(sys.argv) == 3:
         cmd_publish(sys.argv[2])
     elif cmd == "sample":
-        cmd_sample()
+        cmd_sample(sys.argv[2] if len(sys.argv) > 2 else None)
+    elif cmd == "due":
+        cmd_due()
     else:
         sys.exit(__doc__)

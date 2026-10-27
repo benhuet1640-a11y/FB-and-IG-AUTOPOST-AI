@@ -1,40 +1,72 @@
 # ─────────────────────────────────────────────────────────────
 #  Everything you'd want to tweak lives in this file.
-#  (Prompts/topics are placeholders until we finalize them.)
 # ─────────────────────────────────────────────────────────────
 
 brand:
   name: "Pipeline Reception"
-  handle: "@pipelinereception"        # shown in the footer of every slide
+  website: "pipelinereception.com"    # shown in the footer of every slide
   colors:
-    background: "#0F172A"             # slide background
-    text: "#F8FAFC"                   # main text
-    accent: "#38BDF8"                 # headings / highlights / progress bar
-    muted: "#94A3B8"                  # footer + slide counter
+    navy: "#0A2C36"                   # from the logo wordmark
+    teal: "#12A998"                   # from the logo icon
+    amber: "#F6B45D"                  # the dot in the logo icon
+    paper: "#F4F8F7"                  # light background for teaching slides
+    muted: "#5B7680"                  # footer + slide counter
 
-# What the account is about. The AI picks a fresh topic each run from these
-# themes and avoids repeating anything in history.json.
+# Background for the AI writer. It shapes the post's angle but is never sold on
+# the teaching slides.
+business:
+  what_we_do: >
+    Pipeline Reception sets up AI receptionists for service businesses. They answer
+    calls, book appointments and follow up with leads, so the business doesn't lose
+    jobs just because nobody could pick up the phone.
+  positioning: >
+    The AI receptionist ASSISTS the owner and their team. It covers the calls they
+    can't get to (on a job, after hours, during the lunch rush) so they can focus on
+    the work in front of them. It never replaces their staff. Never suggest firing,
+    cutting or replacing people.
+
 content:
-  audience: "small business owners who miss calls and lose leads"
+  audience: >
+    owners and office managers of home-service and local service businesses
+    (HVAC, plumbing, electrical, roofing, landscaping, cleaning, auto repair,
+    salons, med spas, dental and other appointment-based clinics)
   themes:
-    - "why missed calls cost local businesses money"
-    - "phone etiquette and first impressions"
-    - "lead follow-up speed and conversion"
-    - "simple systems to never miss a customer inquiry"
-  tone: "friendly, practical, plain-English, no hype"
-  content_slides: 5                   # educational slides between cover and CTA (IG max total = 10)
+    - "the real cost of missed calls and slow callbacks"
+    - "speed-to-lead and following up so jobs don't go to competitors"
+    - "phone and booking habits that turn callers into booked jobs"
+    - "after-hours, weekend and seasonal-rush call handling"
+    - "keeping your team focused on the job instead of the phone"
+    - "simple systems: call tracking, follow-up, reviews, rebooking"
+    - "how AI receptionists work and where they help (practical, not hype)"
+  tone: "friendly, practical, plain-English, no hype, respectful of the trades"
+  content_slides: 5                   # teaching slides between cover and CTA (IG max total = 10)
   hashtags_per_post: 5
 
 # Last slide only. Every other slide is pure education.
 cta:
-  headline: "Never miss another lead"
-  body: "Pipeline Reception answers every call, 24/7, so you can focus on the work."
-  action: "Follow for more  •  Link in bio"
+  headline: "Never miss a job because you couldn't pick up"
+  body: "Our AI receptionist answers, books and follows up, so your team can stay focused on the work."
+  action: "pipelinereception.com"
 
 ai:
-  provider: "gemini"                  # "gemini" (free tier) or "openai" (pennies/month)
+  provider: "openai"                  # "openai" or "gemini" (Gemini's free tier, text only)
+  openai_model: "gpt-5-mini"          # writes the post text (~$0.50/month at 3 posts a day)
   gemini_model: "gemini-2.5-flash"
-  openai_model: "gpt-4o-mini"
+  # Cover image (hybrid mode): ChatGPT draws 1 image per post; the code adds the text.
+  cover_image: true                   # false = plain branded cover, $0
+  image_model: "gpt-image-1.5"        # or "gpt-image-1-mini" (about 3x cheaper)
+  image_quality: "medium"             # low / medium / high. medium ≈ $0.05 per image on gpt-image-1.5
+  image_style: >
+    Modern flat editorial illustration with soft lighting and clean shapes.
+    Color palette: deep navy (#0A2C36), teal (#12A998) and warm amber (#F6B45D)
+    accents on light neutral tones. Keep the main subject in the upper two-thirds
+    and the bottom third calm and uncluttered, because text will be placed there.
+    No text, letters, numbers, logos or watermarks anywhere in the image.
+
+# Posts go out at these New York times. The code handles daylight saving time.
+schedule:
+  timezone: "America/New_York"
+  post_hours: [8, 12, 18]             # 8am, noon, 6pm. Remove one for 2 posts a day.
 
 platforms:
   instagram: true
