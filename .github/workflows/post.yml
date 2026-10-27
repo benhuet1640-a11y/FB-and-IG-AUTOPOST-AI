@@ -1,0 +1,70 @@
+name: Auto-post carousel
+
+on:
+  schedule:
+    # Times are UTC. These ≈ 9am, 1pm, 6pm US Eastern (EDT).
+    # Delete a line to post twice a day instead of three times.
+    # (Off-the-hour minutes avoid GitHub's top-of-hour delays.)
+    - cron: "7 13 * * *"
+    - cron: "7 17 * * *"
+    - cron: "7 22 * * *"
+  workflow_dispatch:          # adds a "Run workflow" button for testing
+    inputs:
+      dry_run:
+        description: "Generate slides only, don't post"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write             # lets the job commit slides + history back to the repo
+
+concurrency:
+  group: autopost
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Write post + render slides
+        id: gen
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python -m autopost.main generate
+
+      - name: Commit slides (makes the images publicly reachable for Meta)
+        id: commit
+        run: |
+          git config user.name "autopost-bot"
+          git config user.email "autopost-bot@users.noreply.github.com"
+          git add posts
+          git commit -m "New post ${{ steps.gen.outputs.post_id }}"
+          git push
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Publish to Instagram + Facebook
+        if: ${{ !inputs.dry_run }}
+        env:
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          COMMIT_SHA: ${{ steps.commit.outputs.sha }}
+        run: |
+          sleep 20   # give GitHub's CDN a moment to serve the new images
+          python -m autopost.main publish "${{ steps.gen.outputs.post_id }}"
+
+      - name: Save posting history
+        if: ${{ always() && !inputs.dry_run && steps.commit.outcome == 'success' }}
+        run: |
+          git add history.json || true
+          git diff --cached --quiet || (git commit -m "Log post ${{ steps.gen.outputs.post_id }}" && git push)

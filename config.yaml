@@ -1,0 +1,41 @@
+# ─────────────────────────────────────────────────────────────
+#  Everything you'd want to tweak lives in this file.
+#  (Prompts/topics are placeholders until we finalize them.)
+# ─────────────────────────────────────────────────────────────
+
+brand:
+  name: "Pipeline Reception"
+  handle: "@pipelinereception"        # shown in the footer of every slide
+  colors:
+    background: "#0F172A"             # slide background
+    text: "#F8FAFC"                   # main text
+    accent: "#38BDF8"                 # headings / highlights / progress bar
+    muted: "#94A3B8"                  # footer + slide counter
+
+# What the account is about. The AI picks a fresh topic each run from these
+# themes and avoids repeating anything in history.json.
+content:
+  audience: "small business owners who miss calls and lose leads"
+  themes:
+    - "why missed calls cost local businesses money"
+    - "phone etiquette and first impressions"
+    - "lead follow-up speed and conversion"
+    - "simple systems to never miss a customer inquiry"
+  tone: "friendly, practical, plain-English, no hype"
+  content_slides: 5                   # educational slides between cover and CTA (IG max total = 10)
+  hashtags_per_post: 5
+
+# Last slide only. Every other slide is pure education.
+cta:
+  headline: "Never miss another lead"
+  body: "Pipeline Reception answers every call, 24/7, so you can focus on the work."
+  action: "Follow for more  •  Link in bio"
+
+ai:
+  provider: "gemini"                  # "gemini" (free tier) or "openai" (pennies/month)
+  gemini_model: "gemini-2.5-flash"
+  openai_model: "gpt-4o-mini"
+
+platforms:
+  instagram: true
+  facebook: true
