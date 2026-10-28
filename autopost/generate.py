@@ -4,6 +4,7 @@ import io
 import json
 import os
 import random
+import time
 from datetime import date
 
 import requests
@@ -25,6 +26,9 @@ Today is {today}. Where it fits naturally, make the post timely for the season
 
 Hard rules:
 {rules}
+
+"topic" in your JSON = a short, specific title for THIS post (e.g. "Why 2am callers
+never leave voicemails"), not the name of a theme.
 
 Do NOT repeat or closely resemble any of these recent posts:
 {recent}
@@ -100,20 +104,33 @@ def build_prompt(cfg, kind, recent_topics, local):
     return shared + CAROUSEL.format(themes=bullets(c["themes"]), n=c["content_slides"], hashtags=hashtags)
 
 
-def _gemini(prompt, model):
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
-    r = requests.post(
-        url,
-        headers={"x-goog-api-key": os.environ["GEMINI_API_KEY"]},
-        json={
-            "contents": [{"parts": [{"text": prompt}]}],
-            "generationConfig": {"responseMimeType": "application/json", "temperature": 1.0},
-        },
-        timeout=120,
-    )
-    if not r.ok:
-        raise RuntimeError(f"Gemini error: {r.status_code} {r.text}")
-    return r.json()["candidates"][0]["content"]["parts"][0]["text"]
+def _gemini(prompt, models):
+    """Try each model in turn, waiting and retrying when Google says it's busy (429/5xx)."""
+    last = None
+    for model in models:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+        for wait in (0, 15, 45):
+            time.sleep(wait)
+            r = requests.post(
+                url,
+                headers={"x-goog-api-key": os.environ["GEMINI_API_KEY"]},
+                json={
+                    "contents": [{"parts": [{"text": prompt}]}],
+                    "generationConfig": {"responseMimeType": "application/json", "temperature": 1.0},
+                },
+                timeout=120,
+            )
+            if r.ok:
+                return r.json()["candidates"][0]["content"]["parts"][0]["text"]
+            try:
+                reason = r.json()["error"]["message"]
+            except (ValueError, KeyError):
+                reason = r.text[:300]
+            last = f"{model}: {r.status_code} {reason}"
+            print(f"Gemini problem ({last})")
+            if r.status_code not in (429, 500, 502, 503, 504):
+                break  # not a temporary problem; try the next model
+    raise RuntimeError(f"Gemini error: {last}")
 
 
 def _openai(prompt, model):
@@ -154,7 +171,7 @@ def generate_post(cfg, kind, recent_topics):
             if ai["provider"] == "openai":
                 raw = _openai(prompt, ai["openai_model"])
             else:
-                raw = _gemini(prompt, ai["gemini_model"])
+                raw = _gemini(prompt, [ai["gemini_model"], *ai.get("gemini_fallback_models", [])])
             post = validate(json.loads(raw), kind, cfg)
             post["local"] = local
             return post

@@ -23,6 +23,20 @@ POSTS = ROOT / "posts"
 HISTORY = ROOT / "history.json"
 
 
+def load_dotenv():
+    """For local runs: read KEY=value lines from .env. In GitHub Actions the secrets are already set."""
+    env = ROOT / ".env"
+    if not env.exists():
+        return
+    for line in env.read_text().splitlines():
+        key, sep, value = line.partition("=")
+        if sep and not key.strip().startswith("#") and value.strip():
+            os.environ.setdefault(key.strip(), value.strip())
+
+
+load_dotenv()
+
+
 def load_config():
     return yaml.safe_load((ROOT / "config.yaml").read_text())
 

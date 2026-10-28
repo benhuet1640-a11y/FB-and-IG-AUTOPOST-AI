@@ -94,8 +94,8 @@ def art_background(c, art=None, fade_from=0.34, fade_to=0.64):
         return img.convert("RGB")
     img = Image.new("RGB", (W, H), c["navy"])
     deco = ImageDraw.Draw(img)
-    deco.ellipse((W - 520, -300, W + 300, 520), fill=c["teal"])
-    deco.ellipse((W - 330, 420, W - 250, 500), fill=c["amber"])
+    deco.ellipse((W - 420, -260, W + 260, 420), fill=c["teal"])
+    deco.ellipse((W - 355, 285, W - 285, 355), fill=c["amber"])
     return img
 
 

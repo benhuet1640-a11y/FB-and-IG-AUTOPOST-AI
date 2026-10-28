@@ -105,10 +105,19 @@ python -m autopost.main sample carousel
 python -m autopost.main sample ad some-image.png   # with your own artwork
 ```
 
+Generate real AI posts locally (nothing is posted):
+```bash
+cp .env.example .env        # then paste your keys into .env
+python -m autopost.main generate carousel
+python -m autopost.main generate ad
+```
+`.env` is git-ignored, so your keys never get uploaded. GitHub Actions doesn't use it; it reads the repo Secrets instead.
+
 ## Good to know
 - **GitHub's schedule isn't exact.** Runs can start 5–30 minutes late.
 - **If the artwork fails** (for example, OpenAI credit ran out), the post still goes out with the plain branded background.
 - **History:** every published post is logged in `history.json`, and the AI avoids repeating recent topics.
 - **When a run fails**, GitHub emails you.
 - **Google may use free-tier Gemini prompts to improve its products.** That's fine here, since everything it writes gets posted publicly anyway.
+- **Gemini is sometimes overloaded** ("high demand" errors). The app waits and retries, then falls back to `gemini-flash-lite-latest`.
 - **Model names change over time.** If a run fails with "model not found", update the model names in `ai:`.
