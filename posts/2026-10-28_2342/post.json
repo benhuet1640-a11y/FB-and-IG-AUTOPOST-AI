@@ -1,0 +1,66 @@
+{
+  "topic": "Handling freezing pipes and winter emergency calls",
+  "hook_options": [
+    "The call you're losing every freezing Friday",
+    "You're missing winter emergency calls after dark",
+    "Plumbing owners: stop missing sub-zero emergency calls",
+    "More local ads won't fix your missed calls",
+    "3 winter call habits of fully booked shops"
+  ],
+  "hook_type": "callout",
+  "cover": {
+    "kicker": "FREEZE SEASON",
+    "title": "Plumbing owners: stop missing sub-zero emergency calls",
+    "highlight": "sub-zero emergency calls",
+    "subtitle": "Older homes mean frozen pipes and frantic midnight voicemails."
+  },
+  "slides": [
+    {
+      "heading": "The midnight freeze rush",
+      "body": "When temperatures drop, phones start ringing at 2 AM with frozen pipe emergencies. If a call goes to voicemail, the customer hangs up immediately.",
+      "tip": "Call your own business line after 10 PM tonight. What happens?"
+    },
+    {
+      "heading": "Why voicemails get abandoned",
+      "body": "A homeowner with water leaking through a ceiling will not wait for a morning callback. They simply call the next contractor on the list.",
+      "tip": ""
+    },
+    {
+      "heading": "Qualifying the frantic caller",
+      "body": "Not every late call requires immediate dispatch. Some callers only need shut-off guidance, while active bursts need a technician on the road right away.",
+      "tip": "Ask: 'Is the main water shut off right now?'"
+    },
+    {
+      "heading": "Protecting the morning schedule",
+      "body": "Capturing job details and reserving the first morning slots overnight keeps your schedule full before your crew clocks in for the day.",
+      "tip": ""
+    },
+    {
+      "heading": "Winter call handling recap",
+      "body": "Answer freeze calls 24/7, collect clear job details right away, and let your technicians focus strictly on repairs when their shift begins.",
+      "tip": "Review your call log from last weekend and count every call after 8 PM."
+    }
+  ],
+  "caption": "When winter hits, every missed call on a frozen pipe goes straight to the next shop down the road.\n\nCapturing after-hours emergency calls keeps your schedule full without waking up your technicians or burning out your office team.",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumbingcompany",
+    "#plumbingservice",
+    "#smallbusinessowner",
+    "#homeservices"
+  ],
+  "image_prompt": "A plumber in work clothes holding a smartphone in a residential basement near copper pipes and a water heater, natural lighting, with no visible text or screen icons.",
+  "kind": "carousel",
+  "local": true,
+  "person": true,
+  "art_style": "photo",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg",
+    "slide_06.jpg",
+    "slide_07.jpg"
+  ]
+}
