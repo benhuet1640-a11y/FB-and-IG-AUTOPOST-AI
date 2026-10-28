@@ -1,17 +1,22 @@
-name: Auto-post carousel
+name: Auto-post
 
 on:
   schedule:
     # GitHub only understands UTC, so this wakes up at both the summer and winter
     # UTC equivalents of 8am, noon and 6pm New York. The "due" step below posts only
-    # when the New York hour matches schedule.post_hours in config.yaml, so daylight
-    # saving time is handled automatically.
+    # when the New York hour is one of schedule.slots in config.yaml (and picks
+    # carousel vs. ad from there), so daylight saving time is handled automatically.
     # (Minute 7 avoids GitHub's busy top-of-hour slot.)
     - cron: "7 12,13,16,17,22,23 * * *"
   workflow_dispatch:          # adds a "Run workflow" button for testing
     inputs:
+      kind:
+        description: "What to make"
+        type: choice
+        options: [carousel, ad]
+        default: carousel
       dry_run:
-        description: "Generate slides only, don't post"
+        description: "Generate images only, don't post"
         type: boolean
         default: true
 
@@ -40,19 +45,20 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "due=true" >> "$GITHUB_OUTPUT"   # manual runs always go
+            echo "kind=${{ inputs.kind }}" >> "$GITHUB_OUTPUT"
           else
             python -m autopost.main due
           fi
 
-      - name: Write post, draw cover image, render slides
+      - name: Write post, draw AI image, render
         id: gen
         if: steps.due.outputs.due == 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python -m autopost.main generate
+        run: python -m autopost.main generate "${{ steps.due.outputs.kind }}"
 
-      - name: Commit slides (makes the images publicly reachable for Meta)
+      - name: Commit images (makes the images publicly reachable for Meta)
         id: commit
         if: steps.due.outputs.due == 'true'
         run: |

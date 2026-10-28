@@ -4,7 +4,9 @@
 
 brand:
   name: "Pipeline Reception"
-  website: "pipelinereception.com"    # shown in the footer of every slide
+  website: "pipelinereception.com"
+  url: "https://pipelinereception.com"
+  instagram: "@pipeline_reception"
   colors:
     navy: "#0A2C36"                   # from the logo wordmark
     teal: "#12A998"                   # from the logo icon
@@ -12,62 +14,92 @@ brand:
     paper: "#F4F8F7"                  # light background for teaching slides
     muted: "#5B7680"                  # footer + slide counter
 
-# Background for the AI writer. It shapes the post's angle but is never sold on
-# the teaching slides.
+# What the AI knows about the business. Ads use this directly; carousels use it
+# only as background.
 business:
   what_we_do: >
-    Pipeline Reception sets up AI receptionists for service businesses. They answer
-    calls, book appointments and follow up with leads, so the business doesn't lose
-    jobs just because nobody could pick up the phone.
+    Pipeline Reception sets up AI receptionists for plumbing businesses. They answer
+    every call 24/7, book jobs straight into the schedule, and qualify leads, so a
+    plumber never loses a job just because nobody could pick up the phone.
+  features:
+    - "24/7 call answering, including nights, weekends and holidays"
+    - "books appointments straight into your schedule"
+    - "qualifies leads so you know which calls are real jobs"
+    - "we can get you set up in a day"
   positioning: >
     The AI receptionist ASSISTS the owner and their team. It covers the calls they
-    can't get to (on a job, after hours, during the lunch rush) so they can focus on
-    the work in front of them. It never replaces their staff. Never suggest firing,
-    cutting or replacing people.
+    can't get to (under a sink, on an emergency, after hours) so they can focus on
+    the work. It never replaces staff. Never suggest firing, cutting or replacing people.
+  rules:
+    - "Never mention prices, plans by price, or discounts."
+    - "Never name other companies, competitors or software brands."
+    - "Generally-true claims are fine (e.g. 'you'll never miss a call'). Don't invent statistics, percentages, studies, testimonials or customer names."
+    - "The only proof point you may use is that we can set you up in a day."
+  voice: >
+    Speak as "we" (Pipeline Reception) and "you" (the plumbing business owner), or call
+    out the reader directly ("Plumbing business owners:"). Friendly, practical, plain
+    English, no hype, respectful of the trade.
 
 content:
-  audience: >
-    owners and office managers of home-service and local service businesses
-    (HVAC, plumbing, electrical, roofing, landscaping, cleaning, auto repair,
-    salons, med spas, dental and other appointment-based clinics)
+  audience: "plumbing business owners and their office managers across the US"
+  local_market: "Pittsburgh, PA (our home base)"
+  local_share: 0.25                   # about 1 in 4 posts gets a Pittsburgh angle
   themes:
-    - "the real cost of missed calls and slow callbacks"
-    - "speed-to-lead and following up so jobs don't go to competitors"
-    - "phone and booking habits that turn callers into booked jobs"
-    - "after-hours, weekend and seasonal-rush call handling"
-    - "keeping your team focused on the job instead of the phone"
-    - "simple systems: call tracking, follow-up, reviews, rebooking"
-    - "how AI receptionists work and where they help (practical, not hype)"
-  tone: "friendly, practical, plain-English, no hype, respectful of the trades"
+    - "the real cost of missed calls and slow callbacks for plumbers"
+    - "emergency calls: burst pipes, no hot water, backups, and who gets the job"
+    - "speed-to-lead and following up on estimates"
+    - "after-hours, weekend and seasonal-rush call handling (freezes, storms, holidays)"
+    - "keeping techs focused on the job instead of the phone"
+    - "booking, dispatch and scheduling habits that fill the calendar"
+    - "qualifying calls: separating real jobs from tire-kickers"
+    - "reviews, repeat customers and maintenance plans"
+    - "how AI receptionists work for a plumbing shop (practical, not hype)"
   content_slides: 5                   # teaching slides between cover and CTA (IG max total = 10)
-  hashtags_per_post: 5
+  hashtags: >
+    Pick 5-7 from a mix like: #plumbingbusiness #plumber #plumbers #plumbinglife
+    #plumbingcontractor #plumbingservice #plumbingcompany #plumbingtips
+    #smallbusinessowner #homeservices #contractorlife #tradesbusiness.
+    On Pittsburgh posts also use 1-2 of: #pittsburgh #pittsburghbusiness #pittsburghpa #412.
 
-# Last slide only. Every other slide is pure education.
+# Last slide of every carousel.
 cta:
   headline: "Never miss a job because you couldn't pick up"
-  body: "Our AI receptionist answers, books and follows up, so your team can stay focused on the work."
-  action: "pipelinereception.com"
+  body: "We answer 24/7, book jobs into your schedule and qualify every lead, so your team can stay focused on the work."
+  action: "Book a demo"
+
+# Added to the end of captions, per platform. Instagram captions can't have clickable links.
+captions:
+  instagram:
+    carousel: "Follow @pipeline_reception for more tips for plumbing businesses."
+    ad: "Book a demo and pick the plan that fits your shop. Link in bio."
+  facebook:
+    carousel: "More at https://pipelinereception.com"
+    ad: "Book a demo and pick the plan that fits your shop: https://pipelinereception.com"
+  always_hashtag: "#PipelineReception"
 
 ai:
-  provider: "openai"                  # "openai" or "gemini" (Gemini's free tier, text only)
-  openai_model: "gpt-5-mini"          # writes the post text (~$0.50/month at 3 posts a day)
-  gemini_model: "gemini-2.5-flash"
-  # Cover image (hybrid mode): ChatGPT draws 1 image per post; the code adds the text.
-  cover_image: true                   # false = plain branded cover, $0
-  image_model: "gpt-image-1.5"        # or "gpt-image-1-mini" (about 3x cheaper)
-  image_quality: "medium"             # low / medium / high. medium ≈ $0.05 per image on gpt-image-1.5
+  provider: "gemini"                  # "gemini" (free tier) or "openai"
+  gemini_model: "gemini-flash-latest" # Google's alias for its newest Flash model
+  openai_model: "gpt-5-mini"
+  # Hybrid images: the AI draws the artwork, the code adds all the text.
+  cover_image: true                   # false = plain branded background, $0
+  image_model: "gpt-image-1-mini"     # ~$0.015/image. "gpt-image-1.5" looks nicer at ~$0.05
+  image_quality: "medium"             # low / medium / high
   image_style: >
     Modern flat editorial illustration with soft lighting and clean shapes.
     Color palette: deep navy (#0A2C36), teal (#12A998) and warm amber (#F6B45D)
-    accents on light neutral tones. Keep the main subject in the upper two-thirds
-    and the bottom third calm and uncluttered, because text will be placed there.
+    accents on light neutral tones. Keep the main subject in the upper half and
+    the bottom half calm and uncluttered, because text will be placed there.
     No text, letters, numbers, logos or watermarks anywhere in the image.
 
-# Posts go out at these New York times. The code handles daylight saving time.
+# New York hour → what to post. The code handles daylight saving time.
 schedule:
   timezone: "America/New_York"
-  post_hours: [8, 12, 18]             # 8am, noon, 6pm. Remove one for 2 posts a day.
+  slots:
+    8: carousel
+    12: ad
+    18: carousel
 
 platforms:
-  instagram: true
+  instagram: false                    # turn on once Instagram finishes reviewing the account
   facebook: true

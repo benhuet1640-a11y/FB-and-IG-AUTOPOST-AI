@@ -1,76 +1,118 @@
-"""Ask an LLM for one educational carousel post (structured JSON), plus an optional AI cover image."""
+"""Ask an LLM for one post (educational carousel or single-image ad) as JSON, plus an optional AI image."""
 import base64
 import io
 import json
 import os
+import random
+from datetime import date
 
 import requests
 from PIL import Image
 
-PROMPT = """You write educational Instagram/Facebook carousel posts for {brand}.
+SHARED = """You create Instagram/Facebook content for {brand}.
 
-About the business (context only, do NOT pitch it on the teaching slides):
+About the business:
 {what_we_do}
+What we offer:
+{features}
 {positioning}
 
 Audience: {audience}
-Tone: {tone}
+Voice: {voice}
+Today is {today}. Where it fits naturally, make the post timely for the season
+(e.g. frozen pipes in winter, storms and sump pumps in spring, holiday call volume).
+{local}
 
-Pick ONE specific, useful topic related to these themes:
-{themes}
+Hard rules:
+{rules}
 
 Do NOT repeat or closely resemble any of these recent posts:
 {recent}
+"""
 
-Rules:
-- Teach, don't sell. No product mentions, no calls to action, no "DM us" on any slide.
-  (A separate final slide handles the CTA.)
-- Never say or imply AI replaces staff. Where AI comes up, frame it as backup that
-  helps the team.
-- Don't invent statistics, percentages or studies. Use practical, defensible statements.
-- Cover slide: a scroll-stopping hook title (max 8 words) and a one-line subtitle.
+CAROUSEL = """
+Write ONE educational carousel post. Pick a specific, useful topic from these themes:
+{themes}
+
+- Teach, don't sell. No product mentions or calls to action on the cover or content
+  slides. (A separate final slide handles the CTA.)
+- Never say or imply AI replaces staff.
+- Cover: a scroll-stopping hook title (max 8 words) and a one-line subtitle (max 12 words).
 - Exactly {n} content slides. Each has a heading (max 6 words) and a body (max 30 words).
-  One idea per slide, concrete and actionable for a busy owner.
-- Caption: 2-4 short sentences that add value on their own, then a blank line,
-  then exactly {h} relevant hashtags.
-- image_prompt: describe ONE simple illustration scene for the cover that fits the topic
-  (e.g. "an HVAC technician on a rooftop with a phone ringing in his pocket").
-  Describe the scene only, not the art style, and don't include any text in the image.
+  One idea per slide, concrete and actionable for a busy plumbing business owner.
+- Caption: 2-4 short sentences that add value on their own. No hashtags in it.
+- hashtags: {hashtags}
+- image_prompt: ONE simple illustration scene for the cover that fits the topic
+  (e.g. "a plumber under a kitchen sink while a phone rings on the counter").
+  Describe the scene only, not the art style. No text in the image.
 
-Return ONLY JSON in this exact shape:
+Return ONLY JSON:
 {{"topic": "...", "cover": {{"title": "...", "subtitle": "..."}},
   "slides": [{{"heading": "...", "body": "..."}}],
-  "caption": "...", "image_prompt": "..."}}"""
+  "caption": "...", "hashtags": ["#..."], "image_prompt": "..."}}"""
+
+AD = """
+Write ONE single-image ad for {brand}. Pick one angle (for example: a missed
+emergency call at 2am, a tech who can't answer mid-job, the weekend rush, or getting
+set up in a day) and build the ad around it.
+
+- headline: punchy, max 8 words. Speak to plumbing business owners.
+- subhead: max 18 words, says what we do for them in plain English.
+- points: exactly 3 short benefits (max 4 words each), drawn ONLY from "What we offer".
+- Caption: 2-3 short sentences in the same voice. Don't put links or hashtags in it.
+- hashtags: {hashtags}
+- image_prompt: ONE simple illustration scene that shows the angle (e.g. "a plumber
+  asleep at night while his phone glows on the nightstand"). Describe the scene only,
+  not the art style. No text in the image.
+
+Return ONLY JSON:
+{{"topic": "...", "headline": "...", "subhead": "...", "points": ["...", "...", "..."],
+  "caption": "...", "hashtags": ["#..."], "image_prompt": "..."}}"""
+
+REQUIRED = {"carousel": ("topic", "cover", "slides", "caption"),
+            "ad": ("topic", "headline", "subhead", "points", "caption")}
 
 
-def build_prompt(cfg, recent_topics):
-    c, b = cfg["content"], cfg["business"]
-    return PROMPT.format(
+def bullets(items):
+    return "\n".join(f"- {i}" for i in items)
+
+
+def build_prompt(cfg, kind, recent_topics, local):
+    b, c = cfg["business"], cfg["content"]
+    local_line = (f"This post should have a {c['local_market']} angle: local weather, older "
+                  "housing stock, neighborhoods or the local business community."
+                  if local else "Write for a nationwide audience.")
+    shared = SHARED.format(
         brand=cfg["brand"]["name"],
-        what_we_do=b["what_we_do"].strip(),
-        positioning=b["positioning"].strip(),
-        audience=" ".join(c["audience"].split()),
-        tone=c["tone"],
-        themes="\n".join(f"- {t}" for t in c["themes"]),
-        recent="\n".join(f"- {t}" for t in recent_topics) or "- (none yet)",
-        n=c["content_slides"],
-        h=c["hashtags_per_post"],
+        what_we_do=" ".join(b["what_we_do"].split()),
+        features=bullets(b["features"]),
+        positioning=" ".join(b["positioning"].split()),
+        audience=c["audience"],
+        voice=" ".join(b["voice"].split()),
+        today=date.today().strftime("%B %d, %Y"),
+        local=local_line,
+        rules=bullets(b["rules"]),
+        recent=bullets(recent_topics) or "- (none yet)",
     )
+    hashtags = " ".join(c["hashtags"].split())
+    if kind == "ad":
+        return shared + AD.format(brand=cfg["brand"]["name"], hashtags=hashtags)
+    return shared + CAROUSEL.format(themes=bullets(c["themes"]), n=c["content_slides"], hashtags=hashtags)
 
 
 def _gemini(prompt, model):
-    key = os.environ["GEMINI_API_KEY"]
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
     r = requests.post(
         url,
-        headers={"x-goog-api-key": key},
+        headers={"x-goog-api-key": os.environ["GEMINI_API_KEY"]},
         json={
             "contents": [{"parts": [{"text": prompt}]}],
             "generationConfig": {"responseMimeType": "application/json", "temperature": 1.0},
         },
         timeout=120,
     )
-    r.raise_for_status()
+    if not r.ok:
+        raise RuntimeError(f"Gemini error: {r.status_code} {r.text}")
     return r.json()["candidates"][0]["content"]["parts"][0]["text"]
 
 
@@ -85,23 +127,27 @@ def _openai(prompt, model):
         },
         timeout=180,
     )
-    r.raise_for_status()
+    if not r.ok:
+        raise RuntimeError(f"OpenAI error: {r.status_code} {r.text}")
     return r.json()["choices"][0]["message"]["content"]
 
 
-def validate(post, n_slides):
-    for key in ("topic", "cover", "slides", "caption"):
-        if key not in post:
+def validate(post, kind, cfg):
+    for key in REQUIRED[kind]:
+        if not post.get(key):
             raise ValueError(f"AI response missing '{key}'")
-    if len(post["slides"]) < 1:
-        raise ValueError("AI response has no slides")
-    post["slides"] = post["slides"][:n_slides]
+    if kind == "carousel":
+        post["slides"] = post["slides"][:cfg["content"]["content_slides"]]
+    else:
+        post["points"] = post["points"][:3]
+    post["kind"] = kind
     return post
 
 
-def generate_post(cfg, recent_topics):
+def generate_post(cfg, kind, recent_topics):
     ai = cfg["ai"]
-    prompt = build_prompt(cfg, recent_topics)
+    local = random.random() < cfg["content"]["local_share"]
+    prompt = build_prompt(cfg, kind, recent_topics, local)
     last_err = None
     for _ in range(3):  # LLMs occasionally return malformed JSON; just retry
         try:
@@ -109,7 +155,9 @@ def generate_post(cfg, recent_topics):
                 raw = _openai(prompt, ai["openai_model"])
             else:
                 raw = _gemini(prompt, ai["gemini_model"])
-            return validate(json.loads(raw), cfg["content"]["content_slides"])
+            post = validate(json.loads(raw), kind, cfg)
+            post["local"] = local
+            return post
         except (ValueError, KeyError, json.JSONDecodeError) as e:
             last_err = e
     raise RuntimeError(f"Could not get a valid post from the AI: {last_err}")
@@ -135,19 +183,35 @@ def generate_cover_image(scene, cfg):
     return Image.open(io.BytesIO(base64.b64decode(r.json()["data"][0]["b64_json"]))).convert("RGB")
 
 
-SAMPLE_POST = {
-    "topic": "Why the first 5 minutes decide who gets the job",
-    "cover": {
-        "title": "Why the first 5 minutes decide the job",
-        "subtitle": "What fast-responding shops do differently",
+SAMPLES = {
+    "carousel": {
+        "kind": "carousel",
+        "topic": "Why the first 5 minutes decide who gets the job",
+        "cover": {
+            "title": "Why the first 5 minutes decide the job",
+            "subtitle": "What fast-responding plumbing shops do differently",
+        },
+        "slides": [
+            {"heading": "Speed beats price", "body": "Most homeowners book whoever gets back to them first. A quick, friendly reply often matters more than being the cheapest quote."},
+            {"heading": "Interest fades fast", "body": "A customer with a leaking pipe isn't waiting around. If you don't answer, they're already dialing the next number on Google."},
+            {"heading": "Voicemail is a dead end", "body": "Many callers hang up instead of leaving a message. If nobody picks up, assume that job is gone."},
+            {"heading": "Set a callback standard", "body": "Pick a target, like calling back within 5 minutes during business hours, and make it the whole team's rule."},
+            {"heading": "Track what you miss", "body": "Check your call log every Friday. Count missed and unreturned calls. You can't fix what you don't measure."},
+        ],
+        "caption": "Most plumbing jobs aren't lost on price. They're lost because nobody got back to the customer fast enough.\n\nSave this and share it with your office team.",
+        "hashtags": ["#plumbingbusiness", "#plumber", "#plumbingcontractor", "#smallbusinessowner", "#homeservices"],
+        "image_prompt": "a plumber kneeling under a kitchen sink with tools while a phone lights up and rings on the counter behind him",
+        "local": False,
     },
-    "slides": [
-        {"heading": "Speed beats price", "body": "Most homeowners book whoever gets back to them first. A quick, friendly reply often matters more than being the cheapest quote."},
-        {"heading": "Interest fades fast", "body": "A customer with a leaking pipe isn't waiting around. If you don't answer, they're already dialing the next number on Google."},
-        {"heading": "Voicemail is a dead end", "body": "Many callers hang up instead of leaving a message. If nobody picks up, assume that job is gone."},
-        {"heading": "Set a callback standard", "body": "Pick a target, like calling back within 5 minutes during business hours, and make it the whole team's rule."},
-        {"heading": "Track what you miss", "body": "Check your call log every Friday. Count missed and unreturned calls. You can't fix what you don't measure."},
-    ],
-    "caption": "Most jobs aren't lost on price. They're lost because nobody got back to the customer fast enough.\n\nSave this and share it with your office team.\n\n#smallbusiness #homeservices #contractors #customerservice #businesstips",
-    "image_prompt": "a plumber kneeling under a kitchen sink with tools while a phone lights up and rings on the counter behind him",
+    "ad": {
+        "kind": "ad",
+        "topic": "The 2am burst pipe call",
+        "headline": "Who answers the 2am burst pipe call?",
+        "subhead": "We pick up every call, 24/7, and book the job straight into your schedule.",
+        "points": ["24/7 call answering", "Books into your schedule", "Qualifies every lead"],
+        "caption": "Plumbing business owners: emergencies don't wait for business hours, and neither do your customers. We answer every call so the job lands on your schedule, not your competitor's.",
+        "hashtags": ["#plumbingbusiness", "#plumber", "#emergencyplumber", "#smallbusinessowner", "#plumbingservice"],
+        "image_prompt": "a plumber asleep at night while his phone glows on the nightstand in a dark bedroom",
+        "local": False,
+    },
 }

@@ -1,4 +1,4 @@
-"""Turn a post (JSON) into branded 1080x1350 carousel slides (JPEG — Instagram's required format)."""
+"""Turn a post (JSON) into branded 1080x1350 carousel slides or a single ad image (JPEG — Instagram's required format)."""
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -86,16 +86,21 @@ def bottom_fade(color_hex, start, end, max_alpha=245):
     return grad
 
 
+def art_background(c, art=None, fade_from=0.34, fade_to=0.64):
+    """AI illustration with a navy fade at the bottom, or a plain branded backdrop if there's no art."""
+    if art is not None:
+        img = cover_fit(art).convert("RGBA")
+        img.alpha_composite(bottom_fade(c["navy"], int(H * fade_from), int(H * fade_to)))
+        return img.convert("RGB")
+    img = Image.new("RGB", (W, H), c["navy"])
+    deco = ImageDraw.Draw(img)
+    deco.ellipse((W - 520, -300, W + 300, 520), fill=c["teal"])
+    deco.ellipse((W - 330, 420, W - 250, 500), fill=c["amber"])
+    return img
+
+
 def cover_slide(post, c, website, total, cover_img=None):
-    if cover_img is not None:
-        img = cover_fit(cover_img).convert("RGBA")
-        img.alpha_composite(bottom_fade(c["navy"], int(H * 0.34), int(H * 0.64)))
-        img = img.convert("RGB")
-    else:
-        img = Image.new("RGB", (W, H), c["navy"])
-        deco = ImageDraw.Draw(img)
-        deco.ellipse((W - 520, -300, W + 300, 520), fill=c["teal"])
-        deco.ellipse((W - 330, 420, W - 250, 500), fill=c["amber"])
+    img = art_background(c, cover_img)
     d = ImageDraw.Draw(img, "RGBA")
 
     icon = logo("icon.png", 92)
@@ -141,19 +146,56 @@ def cta_slide(cta, c, website, total):
     body_f, body_l, _ = fit_text(d, cta["body"], "Regular", 44, W - 2 * PAD, 240, 1.4)
     y = draw_block(d, (PAD, y + 36), body_l, body_f, c["muted"], 1.4)
 
-    pill_f = font("Bold", 42)
-    tw = d.textlength(cta["action"], font=pill_f)
-    top = y + 64
-    d.rounded_rectangle((PAD, top, PAD + tw + 150, top + 104), radius=52, fill=c["teal"])
-    d.text((PAD + 52, top + 52), cta["action"], font=pill_f, fill=WHITE, anchor="lm")
-    d.text((PAD + tw + 92, top + 52), "→", font=pill_f, fill=c["amber"], anchor="lm")
+    button(d, c, cta["action"], y + 64)
     chrome(d, c, website, total, total)
+    return img
+
+
+def button(d, c, label, top):
+    pill_f = font("Bold", 42)
+    tw = d.textlength(label, font=pill_f)
+    d.rounded_rectangle((PAD, top, PAD + tw + 150, top + 104), radius=52, fill=c["teal"])
+    d.text((PAD + 52, top + 52), label, font=pill_f, fill=WHITE, anchor="lm")
+    d.text((PAD + tw + 92, top + 52), "→", font=pill_f, fill=c["amber"], anchor="lm")
+    return PAD + tw + 150
+
+
+def ad_image(post, cfg, art=None):
+    """Single-image ad: AI art up top, headline + 3 benefits + button over the navy fade."""
+    c, website = cfg["brand"]["colors"], cfg["brand"]["website"]
+    img = art_background(c, art, fade_from=0.26, fade_to=0.52)
+    d = ImageDraw.Draw(img, "RGBA")
+    icon = logo("icon.png", 92)
+    img.paste(icon, (PAD, PAD), icon)
+
+    max_w = W - 2 * PAD
+    head_f, head_l, head_h = fit_text(d, post["headline"], "ExtraBold", 88, max_w, 300, 1.1)
+    sub_f, sub_l, sub_h = fit_text(d, post["subhead"], "Medium", 40, max_w, 160, 1.32)
+    point_f = font("SemiBold", 36)
+    points_h = 58 * len(post["points"])
+    btn_top = H - PAD - 104
+    y = btn_top - 56 - points_h - 34 - sub_h - 30 - head_h
+
+    y = draw_block(d, (PAD, y), head_l, head_f, WHITE, 1.1)
+    y = draw_block(d, (PAD, y + 30), sub_l, sub_f, WHITE + "D9", 1.32) + 34
+    for pt in post["points"]:
+        cy = y + 22
+        d.ellipse((PAD, cy - 15, PAD + 30, cy + 15), fill=c["amber"])
+        d.line((PAD + 8, cy, PAD + 13, cy + 6, PAD + 22, cy - 6), fill=c["navy"], width=4, joint="curve")
+        d.text((PAD + 50, cy), pt, font=point_f, fill=WHITE, anchor="lm")
+        y += 58
+    right = button(d, c, cfg["cta"]["action"], btn_top)
+    d.text((right + 32, btn_top + 52), website, font=font("Medium", 32), fill=WHITE + "CC", anchor="lm")
     return img
 
 
 def render_post(post, cfg, out_dir, cover_img=None):
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    if post["kind"] == "ad":
+        p = out_dir / "ad.jpg"
+        ad_image(post, cfg, cover_img).save(p, "JPEG", quality=92)
+        return [p]
     c, brand, website = cfg["brand"]["colors"], cfg["brand"]["name"], cfg["brand"]["website"]
     total = len(post["slides"]) + 2
     images = [cover_slide(post, c, website, total, cover_img)]
