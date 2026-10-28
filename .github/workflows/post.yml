@@ -40,6 +40,17 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      - name: Which keys can this run see? (shows set/MISSING, never the values)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || vars.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN || vars.META_PAGE_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID || vars.FB_PAGE_ID }}
+        run: |
+          for k in GEMINI_API_KEY OPENAI_API_KEY META_PAGE_TOKEN FB_PAGE_ID; do
+            if [ -n "${!k}" ]; then echo "$k: set"; else echo "$k: MISSING"; fi
+          done
+
       - name: Is it a posting hour in New York?
         id: due
         run: |
@@ -54,9 +65,9 @@ jobs:
         id: gen
         if: steps.due.outputs.due == 'true'
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}   # to read how past posts performed
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || vars.GEMINI_API_KEY }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN || vars.META_PAGE_TOKEN }}   # to read how past posts performed
         run: python -m autopost.main generate "${{ steps.due.outputs.kind }}"
 
       - name: Commit images (makes the images publicly reachable for Meta)
@@ -74,9 +85,9 @@ jobs:
       - name: Publish to Instagram + Facebook
         if: steps.due.outputs.due == 'true' && !inputs.dry_run
         env:
-          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
-          IG_USER_ID: ${{ secrets.IG_USER_ID }}
-          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN || vars.META_PAGE_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID || vars.IG_USER_ID }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID || vars.FB_PAGE_ID }}
           COMMIT_SHA: ${{ steps.commit.outputs.sha }}
         run: |
           sleep 20   # give GitHub's CDN a moment to serve the new images
