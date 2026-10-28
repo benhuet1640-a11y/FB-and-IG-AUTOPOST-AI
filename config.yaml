@@ -44,6 +44,7 @@ content:
   audience: "plumbing business owners and their office managers across the US"
   local_market: "Pittsburgh, PA (our home base)"
   local_share: 0.25                   # about 1 in 4 posts gets a Pittsburgh angle
+  person_share: 0.8                   # about 4 in 5 covers feature a person
   themes:
     - "the real cost of missed calls and slow callbacks for plumbers"
     - "emergency calls: burst pipes, no hot water, backups, and who gets the job"
@@ -64,8 +65,8 @@ content:
 # Last slide of every carousel.
 cta:
   headline: "Never miss a job because you couldn't pick up"
-  body: "We answer 24/7, book jobs into your schedule and qualify every lead, so your team can stay focused on the work."
-  action: "Book a demo"
+  body: "We answer 24/7, book jobs into your schedule and qualify every lead. Visit our website and book a demo."
+  action: "Book a demo at pipelinereception.com"
   save_prompt: "Save this · Share it with your team"
 
 # Added to the end of captions, per platform. Instagram captions can't have clickable links.
@@ -88,14 +89,21 @@ ai:
   cover_image: true                   # false = plain branded background, $0
   image_model: "gpt-image-1.5"        # ~$0.05/image (~$4.50/mo). "gpt-image-1-mini" ≈ 3x cheaper, plainer art
   image_quality: "medium"             # low / medium / high
-  image_style: >
-    Bold, modern editorial illustration with a cinematic feel: dramatic lighting, rich
-    depth, strong contrast and one clear focal point that reads instantly on a phone
-    screen. Color palette built around deep navy (#0A2C36), teal (#12A998) and warm amber
-    (#F6B45D) highlights. Keep the focal subject in the upper half; the lower 40% should be
-    darker and simpler, because a headline will be placed there.
-    No text, letters, numbers, logos, signs, watermarks, icons or app interfaces anywhere
-    in the image; phone screens are plain glowing light with nothing on them.
+  # Cover art alternates between these styles; once there's data, the better performer is
+  # used ~70% of the time (see autopost/learn.py).
+  image_styles:
+    photo: >
+      Photorealistic, natural-looking photo, as if taken by a professional photographer on a
+      real job: soft natural or indoor lighting, true-to-life colors, shallow depth of field,
+      candid and unposed. Nothing dramatic, glossy or cinematic. Keep the subject in the
+      upper half; the lower 40% should be simple and slightly darker, because a headline
+      will be placed there. No text, letters, logos, signs, watermarks or app screens.
+    illustration: >
+      Clean, modern editorial illustration with natural lighting and a calm, friendly feel,
+      not dramatic. Color palette built around deep navy (#0A2C36), teal (#12A998) and warm
+      amber (#F6B45D) accents on light neutral tones. Keep the subject in the upper half; the
+      lower 40% should be simple and slightly darker, because a headline will be placed there.
+      No text, letters, logos, signs, watermarks or app screens.
 
 # New York hour → what to post. The code handles daylight saving time.
 schedule:

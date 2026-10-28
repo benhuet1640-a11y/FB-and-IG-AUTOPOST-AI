@@ -13,7 +13,9 @@ All posts are written for **plumbing business owners** nationwide. About 1 in 4 
 ```
 GitHub Actions (free cron)
    │
-   ├─ autopost/generate.py  → Gemini (free) writes the post as JSON; OpenAI gpt-image-1-mini draws the artwork
+   ├─ autopost/learn.py     → reads how past posts did on Facebook (views, reactions, comments, shares)
+   ├─ autopost/generate.py  → Gemini (free) writes + edits the post, steered by what's working;
+   │                          OpenAI gpt-image-1.5 draws the cover (usually a person, photo or illustration)
    ├─ autopost/render.py    → adds all the text, logo and colors in code (no AI typos)
    ├─ git push              → images get a public URL (Instagram requires one)
    └─ autopost/publish.py   → Facebook post (+ Instagram carousel/image once enabled)
@@ -26,10 +28,10 @@ GitHub Actions (free cron)
 | GitHub Actions (public repo) | $0 |
 | Meta Graph API (Facebook + Instagram) | $0 |
 | Post text: Google Gemini free tier | $0 |
-| Artwork: `gpt-image-1-mini`, medium quality, 1 image per post | ~$1.50/mo |
+| Artwork: `gpt-image-1.5`, medium quality, 1 image per post | ~$4.50/mo |
 | **Total** | **≈ $1.50–2/month** |
 
-For nicer art, set `image_model: gpt-image-1.5` (~$4.50/mo). For $0, set `cover_image: false`, which uses a plain branded background.
+To save money, set `image_model: gpt-image-1-mini` (~$1.50/mo, plainer art). For $0 art, set `cover_image: false`, which uses a plain branded background.
 
 ---
 
@@ -53,7 +55,7 @@ For nicer art, set `image_model: gpt-image-1.5` (~$4.50/mo). For $0, set `cover_
 2. In the app, add **Facebook Login for Business** and the **Instagram** product. You can leave the app in *Development* mode, because you're an admin posting to your own Page.
 3. Open the **Graph API Explorer** (Tools menu):
    - Select your app, then **User Token**.
-   - Add these permissions: `pages_show_list`, `pages_read_engagement`, `pages_manage_posts`, `business_management`, and for Instagram later, `instagram_basic` and `instagram_content_publish`.
+   - Add these permissions: `pages_show_list`, `pages_read_engagement`, `pages_manage_posts`, `business_management`, plus **`read_insights`** and **`pages_read_user_content`** so the app can learn from views and engagement, and for Instagram later, `instagram_basic` and `instagram_content_publish`. If a permission isn't in the dropdown, open your app → **Use cases** → **Customize** on the Page use case and click **Add** next to it first.
    - Click **Generate Access Token** and approve.
 4. Make the token long-lived: open the **Access Token Debugger** (Tools menu), paste the token, then click **Extend Access Token**. Copy the new token.
 5. In Graph API Explorer, paste the long-lived token and run `GET me/accounts`. Find **Pipeline Reception** and copy:
@@ -86,6 +88,16 @@ Also check that **Settings → Actions → General → Workflow permissions** is
 
 ---
 
+## How it gets better over time
+
+Before writing each post, the app checks how every post from the last 30 days did on Facebook (views, reactions, comments, shares), once it's at least a day old. It gives the AI the best and weakest performers, and which **hook types** (curiosity, mistake, callout, contrarian, number) are winning. The AI leans into what works about 70% of the time and tries something new the other 30%, so it keeps learning.
+
+It also tests **cover styles**: photo-realistic vs. illustrated, and person vs. scene (about 4 in 5 covers feature a person). Once each style has a few results, the better one is used most of the time.
+
+Results are saved in `history.json`. This needs the `read_insights` and `pages_read_user_content` permissions on your Meta token. Without them it still posts normally; it just can't learn.
+
+---
+
 ## Customizing (all in `config.yaml` unless noted)
 
 | Want to change… | Where |
@@ -95,7 +107,8 @@ Also check that **Settings → Actions → General → Workflow permissions** is
 | Last carousel slide / button text | `cta` |
 | Caption endings for each platform | `captions` |
 | What posts at what time | `schedule.slots` (New York hours) |
-| Art style, image model and quality | `ai.image_*` |
+| Art styles (photo / illustration), image model and quality | `ai.image_*` |
+| How often covers feature a person | `content.person_share` |
 | The AI writing prompts themselves | `autopost/generate.py` → `CAROUSEL` / `AD` |
 
 Preview the designs locally without any keys:

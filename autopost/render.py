@@ -227,8 +227,13 @@ def cta_slide(cta, c, website, total):
 
 
 def button(d, c, label, top):
-    pill_f = font("Bold", 42)
-    tw = d.textlength(label, font=pill_f)
+    size = 42
+    while True:  # shrink long labels so the pill always fits the slide
+        pill_f = font("Bold", size)
+        tw = d.textlength(label, font=pill_f)
+        if tw + 150 <= W - 2 * PAD or size <= 28:
+            break
+        size -= 2
     d.rounded_rectangle((PAD, top, PAD + tw + 150, top + 104), radius=52, fill=c["teal"])
     d.text((PAD + 52, top + 52), label, font=pill_f, fill=WHITE, anchor="lm")
     d.text((PAD + tw + 92, top + 52), "→", font=pill_f, fill=c["amber"], anchor="lm")
@@ -237,7 +242,7 @@ def button(d, c, label, top):
 
 def ad_image(post, cfg, art=None):
     """Single-image ad: AI art up top, headline + 3 benefits + button over the navy fade."""
-    c, website = cfg["brand"]["colors"], cfg["brand"]["website"]
+    c = cfg["brand"]["colors"]
     img = art_background(c, art, fade_from=0.26, fade_to=0.52)
     d = ImageDraw.Draw(img, "RGBA")
     icon = logo("icon.png", 92)
@@ -259,8 +264,7 @@ def ad_image(post, cfg, art=None):
         d.line((PAD + 8, cy, PAD + 13, cy + 6, PAD + 22, cy - 6), fill=c["navy"], width=4, joint="curve")
         d.text((PAD + 50, cy), pt, font=point_f, fill=WHITE, anchor="lm")
         y += 58
-    right = button(d, c, cfg["cta"]["action"], btn_top)
-    d.text((right + 32, btn_top + 52), website, font=font("Medium", 32), fill=WHITE + "CC", anchor="lm")
+    button(d, c, cfg["cta"]["action"], btn_top)
     return img
 
 

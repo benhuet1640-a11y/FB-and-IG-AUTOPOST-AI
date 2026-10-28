@@ -32,6 +32,8 @@ never leave voicemails"), not the name of a theme.
 
 Do NOT repeat or closely resemble any of these recent posts:
 {recent}
+
+{performance}
 """
 
 HOOKS = """
@@ -43,6 +45,7 @@ First brainstorm 5 very different hooks in "hook_options", one of each type:
   4. Contrarian: challenges a common belief ("More ads won't fix your empty schedule")
   5. Specific number or list: concrete and scannable ("4 phone habits of fully booked plumbers")
 Then pick the ONE that would make a busy plumbing owner stop scrolling, and use it.
+Set "hook_type" to its type: curiosity, mistake, callout, contrarian or number.
 A great hook is specific, concrete, about THEIR money, time or stress, and under 9 words.
 The post must deliver on the hook; no bait-and-switch.
 Banned: "Unlock", "Game-changer", "Level up", "In today's world", "Did you know",
@@ -83,15 +86,10 @@ CAPTION
 - hashtags: {hashtags}
 
 IMAGE
-- image_prompt: ONE bold, attention-grabbing scene for the cover that makes the hook feel
-  real, with a single clear focal point, close-up framing, strong contrast and some
-  emotion or tension (e.g. "close-up of a plumber's hand reaching for a buzzing phone on a
-  wet basement floor, water spraying behind it"). Describe the scene only, not the art
-  style. No text anywhere: if a phone appears, show it face-down, from the side or with a
-  plain glowing screen, never with words, icons, caller ID or app screens.
+{image_brief}
 
 Return ONLY JSON:
-{{"topic": "...", "hook_options": ["...", "...", "...", "...", "..."],
+{{"topic": "...", "hook_options": ["...", "...", "...", "...", "..."], "hook_type": "...",
   "cover": {{"kicker": "...", "title": "...", "highlight": "...", "subtitle": "..."}},
   "slides": [{{"heading": "...", "body": "...", "tip": "..."}}],
   "caption": "...", "hashtags": ["#..."], "image_prompt": "..."}}"""
@@ -108,13 +106,10 @@ weekend rush, or getting set up in a day) and build the whole ad around it.
 - Caption: first line is a hook (max 110 characters), then 1-2 short sentences in the same
   voice. Don't put links or hashtags in it. At most 1 emoji.
 - hashtags: {hashtags}
-- image_prompt: ONE bold, emotional scene that shows the angle, with a single clear focal
-  point and close-up framing (e.g. "a plumber asleep at night, his phone lighting up the
-  dark bedroom on the nightstand"). Describe the scene only, not the art style. No text
-  anywhere: phones show a plain glowing screen with no words, icons or caller ID.
+{image_brief}
 
 Return ONLY JSON:
-{{"topic": "...", "hook_options": ["...", "...", "...", "...", "..."],
+{{"topic": "...", "hook_options": ["...", "...", "...", "...", "..."], "hook_type": "...",
   "headline": "...", "highlight": "...", "subhead": "...", "points": ["...", "...", "..."],
   "caption": "...", "hashtags": ["#..."], "image_prompt": "..."}}"""
 
@@ -126,7 +121,22 @@ def bullets(items):
     return "\n".join(f"- {i}" for i in items)
 
 
-def build_prompt(cfg, kind, recent_topics, local):
+IMAGE_PERSON = """- image_prompt: ONE natural, believable moment for the cover with a PERSON as the
+  focal point: a plumber, a homeowner or an office manager, with a real, relatable
+  expression (e.g. "a plumber in a customer's basement glancing at his ringing phone while
+  holding a wrench", or "a worried homeowner on the phone next to a leaking water heater").
+  Everyday setting, nothing staged or dramatic. Describe the scene only, not the art style."""
+
+IMAGE_SCENE = """- image_prompt: ONE natural, believable everyday scene for the cover that makes the hook
+  feel real; it can be an object or setting rather than a person (e.g. "a phone ringing
+  on a workbench in a plumber's van next to a coiled drain snake"). Nothing staged or
+  dramatic. Describe the scene only, not the art style."""
+
+NO_TEXT = """
+  No text anywhere: if a phone appears, its screen is plain light, never words, icons or caller ID."""
+
+
+def build_prompt(cfg, kind, recent_topics, local, person=True, performance=""):
     b, c = cfg["business"], cfg["content"]
     local_line = (f"This post should have a {c['local_market']} angle: local weather, older "
                   "housing stock, neighborhoods or the local business community."
@@ -142,11 +152,14 @@ def build_prompt(cfg, kind, recent_topics, local):
         local=local_line,
         rules=bullets(b["rules"]),
         recent=bullets(recent_topics) or "- (none yet)",
+        performance=performance,
     )
     hashtags = " ".join(c["hashtags"].split())
+    image_brief = (IMAGE_PERSON if person else IMAGE_SCENE) + NO_TEXT
     if kind == "ad":
-        return shared + AD.format(brand=cfg["brand"]["name"], hashtags=hashtags)
-    return shared + CAROUSEL.format(themes=bullets(c["themes"]), n=c["content_slides"], hashtags=hashtags)
+        return shared + AD.format(brand=cfg["brand"]["name"], hashtags=hashtags, image_brief=image_brief)
+    return shared + CAROUSEL.format(themes=bullets(c["themes"]), n=c["content_slides"],
+                                    hashtags=hashtags, image_brief=image_brief)
 
 
 def _gemini(prompt, models):
@@ -231,7 +244,8 @@ fixing anything that breaks these checks:
 5. Every claim must be generally true. No invented statistics, percentages or studies.
 6. Each non-empty "tip" must be a word-for-word script, a specific action with a time or
    number, or a quick test. Rewrite vague tips ("have a process") or ones that repeat the body.
-7. image_prompt must not ask for any text, words, icons or caller ID on screens or signs.
+7. image_prompt must describe a natural, believable moment (nothing dramatic or staged) and
+   must not ask for any text, words, icons or caller ID on screens or signs.
 
 Make the smallest changes needed; keep what's already good. Return ONLY the JSON.
 
@@ -264,9 +278,10 @@ def _complete(cfg, prompt):
     return _gemini(prompt, [ai["gemini_model"], *ai.get("gemini_fallback_models", [])])
 
 
-def generate_post(cfg, kind, recent_topics):
+def generate_post(cfg, kind, recent_topics, performance=""):
     local = random.random() < cfg["content"]["local_share"]
-    prompt = build_prompt(cfg, kind, recent_topics, local)
+    person = random.random() < cfg["content"].get("person_share", 0.8)
+    prompt = build_prompt(cfg, kind, recent_topics, local, person, performance)
     last_err = None
     for _ in range(3):  # LLMs occasionally return malformed JSON; just retry
         try:
@@ -282,10 +297,11 @@ def generate_post(cfg, kind, recent_topics):
     except Exception as e:  # the draft is still usable if the editor pass fails
         print(f"Editor pass failed, keeping the draft: {e}")
     post["local"] = local
+    post["person"] = person
     return post
 
 
-def generate_cover_image(scene, cfg):
+def generate_cover_image(scene, cfg, art_style):
     """One portrait illustration from OpenAI's image model. Text is added later by render.py."""
     ai = cfg["ai"]
     r = requests.post(
@@ -293,7 +309,7 @@ def generate_cover_image(scene, cfg):
         headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"},
         json={
             "model": ai["image_model"],
-            "prompt": f"{scene}\n\nStyle: {' '.join(ai['image_style'].split())}",
+            "prompt": f"{scene}\n\nStyle: {' '.join(ai['image_styles'][art_style].split())}",
             "size": "1024x1536",
             "quality": ai["image_quality"],
             "n": 1,

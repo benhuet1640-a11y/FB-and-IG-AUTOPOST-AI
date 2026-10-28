@@ -16,6 +16,7 @@ import yaml
 from PIL import Image
 
 from autopost.generate import SAMPLES, generate_cover_image, generate_post
+from autopost.learn import performance_brief, pick_art_style, refresh_metrics
 from autopost.render import render_post
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -69,14 +70,23 @@ def create(post, cfg, cover_img=None):
 
 def cmd_generate(kind):
     cfg = load_config()
-    recent = [h["topic"] for h in load_history() if h.get("kind", "carousel") == kind][-60:]
-    post = generate_post(cfg, kind, recent)
+    history = load_history()
+    try:  # learn from how earlier posts did before writing the next one
+        refresh_metrics(history)
+        save_history(history)
+    except Exception as e:
+        print(f"Couldn't refresh post metrics, continuing without them: {e}", file=sys.stderr)
+    recent = [h["topic"] for h in history if h.get("kind", "carousel") == kind][-60:]
+    post = generate_post(cfg, kind, recent, performance_brief(history, kind))
+    styles = list(cfg["ai"]["image_styles"])
+    post["art_style"] = pick_art_style(history, styles)
     cover_img = None
     if cfg["ai"].get("cover_image") and post.get("image_prompt"):
         try:
-            cover_img = generate_cover_image(post["image_prompt"], cfg)
+            cover_img = generate_cover_image(post["image_prompt"], cfg, post["art_style"])
         except Exception as e:  # a missing picture shouldn't cost us the post
             print(f"Cover image failed, using the plain branded cover: {e}", file=sys.stderr)
+            post["art_style"] = "plain"
     create(post, cfg, cover_img)
 
 
@@ -115,6 +125,9 @@ def cmd_publish(post_id):
     post = json.loads((folder / "post.json").read_text())
     files = [folder / name for name in post["images"]]
     result = {"id": post_id, "kind": post["kind"], "topic": post["topic"],
+              "hook": post["cover"]["title"] if post["kind"] == "carousel" else post["headline"],
+              "hook_type": post.get("hook_type"), "art_style": post.get("art_style"),
+              "person": post.get("person"), "local": post.get("local"),
               "posted_at": datetime.now(timezone.utc).isoformat()}
 
     errors = []
