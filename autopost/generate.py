@@ -111,15 +111,20 @@ def _gemini(prompt, models):
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
         for wait in (0, 15, 45):
             time.sleep(wait)
-            r = requests.post(
-                url,
-                headers={"x-goog-api-key": os.environ["GEMINI_API_KEY"]},
-                json={
-                    "contents": [{"parts": [{"text": prompt}]}],
-                    "generationConfig": {"responseMimeType": "application/json", "temperature": 1.0},
-                },
-                timeout=120,
-            )
+            try:
+                r = requests.post(
+                    url,
+                    headers={"x-goog-api-key": os.environ["GEMINI_API_KEY"]},
+                    json={
+                        "contents": [{"parts": [{"text": prompt}]}],
+                        "generationConfig": {"responseMimeType": "application/json", "temperature": 1.0},
+                    },
+                    timeout=90,
+                )
+            except requests.RequestException as e:  # timeouts and dropped connections are temporary too
+                last = f"{model}: {type(e).__name__}"
+                print(f"Gemini problem ({last})")
+                continue
             if r.ok:
                 return r.json()["candidates"][0]["content"]["parts"][0]["text"]
             try:
