@@ -119,5 +119,5 @@ python -m autopost.main generate ad
 - **History:** every published post is logged in `history.json`, and the AI avoids repeating recent topics.
 - **When a run fails**, GitHub emails you.
 - **Google may use free-tier Gemini prompts to improve its products.** That's fine here, since everything it writes gets posted publicly anyway.
-- **Gemini is sometimes overloaded** ("high demand" errors). The app waits and retries, then falls back to `gemini-flash-lite-latest`.
+- **Gemini is sometimes overloaded** ("high demand" errors). The app waits and retries, then falls back to `gemini-flash-latest`.
 - **Model names change over time.** If a run fails with "model not found", update the model names in `ai:`.

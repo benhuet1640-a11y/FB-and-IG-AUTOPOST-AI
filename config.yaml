@@ -79,9 +79,9 @@ captions:
 
 ai:
   provider: "gemini"                  # "gemini" (free tier) or "openai"
-  gemini_model: "gemini-flash-latest" # Google's alias for its newest Flash model
+  gemini_model: "gemini-flash-lite-latest"  # Google's fast free model; reliable under load
   gemini_fallback_models:             # used if the main one is overloaded or retired
-    - "gemini-flash-lite-latest"
+    - "gemini-flash-latest"
   openai_model: "gpt-5-mini"
   # Hybrid images: the AI draws the artwork, the code adds all the text.
   cover_image: true                   # false = plain branded background, $0
