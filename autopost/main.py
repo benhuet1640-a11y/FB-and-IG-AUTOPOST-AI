@@ -68,8 +68,24 @@ def create(post, cfg, cover_img=None):
     return post_id
 
 
+def check_secrets(names):
+    """Fail early with a clear message instead of a confusing API error."""
+    for name in names:
+        value = os.environ.get(name, "")
+        if value != value.strip():
+            os.environ[name] = value.strip()  # stray spaces/newlines from copy-paste
+    missing = [n for n in names if not os.environ.get(n)]
+    if missing:
+        sys.exit(f"Missing GitHub secret(s): {', '.join(missing)}. Add them under Settings → "
+                 "Secrets and variables → Actions (names must match exactly).")
+
+
 def cmd_generate(kind):
     cfg = load_config()
+    for key in ("GEMINI_API_KEY", "OPENAI_API_KEY", "META_PAGE_TOKEN"):
+        if not os.environ.get(key, "").strip():
+            print(f"Note: {key} is not set.", file=sys.stderr)
+    check_secrets(["OPENAI_API_KEY"] if cfg["ai"].get("cover_image") else [])
     history = load_history()
     try:  # learn from how earlier posts did before writing the next one
         refresh_metrics(history)
@@ -121,6 +137,8 @@ def cmd_publish(post_id):
     from autopost.publish import post_facebook, post_instagram
 
     cfg = load_config()
+    check_secrets(["META_PAGE_TOKEN"] + (["FB_PAGE_ID"] if cfg["platforms"].get("facebook") else [])
+                  + (["IG_USER_ID"] if cfg["platforms"].get("instagram") else []))
     folder = POSTS / post_id
     post = json.loads((folder / "post.json").read_text())
     files = [folder / name for name in post["images"]]

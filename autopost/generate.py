@@ -272,10 +272,23 @@ def edit_post(cfg, post, kind):
 
 
 def _complete(cfg, prompt):
+    """Write with the configured provider; if that fails and the other key exists, use the other one."""
     ai = cfg["ai"]
-    if ai["provider"] == "openai":
-        return _openai(prompt, ai["openai_model"])
-    return _gemini(prompt, [ai["gemini_model"], *ai.get("gemini_fallback_models", [])])
+    gemini = lambda: _gemini(prompt, [ai["gemini_model"], *ai.get("gemini_fallback_models", [])])
+    openai = lambda: _openai(prompt, ai["openai_model"])
+    order = [("OpenAI", "OPENAI_API_KEY", openai), ("Gemini", "GEMINI_API_KEY", gemini)]
+    if ai["provider"] != "openai":
+        order.reverse()
+    available = [(name, fn) for name, key, fn in order if os.environ.get(key)]
+    if not available:
+        raise RuntimeError("No AI key found: add a GEMINI_API_KEY or OPENAI_API_KEY secret in GitHub.")
+    for i, (name, fn) in enumerate(available):
+        try:
+            return fn()
+        except Exception as e:
+            if i == len(available) - 1:
+                raise
+            print(f"{name} failed ({e}); switching to {available[i + 1][0]} for this post.")
 
 
 def generate_post(cfg, kind, recent_topics, performance=""):
