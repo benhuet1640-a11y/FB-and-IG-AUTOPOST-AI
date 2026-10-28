@@ -16,9 +16,9 @@ on:
         options: [carousel, ad]
         default: carousel
       dry_run:
-        description: "Generate images only, don't post"
+        description: "Test only: make the images but DON'T post (scheduled runs always post)"
         type: boolean
-        default: true
+        default: false
 
 permissions:
   contents: write             # lets the job commit slides + history back to the repo

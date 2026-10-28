@@ -77,8 +77,8 @@ Repo → **Settings → Secrets and variables → Actions → New repository sec
 Also check that **Settings → Actions → General → Workflow permissions** is set to **Read and write**.
 
 ### 6. Test it
-- Go to **Actions → Auto-post → Run workflow**. Pick `carousel` or `ad` and leave "dry run" checked. This only generates images. Look in `posts/` to see them.
-- Run it again with dry run **unchecked** to do a real post.
+- Go to **Actions → Auto-post → Run workflow**. Pick `carousel` or `ad` and tick "Test only" to generate images without posting. Look in `posts/` to see them.
+- Leave it unticked (the default) to do a real post.
 - After that it runs on its own.
 
 ### 7. When Instagram is back
