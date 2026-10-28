@@ -7,10 +7,10 @@ import requests
 API = f"https://graph.facebook.com/{os.environ.get('GRAPH_API_VERSION', 'v23.0')}"
 
 
-def _call(method, path, **params):
+def _call(method, path, files=None, **params):
     params["access_token"] = os.environ["META_PAGE_TOKEN"]
     r = requests.request(method, f"{API}/{path}", data=params if method == "POST" else None,
-                         params=params if method == "GET" else None, timeout=120)
+                         params=params if method == "GET" else None, files=files, timeout=120)
     if not r.ok:
         raise RuntimeError(f"Meta API error on {path}: {r.status_code} {r.text}")
     return r.json()
@@ -46,9 +46,12 @@ def post_instagram(image_urls, caption):
     return _call("POST", f"{ig_user}/media_publish", creation_id=container)["id"]
 
 
-def post_facebook(image_urls, caption):
+def post_facebook(image_paths, caption):
     page = os.environ["FB_PAGE_ID"]
-    # Upload each photo unpublished, then attach them all to one feed post.
-    photo_ids = [_call("POST", f"{page}/photos", url=u, published="false")["id"] for u in image_urls]
+    # Upload each photo file unpublished (no public URL needed), then attach them all to one feed post.
+    photo_ids = []
+    for path in image_paths:
+        with open(path, "rb") as f:
+            photo_ids.append(_call("POST", f"{page}/photos", files={"source": f}, published="false")["id"])
     attached = {f"attached_media[{i}]": f'{{"media_fbid":"{pid}"}}' for i, pid in enumerate(photo_ids)}
     return _call("POST", f"{page}/feed", message=caption, **attached)["id"]

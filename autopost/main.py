@@ -113,7 +113,7 @@ def cmd_publish(post_id):
     cfg = load_config()
     folder = POSTS / post_id
     post = json.loads((folder / "post.json").read_text())
-    urls = [f"{image_base_url()}/posts/{post_id}/{name}" for name in post["images"]]
+    files = [folder / name for name in post["images"]]
     result = {"id": post_id, "kind": post["kind"], "topic": post["topic"],
               "posted_at": datetime.now(timezone.utc).isoformat()}
 
@@ -122,7 +122,10 @@ def cmd_publish(post_id):
         if not cfg["platforms"].get(platform):
             continue
         try:
-            result[platform] = fn(urls, build_caption(post, cfg, platform))
+            # Facebook takes the files directly; Instagram only accepts public image URLs.
+            media = files if platform == "facebook" else \
+                [f"{image_base_url()}/posts/{post_id}/{f.name}" for f in files]
+            result[platform] = fn(media, build_caption(post, cfg, platform))
             print(f"Posted to {platform}: {result[platform]}")
         except Exception as e:  # keep going so one platform failing doesn't block the other
             errors.append(f"{platform}: {e}")
