@@ -66,6 +66,7 @@ cta:
   headline: "Never miss a job because you couldn't pick up"
   body: "We answer 24/7, book jobs into your schedule and qualify every lead, so your team can stay focused on the work."
   action: "Book a demo"
+  save_prompt: "Save this · Share it with your team"
 
 # Added to the end of captions, per platform. Instagram captions can't have clickable links.
 captions:
@@ -79,20 +80,22 @@ captions:
 
 ai:
   provider: "gemini"                  # "gemini" (free tier) or "openai"
-  gemini_model: "gemini-flash-lite-latest"  # Google's fast free model; reliable under load
-  gemini_fallback_models:             # used if the main one is overloaded or retired
-    - "gemini-flash-latest"
+  gemini_model: "gemini-flash-latest"  # best free writer; falls back below when overloaded
+  gemini_fallback_models:
+    - "gemini-flash-lite-latest"
   openai_model: "gpt-5-mini"
   # Hybrid images: the AI draws the artwork, the code adds all the text.
   cover_image: true                   # false = plain branded background, $0
-  image_model: "gpt-image-1-mini"     # ~$0.015/image. "gpt-image-1.5" looks nicer at ~$0.05
+  image_model: "gpt-image-1.5"        # ~$0.05/image (~$4.50/mo). "gpt-image-1-mini" ≈ 3x cheaper, plainer art
   image_quality: "medium"             # low / medium / high
   image_style: >
-    Modern flat editorial illustration with soft lighting and clean shapes.
-    Color palette: deep navy (#0A2C36), teal (#12A998) and warm amber (#F6B45D)
-    accents on light neutral tones. Keep the main subject in the upper half and
-    the bottom half calm and uncluttered, because text will be placed there.
-    No text, letters, numbers, logos or watermarks anywhere in the image.
+    Bold, modern editorial illustration with a cinematic feel: dramatic lighting, rich
+    depth, strong contrast and one clear focal point that reads instantly on a phone
+    screen. Color palette built around deep navy (#0A2C36), teal (#12A998) and warm amber
+    (#F6B45D) highlights. Keep the focal subject in the upper half; the lower 40% should be
+    darker and simpler, because a headline will be placed there.
+    No text, letters, numbers, logos, signs, watermarks, icons or app interfaces anywhere
+    in the image; phone screens are plain glowing light with nothing on them.
 
 # New York hour → what to post. The code handles daylight saving time.
 schedule:
