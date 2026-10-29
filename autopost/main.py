@@ -137,8 +137,11 @@ def cmd_publish(post_id):
     from autopost.publish import post_facebook, post_instagram
 
     cfg = load_config()
-    check_secrets(["META_PAGE_TOKEN"] + (["FB_PAGE_ID"] if cfg["platforms"].get("facebook") else [])
-                  + (["IG_USER_ID"] if cfg["platforms"].get("instagram") else []))
+    check_secrets(["META_PAGE_TOKEN"] + (["FB_PAGE_ID"] if cfg["platforms"].get("facebook") else []))
+    if cfg["platforms"].get("instagram") and not os.environ.get("IG_USER_ID", "").strip():
+        print("Instagram is on but the IG_USER_ID secret is missing; posting to Facebook only.",
+              file=sys.stderr)
+        cfg["platforms"]["instagram"] = False
     folder = POSTS / post_id
     post = json.loads((folder / "post.json").read_text())
     files = [folder / name for name in post["images"]]

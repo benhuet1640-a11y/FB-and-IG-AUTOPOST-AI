@@ -114,5 +114,5 @@ schedule:
     18: carousel
 
 platforms:
-  instagram: false                    # turn on once Instagram finishes reviewing the account
+  instagram: true                     # needs the IG_USER_ID secret; skipped (with a warning) without it
   facebook: true

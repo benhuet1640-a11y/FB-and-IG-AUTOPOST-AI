@@ -46,8 +46,9 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
           META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN || vars.META_PAGE_TOKEN }}
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID || vars.FB_PAGE_ID }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID || vars.IG_USER_ID }}
         run: |
-          for k in GEMINI_API_KEY OPENAI_API_KEY META_PAGE_TOKEN FB_PAGE_ID; do
+          for k in GEMINI_API_KEY OPENAI_API_KEY META_PAGE_TOKEN FB_PAGE_ID IG_USER_ID; do
             if [ -n "${!k}" ]; then echo "$k: set"; else echo "$k: MISSING"; fi
           done
 
