@@ -31,5 +31,19 @@
     "posted_at": "2026-10-29T01:04:07.642357+00:00",
     "instagram": "17914775301283186",
     "facebook": "1455738530948421_122095481985536726"
+  },
+  {
+    "id": "2026-10-29_1310",
+    "kind": "carousel",
+    "topic": "The true cost of slow plumbing callbacks",
+    "hook": "Stop waiting until morning to call back",
+    "hook_type": "callout",
+    "art_style": "photo",
+    "person": true,
+    "local": false,
+    "slot": "2026-10-29 08:30",
+    "posted_at": "2026-10-29T13:10:32.579555+00:00",
+    "instagram": "18109449827211220",
+    "facebook": "1455738530948421_122095845249536726"
   }
 ]
