@@ -1,0 +1,63 @@
+{
+  "topic": "Handling Friday afternoon emergency calls in older homes",
+  "hook_options": [
+    "The call you're losing every Friday at 4pm",
+    "You're losing jobs in the first 3 rings",
+    "Plumbing owners: stop missing Friday afternoon calls",
+    "More ads won't fix your missed Friday calls",
+    "3 reasons nobody answers your phone at 4pm"
+  ],
+  "hook_type": "curiosity",
+  "cover": {
+    "kicker": "PITTSBURGH HOMES",
+    "title": "The call you're losing every Friday at 4pm",
+    "highlight": "Friday at 4pm",
+    "subtitle": "Older pipes in local neighborhoods don't wait for Monday morning."
+  },
+  "slides": [
+    {
+      "heading": "The Friday afternoon rush",
+      "body": "It is late Friday in the East End. An old cast-iron stack backs up just as the homeowner starts cooking dinner.",
+      "tip": ""
+    },
+    {
+      "heading": "Why they hang up",
+      "body": "If your hands are under a sink in Shaler and voicemail picks up, they rarely leave a message. They call the next shop on the list.",
+      "tip": "Call your own line after 5pm. What happens?"
+    },
+    {
+      "heading": "Catching the weekend work",
+      "body": "Answering right away lets you lock down the emergency before your competitors even see the missed notification.",
+      "tip": "Say: \"I can get a tech there. Want that slot?\""
+    },
+    {
+      "heading": "Quick weekend capture",
+      "body": "Answer every late-week call, book the emergency straight into the calendar, and head into the weekend knowing your schedule is full.",
+      "tip": "Forward emergency lines to the on-call tech by 3:30pm every Friday."
+    }
+  ],
+  "caption": "Older Pittsburgh houses love to break things right when your team is wrapping up for the week.\n\nWhen a main stack backs up on a Friday evening, homeowners will not wait around for a callback on Monday morning. They just dial the next number.\n\nSetting up clear on-call rotations or dedicated call routing ensures emergency jobs stay on your board instead of going to competitors.\n\nHow does your shop handle calls that come in right at closing time?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#pittsburgh",
+    "#412"
+  ],
+  "image_prompt": "A plumber in a customer's basement glancing at his ringing phone while holding a wrench near older copper pipes, everyday setting, natural lighting.",
+  "kind": "carousel",
+  "local": true,
+  "person": true,
+  "art_style": "photo",
+  "slot": "2026-10-29 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg",
+    "slide_06.jpg"
+  ]
+}
