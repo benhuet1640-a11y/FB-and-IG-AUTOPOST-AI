@@ -66,5 +66,19 @@
     "posted_at": "2026-10-29T16:17:19.449501+00:00",
     "instagram": "18453482860132288",
     "facebook": "1455738530948421_122095941369536726"
+  },
+  {
+    "id": "2026-10-29_2201",
+    "kind": "carousel",
+    "topic": "Handling Friday afternoon emergency calls in older homes",
+    "hook": "The call you're losing every Friday at 4pm",
+    "hook_type": "curiosity",
+    "art_style": "photo",
+    "person": true,
+    "local": true,
+    "slot": "2026-10-29 18:00",
+    "posted_at": "2026-10-29T22:01:38.250652+00:00",
+    "instagram": "18129970459871335",
+    "facebook": "1455738530948421_122096082633536726"
   }
 ]
