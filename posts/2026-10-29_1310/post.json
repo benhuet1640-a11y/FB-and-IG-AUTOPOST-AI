@@ -1,0 +1,69 @@
+{
+  "topic": "The true cost of slow plumbing callbacks",
+  "hook_options": [
+    "The call you're losing every Friday at 4pm",
+    "You're losing jobs in the first 3 rings",
+    "Plumbing owners: stop waiting until morning to call back",
+    "More ads won't fix your missed calls",
+    "3 reasons your missed calls go to competitors"
+  ],
+  "hook_type": "callout",
+  "cover": {
+    "kicker": "PLUMBING OWNERS",
+    "title": "Stop waiting until morning to call back",
+    "highlight": "morning to call",
+    "subtitle": "See why the first plumber to answer gets the paycheck."
+  },
+  "slides": [
+    {
+      "heading": "Leaks don't wait for business hours",
+      "body": "When a basement floods at 8 PM on a Tuesday, the homeowner calls down the list. They keep dialing until someone answers.",
+      "tip": "Call your own line after 5pm. What happens?"
+    },
+    {
+      "heading": "The five-minute window",
+      "body": "If you call back twenty minutes later, they have already booked the next shop on the list. But that's not even the expensive part...",
+      "tip": ""
+    },
+    {
+      "heading": "Lost trust before the wrench turns",
+      "body": "Slow callbacks tell customers you are too busy for them. Even if you call them back first thing in the morning, they assume service will take days.",
+      "tip": "Check missed calls at 7am and 1pm daily."
+    },
+    {
+      "heading": "Answering every ring keeps schedules full",
+      "body": "You don't need more ad spend. You just need someone to pick up when you're under a sink or driving to a supply house.",
+      "tip": ""
+    },
+    {
+      "heading": "Quick capture recap",
+      "body": "1. Callers dial down the list.\n2. First to answer gets the job.\n3. Speed beats a lower estimate every time.",
+      "tip": ""
+    }
+  ],
+  "caption": "When a homeowner has a plumbing emergency, the first shop that answers gets the job. \ud83d\udee0\ufe0f\n\nWaiting until morning means handing that revenue straight to your competitors down the road.\n\nHow many missed calls do you think you had this week while your hands were under a sink?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#plumbingservice",
+    "#smallbusinessowner"
+  ],
+  "image_prompt": "A plumber kneeling beside a water heater in a residential basement, glancing down at a smartphone sitting on a toolbox",
+  "kind": "carousel",
+  "local": false,
+  "person": true,
+  "art_style": "photo",
+  "slot": "2026-10-29 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg",
+    "slide_06.jpg",
+    "slide_07.jpg"
+  ]
+}
