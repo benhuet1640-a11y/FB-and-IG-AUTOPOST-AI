@@ -17,6 +17,10 @@ on:
         description: "Test only: make the images but DON'T post (scheduled runs always post)"
         type: boolean
         default: false
+      scheduled:
+        description: "Act like the schedule: only post if a time slot is due (used by outside timers)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write             # lets the job commit slides + history back to the repo
@@ -53,7 +57,7 @@ jobs:
       - name: Is it a posting hour in New York?
         id: due
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.scheduled }}" != "true" ]; then
             echo "due=true" >> "$GITHUB_OUTPUT"   # manual runs always go
             echo "kind=${{ inputs.kind }}" >> "$GITHUB_OUTPUT"
             echo "slot=" >> "$GITHUB_OUTPUT"
