@@ -8,7 +8,7 @@ Usage:
 import json
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -58,6 +58,8 @@ def set_output(name, value):
 
 def create(post, cfg, cover_img=None):
     post_id = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H%M")
+    if slot := os.environ.get("SLOT"):
+        post["slot"] = slot  # marks this scheduled slot as taken
     out = POSTS / post_id
     paths = render_post(post, cfg, out, cover_img)
     post["images"] = [p.name for p in paths]
@@ -111,13 +113,42 @@ def cmd_sample(kind, image_path=None):
     create(dict(SAMPLES[kind]), load_config(), cover_img)
 
 
-def cmd_due():
+def slot_done(slot):
+    """True if this slot already has a post (generated or published), so we never double-post."""
+    if any(h.get("slot") == slot for h in load_history()):
+        return True
+    for f in POSTS.glob("*/post.json"):
+        try:
+            if json.loads(f.read_text()).get("slot") == slot:
+                return True
+        except ValueError:
+            continue
+    return False
+
+
+def due_slot(now=None):
+    """The earliest slot today that has started, is still within the catch-up window and isn't posted yet."""
     sched = load_config()["schedule"]
-    hour = datetime.now(ZoneInfo(sched["timezone"])).hour
-    kind = sched["slots"].get(hour)
-    print(f"New York hour {hour} → {kind or 'nothing scheduled, skipping'}")
-    set_output("due", "true" if kind else "false")
+    tz = ZoneInfo(sched["timezone"])
+    now = now or datetime.now(tz)
+    window = timedelta(hours=sched.get("catch_up_hours", 3))
+    for hhmm, kind in sorted(sched["slots"].items()):
+        h, m = map(int, str(hhmm).split(":"))
+        start = now.replace(hour=h, minute=m, second=0, microsecond=0)
+        slot = start.strftime("%Y-%m-%d %H:%M")
+        if start <= now < start + window and not slot_done(slot):
+            return slot, kind
+    return None, None
+
+
+def cmd_due():
+    tz = load_config()["schedule"]["timezone"]
+    slot, kind = due_slot()
+    now = datetime.now(ZoneInfo(tz)).strftime("%H:%M")
+    print(f"New York time {now} → {f'posting the {slot} {kind}' if slot else 'nothing due, skipping'}")
+    set_output("due", "true" if slot else "false")
     set_output("kind", kind or "")
+    set_output("slot", slot or "")
 
 
 def build_caption(post, cfg, platform):
@@ -148,7 +179,7 @@ def cmd_publish(post_id):
     result = {"id": post_id, "kind": post["kind"], "topic": post["topic"],
               "hook": post["cover"]["title"] if post["kind"] == "carousel" else post["headline"],
               "hook_type": post.get("hook_type"), "art_style": post.get("art_style"),
-              "person": post.get("person"), "local": post.get("local"),
+              "person": post.get("person"), "local": post.get("local"), "slot": post.get("slot"),
               "posted_at": datetime.now(timezone.utc).isoformat()}
 
     errors = []

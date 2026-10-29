@@ -108,10 +108,11 @@ ai:
 # New York hour → what to post. The code handles daylight saving time.
 schedule:
   timezone: "America/New_York"
-  slots:
-    8: carousel
-    12: ad
-    18: carousel
+  slots:                              # "HH:MM" New York time → what to post
+    "08:30": carousel
+    "12:00": ad
+    "18:00": carousel
+  catch_up_hours: 3                   # if GitHub runs late or skips a run, post up to 3h after the slot
 
 platforms:
   instagram: true                     # needs the IG_USER_ID secret; skipped (with a warning) without it

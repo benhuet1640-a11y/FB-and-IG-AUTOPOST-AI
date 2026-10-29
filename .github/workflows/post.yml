@@ -2,12 +2,10 @@ name: Auto-post
 
 on:
   schedule:
-    # GitHub only understands UTC, so this wakes up at both the summer and winter
-    # UTC equivalents of 8am, noon and 6pm New York. The "due" step below posts only
-    # when the New York hour is one of schedule.slots in config.yaml (and picks
-    # carousel vs. ad from there), so daylight saving time is handled automatically.
-    # (Minute 7 avoids GitHub's busy top-of-hour slot.)
-    - cron: "7 12,13,16,17,22,23 * * *"
+    # Checks every 15 minutes. The "due" step posts a slot from schedule.slots in config.yaml
+    # once its New York time has passed, catching up if GitHub runs late or skips a run, and
+    # never posting the same slot twice. Daylight saving time is handled in the code.
+    - cron: "4,19,34,49 * * * *"
   workflow_dispatch:          # adds a "Run workflow" button for testing
     inputs:
       kind:
@@ -58,6 +56,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "due=true" >> "$GITHUB_OUTPUT"   # manual runs always go
             echo "kind=${{ inputs.kind }}" >> "$GITHUB_OUTPUT"
+            echo "slot=" >> "$GITHUB_OUTPUT"
           else
             python -m autopost.main due
           fi
@@ -69,6 +68,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || vars.OPENAI_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || vars.GEMINI_API_KEY }}
           META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN || vars.META_PAGE_TOKEN }}   # to read how past posts performed
+          SLOT: ${{ steps.due.outputs.slot }}
         run: python -m autopost.main generate "${{ steps.due.outputs.kind }}"
 
       - name: Commit images (makes the images publicly reachable for Meta)
