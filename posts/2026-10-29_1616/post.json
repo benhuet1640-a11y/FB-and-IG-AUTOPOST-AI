@@ -1,0 +1,37 @@
+{
+  "topic": "Capturing after-hours plumbing emergency calls",
+  "hook_options": [
+    "Emergency callers never leave a voicemail",
+    "Letting after-hours emergency calls hit voicemail",
+    "Plumbing owners: stop losing jobs after hours",
+    "The emergency calls you never know about",
+    "Missing after hours calls costs jobs"
+  ],
+  "hook_type": "contrarian",
+  "headline": "Emergency callers never leave a voicemail",
+  "highlight": "never leave",
+  "subhead": "We answer your calls 24/7 and book jobs straight into your schedule.",
+  "points": [
+    "24/7 call answering",
+    "Books straight into schedule",
+    "Qualifies every lead"
+  ],
+  "caption": "When a pipe bursts at night, homeowners call the next plumber until someone picks up. Pipeline Reception answers every call 24/7 and books jobs straight into your schedule. We can get you set up in a day.",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbingcontractor",
+    "#plumbinglife",
+    "#plumbingcompany",
+    "#tradesbusiness"
+  ],
+  "image_prompt": "A plumber kneeling in a residential kitchen working under the sink, looking over his shoulder with a tired expression toward a smartphone resting on the floor beside his toolbox. The phone screen emits a plain, soft blank light with no text, numbers, or icons visible. Natural late-afternoon indoor lighting, realistic and unposed everyday scene.",
+  "kind": "ad",
+  "local": false,
+  "person": true,
+  "art_style": "illustration",
+  "slot": "2026-10-29 12:00",
+  "images": [
+    "ad.jpg"
+  ]
+}
