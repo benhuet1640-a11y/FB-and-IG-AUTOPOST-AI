@@ -4,7 +4,7 @@ Posts to Facebook (and Instagram once it's enabled) **three times a day, every d
 
 | Time | Post |
 |---|---|
-| 8am | Educational carousel: a hook cover, 5 teaching slides and a "Book a demo" slide at the end |
+| 8am | Educational carousel (3–6 slides): a hook cover, 1–4 teaching slides and a "Book a demo" slide at the end |
 | 12pm | Single-image ad: headline, 3 benefits and a "Book a demo" button |
 | 6pm | Educational carousel |
 

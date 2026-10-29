@@ -82,8 +82,18 @@ def check_secrets(names):
                  "Secrets and variables → Actions (names must match exactly).")
 
 
+def prune_old_images(days=21):
+    """Published images aren't needed after a few weeks; keep post.json, drop the JPEGs."""
+    cutoff = datetime.now(timezone.utc).timestamp() - days * 86400
+    for folder in POSTS.iterdir():
+        if folder.is_dir() and (folder / "post.json").exists() and folder.stat().st_mtime < cutoff:
+            for jpg in folder.rglob("*.jpg"):
+                jpg.unlink()
+
+
 def cmd_generate(kind):
     cfg = load_config()
+    prune_old_images()
     for key in ("GEMINI_API_KEY", "OPENAI_API_KEY", "META_PAGE_TOKEN"):
         if not os.environ.get(key, "").strip():
             print(f"Note: {key} is not set.", file=sys.stderr)
@@ -188,7 +198,8 @@ def cmd_publish(post_id):
             continue
         try:
             # Facebook takes the files directly; Instagram only accepts public image URLs.
-            media = files if platform == "facebook" else \
+            hd = [f.parent / "hd" / f.name for f in files]
+            media = (hd if all(p.exists() for p in hd) else files) if platform == "facebook" else \
                 [f"{image_base_url()}/posts/{post_id}/{f.name}" for f in files]
             result[platform] = fn(media, build_caption(post, cfg, platform))
             print(f"Posted to {platform}: {result[platform]}")

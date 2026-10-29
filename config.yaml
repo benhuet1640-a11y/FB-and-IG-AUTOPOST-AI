@@ -55,7 +55,8 @@ content:
     - "qualifying calls: separating real jobs from tire-kickers"
     - "reviews, repeat customers and maintenance plans"
     - "how AI receptionists work for a plumbing shop (practical, not hype)"
-  content_slides: 5                   # teaching slides between cover and CTA (IG max total = 10)
+  content_slides: [1, 4]              # teaching slides between cover and CTA → 3-6 slides in total;
+                                      # the AI picks how many the topic actually needs
   hashtags: >
     Pick 5-7 from a mix like: #plumbingbusiness #plumber #plumbers #plumbinglife
     #plumbingcontractor #plumbingservice #plumbingcompany #plumbingtips

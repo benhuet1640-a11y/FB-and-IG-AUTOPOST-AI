@@ -1,22 +1,63 @@
-"""Turn a post (JSON) into branded 1080x1350 carousel slides or a single ad image (JPEG — Instagram's required format)."""
+"""Turn a post (JSON) into branded 4:5 carousel slides or a single ad image (JPEG, as Instagram requires)."""
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-W, H = 1080, 1350          # 4:5 portrait, the largest feed size Instagram allows
+W, H = 1080, 1350          # layout units: 4:5 portrait, Instagram's largest feed size
+S = 2                      # every slide is drawn at 2x (2160x2700) so text stays razor sharp
 PAD = 96
 ROOT = Path(__file__).resolve().parent.parent
 FONTS, ASSETS = ROOT / "fonts", ROOT / "assets"
 WHITE = "#FFFFFF"
+JPEG = {"quality": 95, "subsampling": 0, "optimize": True}  # 4:4:4 keeps colored text crisp
 
 
 def font(weight, size):
-    return ImageFont.truetype(str(FONTS / f"Inter-{weight}.otf"), size)
+    f = ImageFont.truetype(str(FONTS / f"Inter-{weight}.otf"), size * S)
+    f.lsize = size  # size in layout units
+    return f
 
 
 def logo(name, width):
     img = Image.open(ASSETS / name).convert("RGBA")
-    return img.resize((width, round(img.height * width / img.width)), Image.LANCZOS)
+    return img.resize((width * S, round(img.height * width * S / img.width)), Image.LANCZOS)
+
+
+def paste(img, overlay, xy):
+    img.paste(overlay, (round(xy[0] * S), round(xy[1] * S)), overlay)
+
+
+def canvas(color):
+    return Image.new("RGB", (W * S, H * S), color)
+
+
+class Draw:
+    """ImageDraw that takes layout coordinates (1080x1350) and draws at S x resolution."""
+
+    def __init__(self, img):
+        self.d = ImageDraw.Draw(img, "RGBA")
+
+    @staticmethod
+    def _s(seq):
+        return [v * S for v in seq]
+
+    def text(self, xy, text, **kw):
+        self.d.text(self._s(xy), text, **kw)
+
+    def textlength(self, text, font):
+        return self.d.textlength(text, font=font) / S
+
+    def rectangle(self, box, **kw):
+        self.d.rectangle(self._s(box), **kw)
+
+    def rounded_rectangle(self, box, radius=0, **kw):
+        self.d.rounded_rectangle(self._s(box), radius=radius * S, **kw)
+
+    def ellipse(self, box, **kw):
+        self.d.ellipse(self._s(box), **kw)
+
+    def line(self, xy, width=1, **kw):
+        self.d.line(self._s(xy), width=width * S, **kw)
 
 
 def wrap(draw, text, fnt, max_w):
@@ -49,7 +90,7 @@ def draw_block(draw, xy, lines, fnt, fill, line_gap=1.25):
     x, y = xy
     for ln in lines:
         draw.text((x, y), ln, font=fnt, fill=fill)
-        y += int(fnt.size * line_gap)
+        y += int(fnt.lsize * line_gap)
     return y
 
 
@@ -99,7 +140,7 @@ def draw_rich(draw, xy, lines, fnt, fill, hl_fill, line_gap=1.08):
         for word, hl in line:
             draw.text((x, y), word, font=fnt, fill=hl_fill if hl else fill)
             x += draw.textlength(word, font=fnt) + space
-        y += int(fnt.size * line_gap)
+        y += int(fnt.lsize * line_gap)
     return y
 
 
@@ -127,21 +168,23 @@ def chrome(draw, c, website, index, total, dark=False):
 
 def cover_fit(img):
     """Scale an image to fill the slide, cropping a little more from the bottom than the top."""
-    scale = max(W / img.width, H / img.height)
+    rw, rh = W * S, H * S
+    scale = max(rw / img.width, rh / img.height)
     img = img.resize((round(img.width * scale), round(img.height * scale)), Image.LANCZOS)
-    left = (img.width - W) // 2
-    top = int((img.height - H) * 0.35)
-    return img.crop((left, top, left + W, top + H))
+    left = (img.width - rw) // 2
+    top = int((img.height - rh) * 0.35)
+    return img.crop((left, top, left + rw, top + rh))
 
 
 def bottom_fade(color_hex, start, end, max_alpha=245):
     """Transparent → brand color gradient so white text stays readable over any image."""
     r, g, b = (int(color_hex[i:i + 2], 16) for i in (1, 3, 5))
-    grad = Image.new("RGBA", (W, H), (r, g, b, 0))
+    rw, rh = W * S, H * S
+    grad = Image.new("RGBA", (rw, rh), (r, g, b, 0))
     d = ImageDraw.Draw(grad)
-    for y in range(start, H):
+    for y in range(start, rh):
         a = max_alpha if y >= end else int(max_alpha * ((y - start) / (end - start)) ** 1.4)
-        d.line((0, y, W, y), fill=(r, g, b, a))
+        d.line((0, y, rw, y), fill=(r, g, b, a))
     return grad
 
 
@@ -149,10 +192,10 @@ def art_background(c, art=None, fade_from=0.28, fade_to=0.58):
     """AI illustration with a navy fade at the bottom, or a plain branded backdrop if there's no art."""
     if art is not None:
         img = cover_fit(art).convert("RGBA")
-        img.alpha_composite(bottom_fade(c["navy"], int(H * fade_from), int(H * fade_to)))
+        img.alpha_composite(bottom_fade(c["navy"], int(H * S * fade_from), int(H * S * fade_to)))
         return img.convert("RGB")
-    img = Image.new("RGB", (W, H), c["navy"])
-    deco = ImageDraw.Draw(img)
+    img = canvas(c["navy"])
+    deco = Draw(img)
     deco.ellipse((W - 420, -260, W + 260, 420), fill=c["teal"])
     deco.ellipse((W - 355, 285, W - 285, 355), fill=c["amber"])
     return img
@@ -160,10 +203,10 @@ def art_background(c, art=None, fade_from=0.28, fade_to=0.58):
 
 def cover_slide(post, c, website, total, cover_img=None):
     img = art_background(c, cover_img)
-    d = ImageDraw.Draw(img, "RGBA")
+    d = Draw(img)
 
     icon = logo("icon.png", 92)
-    img.paste(icon, (PAD, PAD), icon)
+    paste(img, icon, (PAD, PAD))
 
     cover = post["cover"]
     title_f, title_l, title_h = fit_rich(d, cover["title"], cover.get("highlight"), "ExtraBold", 116,
@@ -182,10 +225,10 @@ def cover_slide(post, c, website, total, cover_img=None):
 
 
 def content_slide(slide, num, c, brand, website, index, total):
-    img = Image.new("RGB", (W, H), c["paper"])
-    d = ImageDraw.Draw(img, "RGBA")
+    img = canvas(c["paper"])
+    d = Draw(img)
     icon = logo("icon.png", 56)
-    img.paste(icon, (PAD, PAD), icon)
+    paste(img, icon, (PAD, PAD))
     d.text((PAD + 76, PAD + 28), brand, font=font("Bold", 30), fill=c["navy"], anchor="lm")
 
     d.text((PAD - 6, 240), f"{num:02d}", font=font("ExtraBold", 170), fill=c["teal"])
@@ -209,10 +252,10 @@ def content_slide(slide, num, c, brand, website, index, total):
 
 
 def cta_slide(cta, c, website, total):
-    img = Image.new("RGB", (W, H), WHITE)
-    d = ImageDraw.Draw(img, "RGBA")
+    img = canvas(WHITE)
+    d = Draw(img)
     wordmark = logo("wordmark.png", 440)
-    img.paste(wordmark, (PAD, 190), wordmark)
+    paste(img, wordmark, (PAD, 190))
 
     if cta.get("save_prompt"):
         kicker(d, c, cta["save_prompt"], PAD, 410)
@@ -244,9 +287,9 @@ def ad_image(post, cfg, art=None):
     """Single-image ad: AI art up top, headline + 3 benefits + button over the navy fade."""
     c = cfg["brand"]["colors"]
     img = art_background(c, art, fade_from=0.26, fade_to=0.52)
-    d = ImageDraw.Draw(img, "RGBA")
+    d = Draw(img)
     icon = logo("icon.png", 92)
-    img.paste(icon, (PAD, PAD), icon)
+    paste(img, icon, (PAD, PAD))
 
     max_w = W - 2 * PAD
     head_f, head_l, head_h = fit_rich(d, post["headline"], post.get("highlight"), "ExtraBold", 96, max_w, 320, 1.06)
@@ -268,22 +311,23 @@ def ad_image(post, cfg, art=None):
     return img
 
 
+def save(img, out_dir, name):
+    """Write the 1080x1350 version (Instagram, committed to the repo) and an HD one for Facebook."""
+    (out_dir / "hd").mkdir(exist_ok=True)
+    img.save(out_dir / "hd" / name, "JPEG", **JPEG)
+    img.resize((W, H), Image.LANCZOS).save(out_dir / name, "JPEG", **JPEG)
+    return out_dir / name
+
+
 def render_post(post, cfg, out_dir, cover_img=None):
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     if post["kind"] == "ad":
-        p = out_dir / "ad.jpg"
-        ad_image(post, cfg, cover_img).save(p, "JPEG", quality=92)
-        return [p]
+        return [save(ad_image(post, cfg, cover_img), out_dir, "ad.jpg")]
     c, brand, website = cfg["brand"]["colors"], cfg["brand"]["name"], cfg["brand"]["website"]
     total = len(post["slides"]) + 2
     images = [cover_slide(post, c, website, total, cover_img)]
     for i, s in enumerate(post["slides"], start=1):
         images.append(content_slide(s, i, c, brand, website, i + 1, total))
     images.append(cta_slide(cfg["cta"], c, website, total))
-    paths = []
-    for i, img in enumerate(images, start=1):
-        p = out_dir / f"slide_{i:02d}.jpg"
-        img.save(p, "JPEG", quality=92)
-        paths.append(p)
-    return paths
+    return [save(img, out_dir, f"slide_{i:02d}.jpg") for i, img in enumerate(images, start=1)]

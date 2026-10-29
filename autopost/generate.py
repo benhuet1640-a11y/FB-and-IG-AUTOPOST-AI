@@ -64,7 +64,9 @@ COVER
   MISTAKES", "SAVE THIS", "FREEZE SEASON".
 - subtitle: max 12 words that raise the stakes or promise the payoff.
 
-SLIDES: exactly {n} teaching slides that keep people swiping:
+SLIDES: between {n_min} and {n_max} teaching slides, as many as the idea genuinely needs and no
+padding (a sharp single insight can be 1-2 slides; a step-by-step can be {n_max}). The whole post
+is the cover + these slides + a CTA slide. Keep people swiping:
 - Each heading max 6 words, punchy and specific. Each body max 26 words, plain English,
   concrete (real situations, times of day, what a customer actually says).
 - Open loops: at least one slide should end in a way that makes the next slide feel
@@ -74,7 +76,8 @@ SLIDES: exactly {n} teaching slides that keep people swiping:
   Want that slot?"'), a specific action with a time or number ("Check missed calls at 7am
   and 1pm daily."), or a quick test ("Call your own line after 5pm. What happens?").
   Never restate the slide body or give vague advice like "have a process".
-- The LAST teaching slide is a quick recap/takeaway the reader can screenshot.
+- With 3 or more teaching slides, the LAST one is a quick recap/takeaway the reader can
+  screenshot. With fewer, every slide should simply be strong on its own.
 - Teach, don't sell. No product mentions or calls to action on these slides. (A separate
   final slide handles the CTA.) Never say or imply AI replaces staff.
 
@@ -158,7 +161,8 @@ def build_prompt(cfg, kind, recent_topics, local, person=True, performance=""):
     image_brief = (IMAGE_PERSON if person else IMAGE_SCENE) + NO_TEXT
     if kind == "ad":
         return shared + AD.format(brand=cfg["brand"]["name"], hashtags=hashtags, image_brief=image_brief)
-    return shared + CAROUSEL.format(themes=bullets(c["themes"]), n=c["content_slides"],
+    n_min, n_max = c["content_slides"]
+    return shared + CAROUSEL.format(themes=bullets(c["themes"]), n_min=n_min, n_max=n_max,
                                     hashtags=hashtags, image_brief=image_brief)
 
 
@@ -220,7 +224,10 @@ def validate(post, kind, cfg):
     if len(hook.split()) > 11:
         raise ValueError(f"hook too long: {hook}")
     if kind == "carousel":
-        post["slides"] = post["slides"][:cfg["content"]["content_slides"]]
+        n_min, n_max = cfg["content"]["content_slides"]
+        post["slides"] = post["slides"][:n_max]
+        if len(post["slides"]) < n_min:
+            raise ValueError("carousel has no teaching slides")
     else:
         post["points"] = post["points"][:3]
     post["kind"] = kind
