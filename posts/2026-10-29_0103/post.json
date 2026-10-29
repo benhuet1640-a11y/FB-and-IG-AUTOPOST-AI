@@ -1,0 +1,68 @@
+{
+  "topic": "The real cost of missing calls on older Pittsburgh homes",
+  "hook_options": [
+    "The call you're losing every Friday at 4pm",
+    "You're losing jobs in the first 3 rings",
+    "Pittsburgh plumbers: stop missing calls after 5pm",
+    "More ads won't fix your empty schedule",
+    "4 phone habits of fully booked plumbers"
+  ],
+  "hook_type": "mistake",
+  "cover": {
+    "kicker": "PITTSBURGH PLUMBERS",
+    "title": "You're losing jobs in the first 3 rings",
+    "highlight": "losing jobs",
+    "subtitle": "Older homes in the Burgh mean urgent calls don't wait for office hours."
+  },
+  "slides": [
+    {
+      "heading": "The 5pm scramble in Mt. Lebanon",
+      "body": "When a main stack backs up in an older house at suppertime, homeowners dial down the list until someone actually answers.",
+      "tip": "Call your own line after 5pm. What happens?"
+    },
+    {
+      "heading": "Voicemail is where urgent calls die",
+      "body": "Pittsburgh homeowners with water backing up into a basement do not leave messages. They hang up and call the next shop on the list.",
+      "tip": "Listen to three random voicemails left after hours today."
+    },
+    {
+      "heading": "The true cost of a missed lead",
+      "body": "That single water heater replacement you missed on a Tuesday night easily costs your shop thousands in lost revenue.",
+      "tip": "Calculate average job size and multiply by three."
+    },
+    {
+      "heading": "Office staff can't be everywhere",
+      "body": "Your office manager handles dispatch, parts, and billing all day. They simply cannot pick up every single ring during a busy rush.",
+      "tip": "Count phone rings during a morning dispatch window."
+    },
+    {
+      "heading": "Stop bleeding calls after hours",
+      "body": "Answer every single ring day and night, keep bookings moving into the calendar, and let your team focus on the actual pipe work.",
+      "tip": "Check missed calls at 7am and 1pm daily."
+    }
+  ],
+  "caption": "Older Pittsburgh housing stock means plumbing emergencies rarely happen during convenient 9-to-5 business hours.\n\nWhen a homeowner hears water rushing where it shouldn't, the shop that picks up the phone gets the job. Keep your coverage steady around the clock.\n\nHow many missed calls do you think your shop had yesterday?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbingcompany",
+    "#plumbingtips",
+    "#smallbusinessowner",
+    "#pittsburgh",
+    "#412"
+  ],
+  "image_prompt": "A smartphone resting on a muddy clipboard inside the cab of a service van parked on a narrow Pittsburgh street with brick row houses in the background.",
+  "kind": "carousel",
+  "local": true,
+  "person": false,
+  "art_style": "illustration",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg",
+    "slide_06.jpg",
+    "slide_07.jpg"
+  ]
+}
