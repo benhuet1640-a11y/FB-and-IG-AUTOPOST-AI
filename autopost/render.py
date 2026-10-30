@@ -126,10 +126,10 @@ def bottom_fade(color_hex, start, end, max_alpha=245):
 # ── Tweet-style cards ──────────────────────────────────────────────────────────
 
 THEMES = {
-    "light": {"bg": "#FFFFFF", "text": "#0F1419", "muted": "#536471", "line": "#EFF3F4"},
-    "dark": {"bg": "#000000", "text": "#E7E9EA", "muted": "#71767B", "line": "#2F3336"},
+    "light": {"bg": "#FFFFFF", "text": "#0F1419", "muted": "#536471"},
+    "dark": {"bg": "#000000", "text": "#E7E9EA", "muted": "#71767B"},
 }
-SIDE = 84
+SIDE = 90
 
 
 def avatar(size, name="icon.png"):
@@ -141,83 +141,44 @@ def avatar(size, name="icon.png"):
     return icon
 
 
-def icons_row(d, y, color):
-    """Reply, repost, like, bookmark, share: the outline icons under a tweet (no counts)."""
-    xs = [SIDE + 20 + i * ((W - 2 * SIDE - 40) / 4) for i in range(5)]
-    w = 3
-    x = xs[0]  # reply bubble
-    d.rounded_rectangle((x, y, x + 40, y + 30), radius=14, outline=color, width=w)
-    d.line((x + 10, y + 29, x + 6, y + 40, x + 18, y + 30), width=w, fill=color)
-    x = xs[1]  # repost arrows
-    d.line((x + 2, y + 14, x + 2, y + 6, x + 34, y + 6), width=w, fill=color)
-    d.line((x + 27, y - 1, x + 34, y + 6, x + 27, y + 13), width=w, fill=color)
-    d.line((x + 40, y + 24, x + 40, y + 32, x + 8, y + 32), width=w, fill=color)
-    d.line((x + 15, y + 25, x + 8, y + 32, x + 15, y + 39), width=w, fill=color)
-    x = xs[2]  # heart
-    d.arc((x, y, x + 22, y + 22), 140, 360, width=w, fill=color)
-    d.arc((x + 18, y, x + 40, y + 22), 180, 40, width=w, fill=color)
-    d.line((x + 2, y + 16, x + 20, y + 38, x + 38, y + 16), width=w, fill=color)
-    x = xs[3]  # bookmark
-    d.line((x + 6, y, x + 34, y, x + 34, y + 40, x + 20, y + 29, x + 6, y + 40, x + 6, y), width=w, fill=color)
-    x = xs[4]  # share
-    d.line((x + 20, y + 26, x + 20, y), width=w, fill=color)
-    d.line((x + 10, y + 10, x + 20, y, x + 30, y + 10), width=w, fill=color)
-    d.line((x + 4, y + 22, x + 4, y + 38, x + 36, y + 38, x + 36, y + 22), width=w, fill=color)
-
-
-def tweet_card(text, cfg, theme, stamp, link_card=False):
+def tweet_card(text, cfg, theme):
+    """A minimal tweet screenshot: avatar, name, handle, the text. Nothing else (Hormozi-style)."""
     t = THEMES[theme]
     brand = cfg["brand"]
+    founder = brand.get("founder") or {}
     img = canvas(t["bg"])
     d = Draw(img)
     max_w = W - 2 * SIDE
 
-    # measure everything first so the tweet sits in the middle of the frame
+    # short tweets get big text, long ones shrink; the block sits just above the middle
     paras = [p.strip() for p in text.split("\n") if p.strip()]
-    card_h, banner = (330, 210) if link_card else (0, 0)
-    fixed = 116 + 40 + (card_h + 36 if link_card else 0) + 40 + 34 + 34 + 2 + 30 + 40
-    size = 72  # short tweets get big, screenshot-style text; long ones shrink to fit
+    header_h, gap = 150, 56
+    size = 64
     while True:
         f = font("Regular", size)
         blocks = [wrap(d, p, f, max_w) for p in paras]
-        text_h = sum(len(b) * int(size * 1.34) for b in blocks) + int(size * 0.6) * (len(blocks) - 1)
-        if fixed + text_h <= H - 150 or size <= 36:
+        text_h = sum(len(b) * int(size * 1.32) for b in blocks) + int(size * 0.7) * (len(blocks) - 1)
+        if header_h + gap + text_h <= H - 220 or size <= 40:
             break
         size -= 2
-    total = fixed + text_h
-    y = max(60, (H - total) // 2)
+    y = max(90, int((H - (header_h + gap + text_h)) * 0.42))
 
-    founder = brand.get("founder") or {}
-    paste(img, avatar(116, founder.get("avatar", "icon.png")), (SIDE, y))
-    d.text((SIDE + 140, y + 30), founder.get("display_name", brand["name"]), font=font("Bold", 42),
-           fill=t["text"], anchor="lm")
-    d.text((SIDE + 140, y + 84), brand["instagram"], font=font("Regular", 36), fill=t["muted"], anchor="lm")
-    y += 116 + 40
+    paste(img, avatar(header_h, founder.get("avatar", "icon.png")), (SIDE, y))
+    nx = SIDE + header_h + 34
+    d.text((nx, y + header_h * 0.5 - 6), founder.get("display_name", brand["name"]), font=font("Bold", 46),
+           fill=t["text"], anchor="ls")
+    d.text((nx, y + header_h * 0.5 + 10), brand["instagram"], font=font("Regular", 42),
+           fill=t["muted"], anchor="lt")
+    for i in range(2):  # the "··" menu in the corner
+        cx = W - SIDE - 10 - i * 18
+        d.ellipse((cx - 4, y + 30, cx + 4, y + 38), fill=t["muted"])
+    y += header_h + gap
 
     for b in blocks:
         for ln in b:
             d.text((SIDE, y), ln, font=f, fill=t["text"])
-            y += int(size * 1.34)
-        y += int(size * 0.6)
-    y -= int(size * 0.6)
-
-    if link_card:
-        y += 36
-        top = y
-        d.rounded_rectangle((SIDE, top, W - SIDE, top + card_h), radius=28, outline=t["line"], width=3)
-        d.rounded_rectangle((SIDE + 2, top + 2, W - SIDE - 2, top + banner), radius=26, fill="#F4F8F7")
-        d.rectangle((SIDE + 2, top + banner - 30, W - SIDE - 2, top + banner), fill="#F4F8F7")
-        wm = logo("wordmark.png", 330)
-        paste(img, wm, ((W - 330) / 2, top + (banner - wm.size[1] / S) / 2))
-        d.text((SIDE + 30, top + banner + 22), brand["website"], font=font("Regular", 30), fill=t["muted"])
-        d.text((SIDE + 30, top + banner + 62), "Book a demo · AI receptionist for plumbers", font=font("Medium", 32), fill=t["text"])
-        y = top + card_h
-
-    y += 40
-    d.text((SIDE, y), stamp, font=font("Regular", 34), fill=t["muted"])
-    y += 34 + 34
-    d.line((SIDE, y, W - SIDE, y), width=2, fill=t["line"])
-    icons_row(d, y + 30, t["muted"])
+            y += int(size * 1.32)
+        y += int(size * 0.7)
     return img
 
 
@@ -247,12 +208,11 @@ def save(img, out_dir, name):
     return out_dir / name
 
 
-def render_post(post, cfg, out_dir, photo=None, theme="light", stamp=""):
+def render_post(post, cfg, out_dir, photo=None, theme="light"):
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     fmt = post["format"]
     if fmt == "photo":
         return [save(photo_post(post["headline"], photo, cfg), out_dir, "photo.jpg")]
     tweets = post["tweets"] if fmt == "thread" else [post["tweet"]]
-    return [save(tweet_card(t, cfg, theme, stamp, link_card=(i == len(tweets) - 1)), out_dir,
-                 f"slide_{i + 1:02d}.jpg") for i, t in enumerate(tweets)]
+    return [save(tweet_card(t, cfg, theme), out_dir, f"slide_{i + 1:02d}.jpg") for i, t in enumerate(tweets)]

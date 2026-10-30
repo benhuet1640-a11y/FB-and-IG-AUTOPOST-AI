@@ -66,10 +66,11 @@ Do NOT repeat or closely resemble any of these recent posts:
 FORMATS = {
     "thread": """
 FORMAT: a thread of {n_min}-{n_max} tweets, shown as tweet screenshots people swipe through.
-- tweets[0] is the hook tweet: the hook plus at most one more short line. It must make
-  people swipe.
-- Middle tweets: the pain and what it costs, one beat per tweet, each 1-3 short sentences
-  (max 200 characters). Concrete moments, not advice-column lists.
+- tweets[0] is the hook tweet. It can be one punchy line or a few, whatever hits hardest. It
+  must make people swipe.
+- Middle tweets: the pain and what it costs, one beat per tweet. Each tweet can be as short as
+  one line or as long as a full tweet (max 280 characters), whatever makes it land. Concrete
+  moments, not advice-column lists.
 - Last tweet: the fix. Say what {brand} does in plain words and end with the exact line
   "Book a demo at {website}".
 - Use as many tweets as the story needs within the range; never pad.
@@ -78,8 +79,9 @@ Return ONLY JSON:
   "tweets": ["...", "..."], "caption": "...", "hashtags": ["#..."]}}""",
 
     "tweet": """
-FORMAT: ONE standalone tweet shown as a screenshot (max 260 characters). Hook first, then
-the pain/cost in a line or two, then the fix, ending with "Book a demo at {website}". It should read like a real
+FORMAT: ONE standalone tweet shown as a screenshot (max 280 characters). It can be a single
+sharp line or a short paragraph, whatever is strongest. Hook first, then the pain/cost, then
+the fix, ending with "Book a demo at {website}". It should read like a real
 founder's tweet, not an ad.
 Return ONLY JSON:
 {{"topic": "...", "hook_options": ["...","...","...","...","..."], "hook_type": "...",
@@ -218,7 +220,7 @@ not an AI. Return the SAME JSON structure with every field kept, fixing anything
 5. Nothing seasonal. No invented statistics, studies, people, businesses, conversations or
    events presented as real ("a plumber told me last week..."); turn those into general
    patterns ("we hear this a lot"). Hypothetical math must be framed as hypothetical.
-6. Perfect spelling and grammar. Tweets max 200 characters each (single tweet max 260).
+6. Perfect spelling and grammar. Each tweet max 280 characters; short is fine if it hits.
 
 Make the smallest changes needed; keep what's already good. Return ONLY the JSON.
 

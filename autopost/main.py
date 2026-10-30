@@ -63,9 +63,7 @@ def create(post, cfg, photo=None):
     if slot := os.environ.get("SLOT"):
         post["slot"] = slot  # marks this scheduled slot as taken
     out = POSTS / post_id
-    tz = ZoneInfo(cfg["schedule"]["timezone"])
-    stamp = datetime.now(tz).strftime("%-I:%M %p · %b %-d, %Y")  # the tweet's timestamp line
-    paths = render_post(post, cfg, out, photo=photo, theme=post.get("theme", "light"), stamp=stamp)
+    paths = render_post(post, cfg, out, photo=photo, theme=post.get("theme", "light"))
     post["images"] = [p.name for p in paths]
     (out / "post.json").write_text(json.dumps(post, indent=2) + "\n")
     print(f"Rendered {len(paths)} image(s) → {out}")
