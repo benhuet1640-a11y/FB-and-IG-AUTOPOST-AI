@@ -7,6 +7,10 @@ brand:
   website: "pipelinereception.com"
   url: "https://pipelinereception.com"
   instagram: "@pipeline_reception"
+  founder:                            # the person the tweet-style posts come from
+    name: "Mike"
+    display_name: "Mike · Pipeline Reception"
+    avatar: "founder.jpg"             # in assets/
   colors:
     navy: "#0A2C36"                   # from the logo wordmark
     teal: "#12A998"                   # from the logo icon
@@ -44,19 +48,18 @@ content:
   audience: "plumbing business owners and their office managers across the US"
   local_market: "Pittsburgh, PA (our home base)"
   local_share: 0.25                   # about 1 in 4 posts gets a Pittsburgh angle
-  person_share: 0.8                   # about 4 in 5 covers feature a person
-  themes:
-    - "the real cost of missed calls and slow callbacks for plumbers"
-    - "emergency calls: burst pipes, no hot water, backups, and who gets the job"
-    - "speed-to-lead and following up on estimates"
-    - "after-hours, weekend and seasonal-rush call handling (freezes, storms, holidays)"
-    - "keeping techs focused on the job instead of the phone"
-    - "booking, dispatch and scheduling habits that fill the calendar"
-    - "qualifying calls: separating real jobs from tire-kickers"
-    - "reviews, repeat customers and maintenance plans"
-    - "how AI receptionists work for a plumbing shop (practical, not hype)"
-  content_slides: [1, 4]              # teaching slides between cover and CTA → 3-6 slides in total;
-                                      # the AI picks how many the topic actually needs
+  pain_points:                        # what posts are about: one real phone pain per post
+    - "missing calls while on a job (under a sink, in a crawlspace, on a ladder)"
+    - "callers who hang up on voicemail and call the next plumber"
+    - "calling leads back hours later, after they've already booked someone"
+    - "after-hours and weekend emergency calls going to whoever answers first"
+    - "the office person (or spouse) drowning in calls and can't keep up"
+    - "tire-kicker and price-shopper calls eating up the day"
+    - "estimates that never get followed up"
+    - "answering the phone at dinner, at the kid's game, at 11pm"
+    - "techs getting pulled off jobs to deal with the phone"
+    - "paying for ads and leads, then missing the calls they bring in"
+  thread_tweets: [3, 6]               # tweets per thread post (each tweet is one slide)
   hashtags: >
     Pick 5-7 from a mix like: #plumbingbusiness #plumber #plumbers #plumbinglife
     #plumbingcontractor #plumbingservice #plumbingcompany #plumbingtips
@@ -86,25 +89,6 @@ ai:
   gemini_fallback_models:
     - "gemini-flash-lite-latest"
   openai_model: "gpt-5-mini"
-  # Hybrid images: the AI draws the artwork, the code adds all the text.
-  cover_image: true                   # false = plain branded background, $0
-  image_model: "gpt-image-1.5"        # ~$0.05/image (~$4.50/mo). "gpt-image-1-mini" ≈ 3x cheaper, plainer art
-  image_quality: "medium"             # low / medium / high
-  # Cover art alternates between these styles; once there's data, the better performer is
-  # used ~70% of the time (see autopost/learn.py).
-  image_styles:
-    photo: >
-      Photorealistic, natural-looking photo, as if taken by a professional photographer on a
-      real job: soft natural or indoor lighting, true-to-life colors, shallow depth of field,
-      candid and unposed. Nothing dramatic, glossy or cinematic. Keep the subject in the
-      upper half; the lower 40% should be simple and slightly darker, because a headline
-      will be placed there. No text, letters, logos, signs, watermarks or app screens.
-    illustration: >
-      Clean, modern editorial illustration with natural lighting and a calm, friendly feel,
-      not dramatic. Color palette built around deep navy (#0A2C36), teal (#12A998) and warm
-      amber (#F6B45D) accents on light neutral tones. Keep the subject in the upper half; the
-      lower 40% should be simple and slightly darker, because a headline will be placed there.
-      No text, letters, logos, signs, watermarks or app screens.
 
 # New York hour → what to post. The code handles daylight saving time.
 schedule:

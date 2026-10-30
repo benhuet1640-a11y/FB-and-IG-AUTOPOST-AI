@@ -1,16 +1,14 @@
-"""Ask an LLM for one post (educational carousel or single-image ad) as JSON, plus an optional AI image."""
-import base64
-import io
+"""Ask an LLM for one post as JSON: a tweet-style thread, a single tweet, or a real-photo post."""
 import json
 import os
 import random
 import time
-from datetime import date
 
 import requests
-from PIL import Image
 
-SHARED = """You create Instagram/Facebook content for {brand}.
+SHARED = """You write social posts for {brand}. They appear as tweets from {founder}, the founder, so write
+as {founder}: "I" for his own view ("I think most plumbers lose more jobs to voicemail than to
+price"), "we" for the company ("we built this because...").
 
 About the business:
 {what_we_do}
@@ -19,151 +17,119 @@ What we offer:
 {positioning}
 
 Audience: {audience}
-Voice: {voice}
-Today is {today}. Where it fits naturally, make the post timely for the season
-(e.g. frozen pipes in winter, storms and sump pumps in spring, holiday call volume).
 {local}
+
+VOICE (this is what makes it feel real, not AI):
+- First person, founder/team: "we", "I've talked to", "we keep hearing". Like a real person who
+  knows the trade texting a plumber they respect. Casual, direct, a little blunt.
+- Short sentences. Contractions. Plain words a plumber uses (callback, the van, under a sink,
+  the office line, voicemail, the schedule, estimate). One idea per sentence.
+- Specific, concrete moments beat general claims: "It's 6:40pm, you're elbow-deep in a
+  water heater, the phone buzzes in your pocket. Third time today."
+- Illustrative math is fine if framed as a hypothetical ("if a job's worth $400 to you and
+  you miss 3 calls a week..."), never as a statistic or a study.
+- Do NOT sound like AI marketing. Never use: em dashes, "Here's the thing", "Let's be honest",
+  "game-changer", "unlock", "level up", "in today's world", "imagine", "say goodbye to",
+  "Did you know", "the secret", lists of three adjectives, rhetorical "Sound familiar?",
+  ALL CAPS, more than one emoji, or hashtags inside the post text.
+
+ANGLE: pain → cost → fix.
+- Open on ONE real, specific pain plumbing owners feel about the phone. Pick from (or near):
+{pains}
+- Show what it costs them (jobs, money, nights, stress) in their terms.
+- Then the fix: {brand}, said plainly and specifically (what actually happens when a call
+  comes in), and an invitation to book a demo at {website}.
+- Nothing seasonal or dated. Posts must make sense any day of the year.
 
 Hard rules:
 {rules}
 
-"topic" in your JSON = a short, specific title for THIS post (e.g. "Why 2am callers
-never leave voicemails"), not the name of a theme.
+HOOK (the first line decides everything):
+Brainstorm 5 hooks in "hook_options", one of each type, then use the strongest:
+  1. scene: drop them into the moment ("You're under a sink. Phone rings. You let it go.")
+  2. hard truth: a blunt line they can't argue with ("The plumber who answers gets the job. Not the best one.")
+  3. we-hear: a pattern, not an invented story ("We hear the same thing from plumbers all the
+     time: 'I can't answer the phone and do the job.'"). Never invent a specific conversation,
+     person, dollar amount or event as if it really happened.
+  4. question that stings ("How many calls hit voicemail while you were on a job today?")
+  5. number: ("4 calls you missed this week that went to the guy down the street")
+Set "hook_type" to scene, truth, heard, question or number. The hook must be under 15 words,
+specific, and make a plumbing owner feel seen. No clickbait the post doesn't pay off.
 
+"topic" = a short, specific title for THIS post (not a theme name).
 Do NOT repeat or closely resemble any of these recent posts:
 {recent}
 
 {performance}
 """
 
-HOOKS = """
-HOOK CRAFT (this decides whether anyone reads the post):
-First brainstorm 5 very different hooks in "hook_options", one of each type:
-  1. Curiosity gap: hints at a payoff without giving it away ("The call you're losing every Friday at 4pm")
-  2. Costly mistake: names a mistake the reader is probably making ("You're losing jobs in the first 3 rings")
-  3. Audience callout: speaks straight to them ("Plumbing owners: stop doing this after 5pm")
-  4. Contrarian: challenges a common belief ("More ads won't fix your empty schedule")
-  5. Specific number or list: concrete and scannable ("4 phone habits of fully booked plumbers")
-Then pick the ONE that would make a busy plumbing owner stop scrolling, and use it.
-Set "hook_type" to its type: curiosity, mistake, callout, contrarian or number.
-A great hook is specific, concrete, about THEIR money, time or stress, and under 9 words.
-The post must deliver on the hook; no bait-and-switch.
-Banned: "Unlock", "Game-changer", "Level up", "In today's world", "Did you know",
-"Secret", rhetorical fluff, ALL CAPS sentences, and emojis on the images.
+FORMATS = {
+    "thread": """
+FORMAT: a thread of {n_min}-{n_max} tweets, shown as tweet screenshots people swipe through.
+- tweets[0] is the hook tweet: the hook plus at most one more short line. It must make
+  people swipe.
+- Middle tweets: the pain and what it costs, one beat per tweet, each 1-3 short sentences
+  (max 200 characters). Concrete moments, not advice-column lists.
+- Last tweet: the fix. Say what {brand} does in plain words and end with the exact line
+  "Book a demo at {website}".
+- Use as many tweets as the story needs within the range; never pad.
+Return ONLY JSON:
+{{"topic": "...", "hook_options": ["...","...","...","...","..."], "hook_type": "...",
+  "tweets": ["...", "..."], "caption": "...", "hashtags": ["#..."]}}""",
+
+    "tweet": """
+FORMAT: ONE standalone tweet shown as a screenshot (max 260 characters). Hook first, then
+the pain/cost in a line or two, then the fix, ending with "Book a demo at {website}". It should read like a real
+founder's tweet, not an ad.
+Return ONLY JSON:
+{{"topic": "...", "hook_options": ["...","...","...","...","..."], "hook_type": "...",
+  "tweet": "...", "caption": "...", "hashtags": ["#..."]}}""",
+
+    "photo": """
+FORMAT: a real photo of a plumber at work with ONE short line of text on it.
+- headline: the hook, max 10 words, written like something a person would actually say.
+- The caption carries the rest: pain, cost, and the fix with {brand}.
+Return ONLY JSON:
+{{"topic": "...", "hook_options": ["...","...","...","...","..."], "hook_type": "...",
+  "headline": "...", "caption": "...", "hashtags": ["#..."]}}""",
+}
+
+CAPTION = """
+CAPTION (goes under the post): founder voice, 2-4 short lines with line breaks. Line one is a
+second hook (max 110 characters, it shows before "...more"). Add a detail the images don't
+say. End with a question plumbing owners will want to answer in the comments. No links,
+no hashtags in it, at most 1 emoji.
+hashtags: {hashtags}
 """
 
-CAROUSEL = """
-Write ONE educational carousel post. Pick a specific, useful topic from these themes:
-{themes}
-""" + HOOKS + """
-COVER
-- title: the winning hook (max 9 words).
-- highlight: 1-3 consecutive words copied EXACTLY from the title to color for emphasis
-  (the most emotional or concrete words, e.g. "losing jobs" or "4pm").
-- kicker: a 2-4 word label shown above the title, e.g. "PLUMBING OWNERS", "3 COSTLY
-  MISTAKES", "SAVE THIS", "FREEZE SEASON".
-- subtitle: max 12 words that raise the stakes or promise the payoff.
-
-SLIDES: between {n_min} and {n_max} teaching slides, as many as the idea genuinely needs and no
-padding (a sharp single insight can be 1-2 slides; a step-by-step can be {n_max}). The whole post
-is the cover + these slides + a CTA slide. Keep people swiping:
-- Each heading max 6 words, punchy and specific. Each body max 26 words, plain English,
-  concrete (real situations, times of day, what a customer actually says).
-- Open loops: at least one slide should end in a way that makes the next slide feel
-  necessary (e.g. "But that's not the expensive part...").
-- "tip" (use on 2-3 slides, "" on the rest): something the reader can use TODAY, max 16
-  words. It must be one of: a word-for-word phone script ('Say: "I can get a tech there by 3.
-  Want that slot?"'), a specific action with a time or number ("Check missed calls at 7am
-  and 1pm daily."), or a quick test ("Call your own line after 5pm. What happens?").
-  Never restate the slide body or give vague advice like "have a process".
-- With 3 or more teaching slides, the LAST one is a quick recap/takeaway the reader can
-  screenshot. With fewer, every slide should simply be strong on its own.
-- Teach, don't sell. No product mentions or calls to action on these slides. (A separate
-  final slide handles the CTA.) Never say or imply AI replaces staff.
-
-CAPTION
-- First line: a second hook, max 110 characters (it shows before "...more").
-- Then 2-3 short sentences of extra value, using line breaks for readability.
-- End with ONE specific question that plumbing owners will want to answer in the comments.
-- No hashtags or links in the caption. At most 2 emojis in total.
-- hashtags: {hashtags}
-
-IMAGE
-{image_brief}
-
-Return ONLY JSON:
-{{"topic": "...", "hook_options": ["...", "...", "...", "...", "..."], "hook_type": "...",
-  "cover": {{"kicker": "...", "title": "...", "highlight": "...", "subtitle": "..."}},
-  "slides": [{{"heading": "...", "body": "...", "tip": "..."}}],
-  "caption": "...", "hashtags": ["#..."], "image_prompt": "..."}}"""
-
-AD = """
-Write ONE single-image ad for {brand}. Pick one sharp angle (for example: the 2am burst
-pipe call, a tech who can't answer mid-job, the Monday-morning voicemail pile, the
-weekend rush, or getting set up in a day) and build the whole ad around it.
-""" + HOOKS + """
-- headline: the winning hook, max 8 words, speaking to plumbing business owners.
-- highlight: 1-3 consecutive words copied EXACTLY from the headline to color for emphasis.
-- subhead: max 18 words, says what we do for them in plain English.
-- points: exactly 3 short benefits (max 4 words each), drawn ONLY from "What we offer".
-- Caption: first line is a hook (max 110 characters), then 1-2 short sentences in the same
-  voice. Don't put links or hashtags in it. At most 1 emoji.
-- hashtags: {hashtags}
-{image_brief}
-
-Return ONLY JSON:
-{{"topic": "...", "hook_options": ["...", "...", "...", "...", "..."], "hook_type": "...",
-  "headline": "...", "highlight": "...", "subhead": "...", "points": ["...", "...", "..."],
-  "caption": "...", "hashtags": ["#..."], "image_prompt": "..."}}"""
-
-REQUIRED = {"carousel": ("topic", "cover", "slides", "caption"),
-            "ad": ("topic", "headline", "subhead", "points", "caption")}
+REQUIRED = {"thread": ("tweets",), "tweet": ("tweet",), "photo": ("headline",)}
 
 
 def bullets(items):
     return "\n".join(f"- {i}" for i in items)
 
 
-IMAGE_PERSON = """- image_prompt: ONE natural, believable moment for the cover with a PERSON as the
-  focal point: a plumber, a homeowner or an office manager, with a real, relatable
-  expression (e.g. "a plumber in a customer's basement glancing at his ringing phone while
-  holding a wrench", or "a worried homeowner on the phone next to a leaking water heater").
-  Everyday setting, nothing staged or dramatic. Describe the scene only, not the art style."""
-
-IMAGE_SCENE = """- image_prompt: ONE natural, believable everyday scene for the cover that makes the hook
-  feel real; it can be an object or setting rather than a person (e.g. "a phone ringing
-  on a workbench in a plumber's van next to a coiled drain snake"). Nothing staged or
-  dramatic. Describe the scene only, not the art style."""
-
-NO_TEXT = """
-  No text anywhere: if a phone appears, its screen is plain light, never words, icons or caller ID."""
-
-
-def build_prompt(cfg, kind, recent_topics, local, person=True, performance=""):
+def build_prompt(cfg, fmt, recent_topics, local, performance=""):
     b, c = cfg["business"], cfg["content"]
-    local_line = (f"This post should have a {c['local_market']} angle: local weather, older "
-                  "housing stock, neighborhoods or the local business community."
-                  if local else "Write for a nationwide audience.")
+    brand, website = cfg["brand"]["name"], cfg["brand"]["website"]
+    local_line = (f"This post should feel local to {c['local_market']}: mention Pittsburgh or its "
+                  "neighborhoods naturally, the way a local would." if local
+                  else "Write for plumbing owners anywhere in the US.")
     shared = SHARED.format(
-        brand=cfg["brand"]["name"],
+        brand=brand, website=website, pains=bullets(c["pain_points"]),
+        founder=(cfg["brand"].get("founder") or {}).get("name", "the founder"),
         what_we_do=" ".join(b["what_we_do"].split()),
         features=bullets(b["features"]),
         positioning=" ".join(b["positioning"].split()),
         audience=c["audience"],
-        voice=" ".join(b["voice"].split()),
-        today=date.today().strftime("%B %d, %Y"),
         local=local_line,
         rules=bullets(b["rules"]),
         recent=bullets(recent_topics) or "- (none yet)",
         performance=performance,
     )
-    hashtags = " ".join(c["hashtags"].split())
-    image_brief = (IMAGE_PERSON if person else IMAGE_SCENE) + NO_TEXT
-    if kind == "ad":
-        return shared + AD.format(brand=cfg["brand"]["name"], hashtags=hashtags, image_brief=image_brief)
-    n_min, n_max = c["content_slides"]
-    return shared + CAROUSEL.format(themes=bullets(c["themes"]), n_min=n_min, n_max=n_max,
-                                    hashtags=hashtags, image_brief=image_brief)
+    n_min, n_max = c["thread_tweets"]
+    return (shared + FORMATS[fmt].format(brand=brand, website=website, n_min=n_min, n_max=n_max)
+            + CAPTION.format(hashtags=" ".join(c["hashtags"].split())))
 
 
 def _gemini(prompt, models):
@@ -216,66 +182,55 @@ def _openai(prompt, model):
     return r.json()["choices"][0]["message"]["content"]
 
 
-def validate(post, kind, cfg):
-    for key in REQUIRED[kind]:
+def validate(post, fmt, cfg):
+    for key in ("topic", "caption", *REQUIRED[fmt]):
         if not post.get(key):
             raise ValueError(f"AI response missing '{key}'")
-    hook = post["cover"]["title"] if kind == "carousel" else post["headline"]
-    if len(hook.split()) > 11:
-        raise ValueError(f"hook too long: {hook}")
-    if kind == "carousel":
-        n_min, n_max = cfg["content"]["content_slides"]
-        post["slides"] = post["slides"][:n_max]
-        if len(post["slides"]) < n_min:
-            raise ValueError("carousel has no teaching slides")
-    else:
-        post["points"] = post["points"][:3]
-    post["kind"] = kind
+    if fmt == "thread":
+        n_min, n_max = cfg["content"]["thread_tweets"]
+        post["tweets"] = [t.strip() for t in post["tweets"] if t.strip()][:n_max]
+        if len(post["tweets"]) < n_min:
+            raise ValueError("thread too short")
+    if fmt == "photo" and len(post["headline"].split()) > 14:
+        raise ValueError("photo headline too long")
+    # every tweet-style post ends with the same clear ask
+    ask = f"Book a demo at {cfg['brand']['website']}"
+    if fmt == "thread" and "book a demo" not in post["tweets"][-1].lower():
+        post["tweets"][-1] = post["tweets"][-1].rstrip() + "\n\n" + ask
+    if fmt == "tweet" and "book a demo" not in post["tweet"].lower():
+        post["tweet"] = post["tweet"].rstrip() + "\n\n" + ask
+    post["format"] = fmt
     return post
 
 
-EDITOR = """You are a sharp social media editor for {brand}, reviewing a draft {kind} post
-written for plumbing business owners. Return the SAME JSON structure with every field kept,
-fixing anything that breaks these checks:
+EDITOR = """You edit social posts for {brand} so they sound like a real founder wrote them,
+not an AI. Return the SAME JSON structure with every field kept, fixing anything that breaks:
 
-1. Rules (non-negotiable):
+1. Hard rules:
 {rules}
-   - Never say or imply AI replaces staff.
-{selling_rule}
-2. The hook must be specific and scroll-stopping, under 9 words, and the post must deliver on it.
-   "highlight" must be words copied exactly from the {hook_field}.
-3. Flawless spelling and grammar; plain English a busy owner can skim; no repeated words,
-   filler or clichés ("Unlock", "Game-changer", "Level up").
-4. Respect the length limits: slide headings max 6 words, bodies max 26 words, tips max
-   16 words; ad subhead max 18 words, points max 4 words.
-5. Every claim must be generally true. No invented statistics, percentages or studies.
-6. Each non-empty "tip" must be a word-for-word script, a specific action with a time or
-   number, or a quick test. Rewrite vague tips ("have a process") or ones that repeat the body.
-7. image_prompt must describe a natural, believable moment (nothing dramatic or staged) and
-   must not ask for any text, words, icons or caller ID on screens or signs.
+   - Never say or imply AI replaces staff; it covers the calls the team can't get to.
+2. Sounds human: short sentences, contractions, plain trade words. Remove em dashes, "Here's
+   the thing", "game-changer", "unlock", "imagine", "say goodbye to", "Sound familiar?",
+   triple-adjective lists, corporate phrasing and anything that reads like an ad agency.
+3. The first line is a strong, specific hook a plumbing owner would stop on. Sharpen it if weak.
+4. pain → cost → fix: the fix names {brand} plainly, and tweet posts end with
+   "Book a demo at {website}".
+5. Nothing seasonal. No invented statistics, studies, people, businesses, conversations or
+   events presented as real ("a plumber told me last week..."); turn those into general
+   patterns ("we hear this a lot"). Hypothetical math must be framed as hypothetical.
+6. Perfect spelling and grammar. Tweets max 200 characters each (single tweet max 260).
 
 Make the smallest changes needed; keep what's already good. Return ONLY the JSON.
 
 DRAFT:
 {draft}"""
 
-NO_SELLING = """   - This is an EDUCATIONAL carousel. The cover, slides, tips and caption must NOT mention
-     {brand}, "we", our service, setup time, demos or any call to action. Rewrite those
-     parts as pure, useful advice (a separate final slide already handles the CTA)."""
 
-
-def edit_post(cfg, post, kind):
-    """Second pass: a reviewer prompt that enforces the rules and polishes the copy."""
-    prompt = EDITOR.format(
-        brand=cfg["brand"]["name"],
-        kind="educational carousel" if kind == "carousel" else "single-image ad",
-        rules=bullets(cfg["business"]["rules"]),
-        selling_rule=NO_SELLING.format(brand=cfg["brand"]["name"]) if kind == "carousel" else "",
-        hook_field="cover title" if kind == "carousel" else "headline",
-        draft=json.dumps(post, indent=2),
-    )
-    edited = json.loads(_complete(cfg, prompt))
-    return validate(edited, kind, cfg)
+def edit_post(cfg, post, fmt):
+    """Second pass: enforce the rules and strip anything that sounds like AI."""
+    prompt = EDITOR.format(brand=cfg["brand"]["name"], website=cfg["brand"]["website"],
+                           rules=bullets(cfg["business"]["rules"]), draft=json.dumps(post, indent=2))
+    return validate(json.loads(_complete(cfg, prompt)), fmt, cfg)
 
 
 def _complete(cfg, prompt):
@@ -298,14 +253,13 @@ def _complete(cfg, prompt):
             print(f"{name} failed ({e}); switching to {available[i + 1][0]} for this post.")
 
 
-def generate_post(cfg, kind, recent_topics, performance=""):
+def generate_post(cfg, fmt, recent_topics, performance=""):
     local = random.random() < cfg["content"]["local_share"]
-    person = random.random() < cfg["content"].get("person_share", 0.8)
-    prompt = build_prompt(cfg, kind, recent_topics, local, person, performance)
+    prompt = build_prompt(cfg, fmt, recent_topics, local, performance)
     last_err = None
     for _ in range(3):  # LLMs occasionally return malformed JSON; just retry
         try:
-            post = validate(json.loads(_complete(cfg, prompt)), kind, cfg)
+            post = validate(json.loads(_complete(cfg, prompt)), fmt, cfg)
             break
         except (ValueError, KeyError, json.JSONDecodeError) as e:
             last_err = e
@@ -313,66 +267,44 @@ def generate_post(cfg, kind, recent_topics, performance=""):
         raise RuntimeError(f"Could not get a valid post from the AI: {last_err}")
 
     try:
-        post = edit_post(cfg, post, kind)
+        post = edit_post(cfg, post, fmt)
     except Exception as e:  # the draft is still usable if the editor pass fails
         print(f"Editor pass failed, keeping the draft: {e}")
     post["local"] = local
-    post["person"] = person
     return post
 
 
-def generate_cover_image(scene, cfg, art_style):
-    """One portrait illustration from OpenAI's image model. Text is added later by render.py."""
-    ai = cfg["ai"]
-    r = requests.post(
-        "https://api.openai.com/v1/images/generations",
-        headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"},
-        json={
-            "model": ai["image_model"],
-            "prompt": f"{scene}\n\nStyle: {' '.join(ai['image_styles'][art_style].split())}",
-            "size": "1024x1536",
-            "quality": ai["image_quality"],
-            "n": 1,
-        },
-        timeout=300,
-    )
-    if not r.ok:
-        raise RuntimeError(f"OpenAI image error: {r.status_code} {r.text}")
-    return Image.open(io.BytesIO(base64.b64decode(r.json()["data"][0]["b64_json"]))).convert("RGB")
-
-
 SAMPLES = {
-    "carousel": {
-        "kind": "carousel",
-        "topic": "Why the first 5 minutes decide who gets the job",
-        "cover": {
-            "kicker": "PLUMBING OWNERS",
-            "title": "You're losing jobs in the first 3 rings",
-            "highlight": "losing jobs",
-            "subtitle": "What fully booked shops do before the 4th ring",
-        },
-        "slides": [
-            {"heading": "Speed beats price", "body": "Most homeowners book whoever gets back to them first. A quick, friendly reply often matters more than being the cheapest quote.", "tip": "Say: \"I can get a tech there by 3. Want that slot?\""},
-            {"heading": "Interest fades fast", "body": "A customer with a leaking pipe isn't waiting around. If you don't answer, they're already dialing the next number on Google."},
-            {"heading": "Voicemail is a dead end", "body": "Many callers hang up instead of leaving a message. If nobody picks up, assume that job is gone."},
-            {"heading": "Set a callback standard", "body": "Pick a target, like calling back within 5 minutes during business hours, and make it the whole team's rule."},
-            {"heading": "Track what you miss", "body": "Check your call log every Friday. Count missed and unreturned calls. You can't fix what you don't measure."},
+    "thread": {
+        "format": "thread",
+        "topic": "Voicemail is where plumbing jobs go to die",
+        "hook_type": "scene",
+        "tweets": [
+            "You're under a sink. Phone buzzes. You let it go to voicemail.\n\nThat was probably a job.",
+            "Most people calling a plumber don't leave a message. They've got water on the floor. They just call the next number on Google.",
+            "So by the time you wipe your hands and call back, they've already booked someone. Not a better plumber. Just the one who picked up.",
+            "We built Pipeline Reception for exactly this. Every call gets answered, 24/7. Real jobs get booked straight into your schedule while you finish the one you're on.\n\nBook a demo at pipelinereception.com",
         ],
-        "caption": "Most plumbing jobs aren't lost on price. They're lost because nobody got back to the customer fast enough.\n\nSave this and share it with your office team.",
-        "hashtags": ["#plumbingbusiness", "#plumber", "#plumbingcontractor", "#smallbusinessowner", "#homeservices"],
-        "image_prompt": "a plumber kneeling under a kitchen sink with tools while a phone lights up and rings on the counter behind him",
+        "caption": "Most plumbing jobs aren't lost on price. They're lost to voicemail.\n\nWe hear it from owners every week: they find out about the missed call an hour later, and the customer's already gone.\n\nWhat do you do with calls that come in while you're on a job?",
+        "hashtags": ["#plumbingbusiness", "#plumber", "#plumbinglife", "#smallbusinessowner", "#tradesbusiness"],
         "local": False,
     },
-    "ad": {
-        "kind": "ad",
-        "topic": "The 2am burst pipe call",
-        "headline": "Who answers the 2am burst pipe call?",
-        "highlight": "2am burst pipe",
-        "subhead": "We pick up every call, 24/7, and book the job straight into your schedule.",
-        "points": ["24/7 call answering", "Books into your schedule", "Qualifies every lead"],
-        "caption": "Plumbing business owners: emergencies don't wait for business hours, and neither do your customers. We answer every call so the job lands on your schedule, not your competitor's.",
-        "hashtags": ["#plumbingbusiness", "#plumber", "#emergencyplumber", "#smallbusinessowner", "#plumbingservice"],
-        "image_prompt": "a plumber asleep at night while his phone glows on the nightstand in a dark bedroom",
+    "tweet": {
+        "format": "tweet",
+        "topic": "The plumber who answers gets the job",
+        "hook_type": "truth",
+        "tweet": "The plumber who answers gets the job. Not the cheapest one. Not the best one.\n\nIf your phone goes to voicemail while you're on a job, someone else is booking your customer.\n\nWe fix that. pipelinereception.com",
+        "caption": "Hard truth we keep hearing from owners: the first one to pick up wins.\n\nHow many calls did you miss today?",
+        "hashtags": ["#plumbingbusiness", "#plumber", "#smallbusinessowner"],
+        "local": False,
+    },
+    "photo": {
+        "format": "photo",
+        "topic": "You can't answer the phone with both hands in a wall",
+        "hook_type": "scene",
+        "headline": "You can't answer the phone with both hands in a wall.",
+        "caption": "That's not a time management problem. It's a phone problem.\n\nWe answer every call 24/7 and book the real jobs straight into your schedule, so you can finish the one you're on.\n\nWho's answering your phone right now?",
+        "hashtags": ["#plumbingbusiness", "#plumber", "#plumbinglife"],
         "local": False,
     },
 }

@@ -2,11 +2,12 @@
 Usage:
   python -m autopost.main generate carousel|ad      # AI writes a post + renders it into posts/<id>/
   python -m autopost.main publish <id>              # posts it to Instagram/Facebook
-  python -m autopost.main sample carousel|ad [img]  # renders a built-in sample (no API keys needed)
+  python -m autopost.main sample thread|tweet|photo [img]  # built-in sample, no API keys needed
   python -m autopost.main due                       # what (if anything) is scheduled for this hour?
 """
 import json
 import os
+import random
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -15,12 +16,13 @@ from zoneinfo import ZoneInfo
 import yaml
 from PIL import Image
 
-from autopost.generate import SAMPLES, generate_cover_image, generate_post
+from autopost.generate import SAMPLES, generate_post
 from autopost.learn import performance_brief, pick_art_style, refresh_metrics
 from autopost.render import render_post
 
 ROOT = Path(__file__).resolve().parent.parent
 POSTS = ROOT / "posts"
+PHOTOS = ROOT / "assets" / "photos"
 HISTORY = ROOT / "history.json"
 
 
@@ -56,18 +58,30 @@ def set_output(name, value):
             f.write(f"{name}={value}\n")
 
 
-def create(post, cfg, cover_img=None):
+def create(post, cfg, photo=None):
     post_id = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H%M")
     if slot := os.environ.get("SLOT"):
         post["slot"] = slot  # marks this scheduled slot as taken
     out = POSTS / post_id
-    paths = render_post(post, cfg, out, cover_img)
+    tz = ZoneInfo(cfg["schedule"]["timezone"])
+    stamp = datetime.now(tz).strftime("%-I:%M %p · %b %-d, %Y")  # the tweet's timestamp line
+    paths = render_post(post, cfg, out, photo=photo, theme=post.get("theme", "light"), stamp=stamp)
     post["images"] = [p.name for p in paths]
     (out / "post.json").write_text(json.dumps(post, indent=2) + "\n")
     print(f"Rendered {len(paths)} image(s) → {out}")
     print(f"Topic: {post['topic']}")
     set_output("post_id", post_id)
     return post_id
+
+
+def pick_photo(history):
+    """A photo from assets/photos, avoiding the ones used most recently."""
+    photos = sorted(p for p in PHOTOS.glob("*") if p.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp"))
+    if not photos:
+        return None
+    recent = [h.get("photo") for h in history[-30:] if h.get("photo")]
+    fresh = [p for p in photos if p.name not in recent] or photos
+    return random.choice(fresh)
 
 
 def check_secrets(names):
@@ -91,36 +105,48 @@ def prune_old_images(days=21):
                 jpg.unlink()
 
 
+def pick_format(kind, history, cfg):
+    """Carousel slots are tweet threads; single-post slots alternate real photos and single tweets."""
+    if kind == "carousel":
+        return "thread"
+    if not any(PHOTOS.glob("*")):
+        return "tweet"
+    return pick_art_style(history, ["photo", "tweet"])
+
+
 def cmd_generate(kind):
     cfg = load_config()
     prune_old_images()
     for key in ("GEMINI_API_KEY", "OPENAI_API_KEY", "META_PAGE_TOKEN"):
         if not os.environ.get(key, "").strip():
             print(f"Note: {key} is not set.", file=sys.stderr)
-    check_secrets(["OPENAI_API_KEY"] if cfg["ai"].get("cover_image") else [])
     history = load_history()
     try:  # learn from how earlier posts did before writing the next one
         refresh_metrics(history)
         save_history(history)
     except Exception as e:
         print(f"Couldn't refresh post metrics, continuing without them: {e}", file=sys.stderr)
-    recent = [h["topic"] for h in history if h.get("kind", "carousel") == kind][-60:]
-    post = generate_post(cfg, kind, recent, performance_brief(history, kind))
-    styles = list(cfg["ai"]["image_styles"])
-    post["art_style"] = pick_art_style(history, styles)
-    cover_img = None
-    if cfg["ai"].get("cover_image") and post.get("image_prompt"):
-        try:
-            cover_img = generate_cover_image(post["image_prompt"], cfg, post["art_style"])
-        except Exception as e:  # a missing picture shouldn't cost us the post
-            print(f"Cover image failed, using the plain branded cover: {e}", file=sys.stderr)
-            post["art_style"] = "plain"
-    create(post, cfg, cover_img)
+    recent = [h["topic"] for h in history][-60:]
+    fmt = pick_format(kind, history, cfg)
+    post = generate_post(cfg, fmt, recent, performance_brief(history, kind))
+    post["kind"] = kind
+    post["art_style"] = fmt  # what learn.py compares between posts
+    post["theme"] = random.choice(["light", "dark"])
+    photo = None
+    if fmt == "photo":
+        path = pick_photo(history)
+        post["photo"] = path.name
+        photo = Image.open(path)
+    create(post, cfg, photo)
 
 
-def cmd_sample(kind, image_path=None):
-    cover_img = Image.open(image_path).convert("RGB") if image_path else None
-    create(dict(SAMPLES[kind]), load_config(), cover_img)
+def cmd_sample(fmt, image_path=None):
+    """Render a built-in example post (no API keys needed). fmt: thread, tweet or photo."""
+    post = dict(SAMPLES[fmt], kind="carousel" if fmt == "thread" else "ad", theme="light")
+    photo = None
+    if fmt == "photo":
+        photo = Image.open(image_path) if image_path else Image.open(pick_photo([]))
+    create(post, load_config(), photo)
 
 
 def slot_done(slot):
@@ -187,7 +213,8 @@ def cmd_publish(post_id):
     post = json.loads((folder / "post.json").read_text())
     files = [folder / name for name in post["images"]]
     result = {"id": post_id, "kind": post["kind"], "topic": post["topic"],
-              "hook": post["cover"]["title"] if post["kind"] == "carousel" else post["headline"],
+              "hook": (post.get("tweets") or [post.get("tweet") or post.get("headline")])[0].split("\n")[0],
+              "format": post.get("format"), "photo": post.get("photo"),
               "hook_type": post.get("hook_type"), "art_style": post.get("art_style"),
               "person": post.get("person"), "local": post.get("local"), "slot": post.get("slot"),
               "posted_at": datetime.now(timezone.utc).isoformat()}
@@ -216,7 +243,7 @@ def cmd_publish(post_id):
 
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else ""
-    if cmd == "generate" and len(sys.argv) == 3 and sys.argv[2] in SAMPLES:
+    if cmd == "generate" and len(sys.argv) == 3 and sys.argv[2] in ("carousel", "ad"):
         cmd_generate(sys.argv[2])
     elif cmd == "publish" and len(sys.argv) == 3:
         cmd_publish(sys.argv[2])

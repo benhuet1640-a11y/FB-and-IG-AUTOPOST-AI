@@ -1,30 +1,38 @@
 # Pipeline Reception — Social Autoposter
 
-Posts to Facebook (and Instagram once it's enabled) **three times a day, every day**, New York time:
+Posts to Facebook and Instagram **three times a day, every day**, New York time:
 
 | Time | Post |
 |---|---|
-| 8am | Educational carousel (3–6 slides): a hook cover, 1–4 teaching slides and a "Book a demo" slide at the end |
-| 12pm | Single-image ad: headline, 3 benefits and a "Book a demo" button |
-| 6pm | Educational carousel |
+| 8:30am | Tweet-style thread (3–6 slides) from Mike, ending with "Book a demo at pipelinereception.com" |
+| 12pm | Single post: a real photo with one line of text, or a single tweet card |
+| 6pm | Tweet-style thread |
 
-All posts are written for **plumbing business owners** nationwide. About 1 in 4 gets a **Pittsburgh** angle.
+Every post follows **pain → cost → fix**: one real phone pain plumbing owners feel, what it costs them, and Pipeline Reception as the fix. Written in Mike's voice (founder), nothing seasonal. About 1 in 4 posts gets a **Pittsburgh** angle.
+
+**Real photos:** drop free photos (from pexels.com or unsplash.com) into `assets/photos/` (on GitHub: open the folder → **Add file → Upload files**). Photo posts rotate through them; with no photos, the noon post is a single tweet.
 
 ```
-GitHub Actions (free cron)
+GitHub Actions (checks every 15 min)
    │
-   ├─ autopost/learn.py     → reads how past posts did on Facebook (views, reactions, comments, shares)
-   ├─ autopost/generate.py  → Gemini (free) writes + edits the post, steered by what's working;
-   │                          OpenAI gpt-image-1.5 draws the cover (usually a person, photo or illustration)
-   ├─ autopost/render.py    → adds all the text, logo and colors in code (no AI typos)
+   ├─ autopost/learn.py     → reads how past posts did (views, reactions, comments, shares)
+   ├─ autopost/generate.py  → Gemini (free) writes + edits the post in Mike's voice, steered by what's working
+   ├─ autopost/render.py    → draws tweet cards / photo posts at 2x for sharp text
    ├─ git push              → images get a public URL (Instagram requires one)
-   └─ autopost/publish.py   → Facebook post (+ Instagram carousel/image once enabled)
+   └─ autopost/publish.py   → Facebook (HD upload) + Instagram
 ```
 
-## Estimated cost (~90 posts/month)
+## Estimated cost
 
 | Part | Cost |
 |---|---|
+| GitHub Actions (public repo) | $0 |
+| Meta Graph API (Facebook + Instagram) | $0 |
+| Post text: Google Gemini free tier | $0 |
+| OpenAI (only used if Gemini fails) | a few cents/month at most |
+| **Total** | **≈ $0** |
+
+---|---|
 | GitHub Actions (public repo) | $0 |
 | Meta Graph API (Facebook + Instagram) | $0 |
 | Post text: Google Gemini free tier | $0 |
