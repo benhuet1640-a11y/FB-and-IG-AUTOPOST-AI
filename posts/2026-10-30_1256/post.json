@@ -1,0 +1,63 @@
+{
+  "topic": "Handling holiday plumbing call volume",
+  "hook_options": [
+    "The call you lose every Thanksgiving morning",
+    "You lose holiday jobs to the first plumber who answers",
+    "Plumbing owners: stop ignoring Thanksgiving phone calls",
+    "More advertising won't save your holiday weekend schedule",
+    "Three phone mistakes that empty your holiday calendar"
+  ],
+  "hook_type": "callout",
+  "cover": {
+    "kicker": "HOLIDAY RUSH",
+    "title": "Stop ignoring Thanksgiving phone calls",
+    "highlight": "Thanksgiving phone calls",
+    "subtitle": "How to capture every emergency call while you eat dinner."
+  },
+  "slides": [
+    {
+      "heading": "The holiday dinner interruption",
+      "body": "When a main line backs up on Thanksgiving afternoon, homeowners do not leave long voicemails. They hang up and call the next plumber.",
+      "tip": "Call your own business number right now and time how long it rings before voicemail picks up."
+    },
+    {
+      "heading": "Why speed wins the rush",
+      "body": "The first plumbing company to answer picks up the job. If your phone goes to voicemail during dinner, that emergency call is gone.",
+      "tip": "Say: 'I can get a tech there by 3. Want that slot?'"
+    },
+    {
+      "heading": "Keep your team off duty",
+      "body": "Your crew and office staff need time off with their families. Working through holidays leads directly to employee burnout and expensive turnover.",
+      "tip": "Check your holiday missed call log from last year to see exactly how many jobs walked away."
+    },
+    {
+      "heading": "Holiday booking quick checklist",
+      "body": "Answer every ring around the clock, qualify the real emergencies instantly, and book the job straight into your calendar without delay.",
+      "tip": "Review your call routing rules before Wednesday afternoon to ensure seamless coverage."
+    }
+  ],
+  "caption": "Holiday emergency calls will not wait until Monday morning.\n\nWhen families gather, plumbing systems take a beating from heavy use. If your phone rings to voicemail, those high-paying emergency jobs go straight elsewhere.\n\nHow does your shop handle calls during holiday dinners?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#plumbingservice",
+    "#plumbingcompany"
+  ],
+  "image_prompt": "A plumber sitting at a dining room table during a meal, looking down at a phone resting on the table, with a realistic, concerned expression in a normal home setting.",
+  "kind": "carousel",
+  "local": false,
+  "person": true,
+  "art_style": "illustration",
+  "slot": "2026-10-30 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg",
+    "slide_06.jpg"
+  ]
+}
