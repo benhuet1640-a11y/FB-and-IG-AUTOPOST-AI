@@ -11,6 +11,7 @@ brand:
     name: "Mike"
     display_name: "Mike · Pipeline Reception"
     avatar: "founder.jpg"             # in assets/
+    verified: true                    # blue check next to the name
   colors:
     navy: "#0A2C36"                   # from the logo wordmark
     teal: "#12A998"                   # from the logo icon

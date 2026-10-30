@@ -1,4 +1,5 @@
 """Turn a post (JSON) into tweet-style cards or a real-photo post, as 4:5 JPEGs (what Instagram requires)."""
+import math
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -141,6 +142,18 @@ def avatar(size, name="icon.png"):
     return icon
 
 
+def badge(d, cx, cy, r):
+    """The blue scalloped verified badge with a white check."""
+    blue = "#1D9BF0"
+    for i in range(8):  # scalloped edge
+        a = i * math.pi / 4
+        px, py = cx + math.cos(a) * r * 0.62, cy + math.sin(a) * r * 0.62
+        d.ellipse((px - r * 0.42, py - r * 0.42, px + r * 0.42, py + r * 0.42), fill=blue)
+    d.ellipse((cx - r * 0.8, cy - r * 0.8, cx + r * 0.8, cy + r * 0.8), fill=blue)
+    d.line((cx - r * 0.42, cy + r * 0.02, cx - r * 0.1, cy + r * 0.34, cx + r * 0.46, cy - r * 0.3),
+           width=max(2, round(r * 0.2)), fill=WHITE, joint="curve")
+
+
 def tweet_card(text, cfg, theme):
     """A minimal tweet screenshot: avatar, name, handle, the text. Nothing else (Hormozi-style)."""
     t = THEMES[theme]
@@ -165,8 +178,10 @@ def tweet_card(text, cfg, theme):
 
     paste(img, avatar(header_h, founder.get("avatar", "icon.png")), (SIDE, y))
     nx = SIDE + header_h + 34
-    d.text((nx, y + header_h * 0.5 - 6), founder.get("display_name", brand["name"]), font=font("Bold", 46),
-           fill=t["text"], anchor="ls")
+    name, name_f = founder.get("display_name", brand["name"]), font("Bold", 46)
+    d.text((nx, y + header_h * 0.5 - 6), name, font=name_f, fill=t["text"], anchor="ls")
+    if founder.get("verified"):
+        badge(d, nx + d.textlength(name, name_f) + 30, y + header_h * 0.5 - 22, 21)
     d.text((nx, y + header_h * 0.5 + 10), brand["instagram"], font=font("Regular", 42),
            fill=t["muted"], anchor="lt")
     for i in range(2):  # the "··" menu in the corner
