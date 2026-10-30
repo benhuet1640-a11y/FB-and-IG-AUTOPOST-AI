@@ -94,5 +94,19 @@
     "posted_at": "2026-10-29T22:01:38.250652+00:00",
     "instagram": "18129970459871335",
     "facebook": "1455738530948421_122096082633536726"
+  },
+  {
+    "id": "2026-10-30_1256",
+    "kind": "carousel",
+    "topic": "Handling holiday plumbing call volume",
+    "hook": "Stop ignoring Thanksgiving phone calls",
+    "hook_type": "callout",
+    "art_style": "illustration",
+    "person": true,
+    "local": false,
+    "slot": "2026-10-30 08:30",
+    "posted_at": "2026-10-30T12:56:27.097652+00:00",
+    "instagram": "18139800586727224",
+    "facebook": "1455738530948421_122096467839536726"
   }
 ]
