@@ -1,0 +1,39 @@
+{
+  "topic": "Answering the phone while under a sink",
+  "hook_options": [
+    "You're under a sink. Phone rings. You let it go.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I can't answer the phone and do the job.",
+    "How many calls hit voicemail while you were on a job today?",
+    "Calls you missed this week went to the guy down the street"
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're under a sink. Phone rings. You let it go.",
+    "It's the third time today. By the time you wipe your hands and listen to the voicemail, they already called the next guy.",
+    "That's a job for a new water heater gone. Just because nobody picked up.",
+    "Pipeline Reception answers the calls your team can't get to, so you don't miss new jobs. We can set you up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "The hardest part of running a plumbing shop isn't the work.\nIt's trying to talk to customers while you're elbow-deep in a repair.\nHow do you handle the phone when you're solo on a job?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#homeservices",
+    "#tradesbusiness"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-10-30 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg"
+  ]
+}
