@@ -122,5 +122,19 @@
     "posted_at": "2026-10-30T12:56:27.097652+00:00",
     "instagram": "18139800586727224",
     "facebook": "1455738530948421_122096467839536726"
+  },
+  {
+    "id": "2026-10-30_1653",
+    "kind": "ad",
+    "topic": "The Monday morning voicemail pile",
+    "hook": "Plumbing owners: stop dreading Monday mornings",
+    "hook_type": "callout",
+    "art_style": "photo",
+    "person": true,
+    "local": false,
+    "slot": "2026-10-30 12:00",
+    "posted_at": "2026-10-30T16:53:28.622980+00:00",
+    "instagram": "18104787359564107",
+    "facebook": "1455738530948421_122096623257536726"
   }
 ]
