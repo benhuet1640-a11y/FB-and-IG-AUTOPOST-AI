@@ -1,0 +1,40 @@
+{
+  "topic": "The true cost of missing calls on the job",
+  "hook_options": [
+    "You're under a sink. Phone rings. You let it go.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear this all the time: you can't answer the phone and do the job at the same time.",
+    "How many calls hit voicemail while you were on a job today?",
+    "Most homeowners won't leave a voicemail. They just call the next plumber."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're under a sink. Phone rings. You let it go.",
+    "It hits voicemail. No message left. The caller just dials the next plumber on Google.",
+    "Say an average install brings in $2,000. Miss two of those a month while your hands are full, and that's serious money walking away.",
+    "We built Pipeline Reception to fix this. It covers the calls your team can't get to, qualifies the lead, and books the job on your calendar.",
+    "We can set you up in a day so you stop losing work. Book a demo at pipelinereception.com"
+  ],
+  "caption": "The phone shouldn't cost you jobs while you're working.\n\nHow do you handle calls when your hands are full?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#plumbingservice",
+    "#plumbingcompany"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
