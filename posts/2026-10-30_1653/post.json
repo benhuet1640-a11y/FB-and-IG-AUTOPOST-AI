@@ -1,0 +1,37 @@
+{
+  "topic": "The Monday morning voicemail pile",
+  "hook_options": [
+    "The calls waiting for you every Monday",
+    "You're losing jobs in the first 3 rings",
+    "Plumbing owners: stop dreading Monday mornings",
+    "More leads won't fix your missed calls",
+    "3 phone habits of fully booked plumbers"
+  ],
+  "hook_type": "callout",
+  "headline": "Plumbing owners: stop dreading Monday mornings",
+  "highlight": "dredging Monday mornings",
+  "subhead": "We answer your phones 24/7 and book jobs straight into your schedule.",
+  "points": [
+    "Answers calls 24/7",
+    "Books appointments directly",
+    "Qualifies every lead"
+  ],
+  "caption": "Walk into your shop on Monday to a full schedule instead of a wall of voicemails.",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbingcompany",
+    "#plumbingservice",
+    "#smallbusinessowner",
+    "#contractorlife"
+  ],
+  "image_prompt": "An office manager sitting at a wooden desk on a Monday morning, looking at a stack of pink message slips next to a plain landline phone in a brightly lit, modest plumbing office.",
+  "kind": "ad",
+  "local": false,
+  "person": true,
+  "art_style": "photo",
+  "slot": "2026-10-30 12:00",
+  "images": [
+    "ad.jpg"
+  ]
+}
