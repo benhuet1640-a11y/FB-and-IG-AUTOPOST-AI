@@ -136,5 +136,21 @@
     "posted_at": "2026-10-30T16:53:28.622980+00:00",
     "instagram": "18104787359564107",
     "facebook": "1455738530948421_122096623257536726"
+  },
+  {
+    "id": "2026-10-30_2027",
+    "kind": "carousel",
+    "topic": "The true cost of missing calls on the job",
+    "hook": "You're under a sink. Phone rings. You let it go.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": null,
+    "posted_at": "2026-10-30T20:27:46.377103+00:00",
+    "instagram": "18100157987677811",
+    "facebook": "1455738530948421_122096736207536726"
   }
 ]
