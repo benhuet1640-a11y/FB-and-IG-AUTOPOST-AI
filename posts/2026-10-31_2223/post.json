@@ -1,0 +1,39 @@
+{
+  "topic": "Answering the phone while on a water heater install",
+  "hook_options": [
+    "You're wrestling a water heater tank. The phone rings.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear this from plumbers all day: I can't be on a job and on the phone.",
+    "How many calls hit voicemail while you were on an install today?",
+    "The calls you miss on a job go straight to the next guy on Google."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're wrestling a heavy water heater tank down basement stairs. Your hands are full.\n\nThe phone rings in your pocket. You let it go.",
+    "By the time you wipe your hands and call back twenty minutes later, they already have another plumber coming out.",
+    "Say a job like that brings in a grand. Missing just a couple calls a week means handing thousands of dollars to the shop down the street.",
+    "We built Pipeline Reception to catch the calls you and your team can't get to. It answers 24/7, qualifies the lead, and books the job on your calendar.\n\nWe can get you set up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Your phone shouldn't cost you jobs while your hands are full.\n\nHow many calls hit voicemail while you were on a job this week?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbingcompany",
+    "#contractorlife",
+    "#smallbusinessowner",
+    "#homeservices"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "dark",
+  "slot": "2026-10-31 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg"
+  ]
+}
