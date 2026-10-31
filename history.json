@@ -175,5 +175,21 @@
     "posted_at": "2026-10-30T22:12:48.730539+00:00",
     "instagram": "18119245607081243",
     "facebook": "1455738530948421_122096778351536726"
+  },
+  {
+    "id": "2026-10-31_1248",
+    "kind": "carousel",
+    "topic": "Handling Saturday night emergency calls",
+    "hook": "You're eating dinner with family. The phone rings. It's a main line backup.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-10-31 08:30",
+    "posted_at": "2026-10-31T12:49:09.475450+00:00",
+    "instagram": "18132762061862877",
+    "facebook": "1455738530948421_122097206211536726"
   }
 ]
