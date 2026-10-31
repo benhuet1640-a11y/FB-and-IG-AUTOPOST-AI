@@ -1,0 +1,31 @@
+{
+  "topic": "Answering the phone at dinner",
+  "hook_options": [
+    "You're cutting steak. Phone rings. It's a water heater leak.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I hate taking calls at dinner.",
+    "How many calls hit voicemail while you were eating with your family?",
+    "Every missed call this week went straight to the guy down the street."
+  ],
+  "hook_type": "scene",
+  "tweet": "You're cutting steak. Phone rings. It's a water heater leak. You let it go to voicemail, and they call the next guy. Pipeline Reception answers your calls so you don't miss leads. We set you up in a day. Book a demo at pipelinereception.com",
+  "caption": "Your family deserves dinner without the phone buzzing. Most missed calls turn into lost revenue before you even finish eating. How do you handle urgent calls after hours?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcompany",
+    "#contractorlife",
+    "#smallbusinessowner"
+  ],
+  "format": "tweet",
+  "local": false,
+  "kind": "ad",
+  "art_style": "tweet",
+  "theme": "light",
+  "slot": "2026-10-31 12:00",
+  "images": [
+    "slide_01.jpg"
+  ]
+}
