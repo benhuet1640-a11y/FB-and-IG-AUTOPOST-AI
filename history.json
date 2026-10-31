@@ -198,5 +198,21 @@
     "posted_at": "2026-10-31T12:49:09.475450+00:00",
     "instagram": "18132762061862877",
     "facebook": "1455738530948421_122097206211536726"
+  },
+  {
+    "id": "2026-10-31_1618",
+    "kind": "ad",
+    "topic": "Answering the phone at dinner",
+    "hook": "You're cutting steak. Phone rings. It's a water heater leak. You let it go to voicemail, and they call the next guy. Pipeline Reception answers your calls so you don't miss leads. We set you up in a day. Book a demo at pipelinereception.com",
+    "format": "tweet",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "tweet",
+    "person": null,
+    "local": false,
+    "slot": "2026-10-31 12:00",
+    "posted_at": "2026-10-31T16:18:45.660420+00:00",
+    "instagram": "18642720526010983",
+    "facebook": "1455738530948421_122097345909536726"
   }
 ]
