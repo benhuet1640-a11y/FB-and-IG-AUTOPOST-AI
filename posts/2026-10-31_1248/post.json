@@ -1,0 +1,41 @@
+{
+  "topic": "Handling Saturday night emergency calls",
+  "hook_options": [
+    "You're eating dinner with family. The phone rings. It's a main line backup.",
+    "The plumber who picks up the emergency call gets the job.",
+    "We hear the same thing from plumbers all the time: weekend calls keep interrupting family time.",
+    "How many emergency calls went to voicemail while you were off the clock this weekend?",
+    "3 emergency calls you missed this weekend while you were away from the phone."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're eating dinner with family. The phone rings. It's a main line backup.",
+    "If you let it ring, they hang up and call the next plumber on the list.",
+    "If you answer it, your night is over and you're driving out to the van.",
+    "Pipeline Reception answers your phone 24/7, qualifies the emergency, and books the job straight into your schedule.",
+    "We can set you up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Missing weekend calls means handing paying work straight to the next shop.\n\nHow do you handle urgent calls after hours?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#smallbusinessowner",
+    "#tradesbusiness"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-10-31 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
