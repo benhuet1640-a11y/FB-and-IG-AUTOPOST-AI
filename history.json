@@ -235,5 +235,21 @@
     "posted_at": "2026-10-31T16:18:45.660420+00:00",
     "instagram": "18642720526010983",
     "facebook": "1455738530948421_122097345909536726"
+  },
+  {
+    "id": "2026-10-31_2223",
+    "kind": "carousel",
+    "topic": "Answering the phone while on a water heater install",
+    "hook": "You're wrestling a heavy water heater tank down basement stairs. Your hands are full.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-10-31 18:00",
+    "posted_at": "2026-10-31T22:23:41.986273+00:00",
+    "instagram": "18115056392143726",
+    "facebook": "1455738530948421_122097533823536726"
   }
 ]
