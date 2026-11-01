@@ -304,5 +304,21 @@
     "posted_at": "2026-11-01T17:17:18.050095+00:00",
     "instagram": "17886875193689539",
     "facebook": "1455738530948421_122098187361536726"
+  },
+  {
+    "id": "2026-11-01_2336",
+    "kind": "carousel",
+    "topic": "Handling the second call on a busy office line",
+    "hook": "Your office phone rings. Line one is talking. Line two starts blinking.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-01 18:00",
+    "posted_at": "2026-11-01T23:36:56.159566+00:00",
+    "instagram": "17992423170117034",
+    "facebook": "1455738530948421_122098393317536726"
   }
 ]
