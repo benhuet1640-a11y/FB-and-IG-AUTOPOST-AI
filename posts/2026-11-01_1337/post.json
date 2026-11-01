@@ -1,0 +1,40 @@
+{
+  "topic": "Paying for plumbing leads that go straight to voicemail",
+  "hook_options": [
+    "You spend money on a Google click. The phone rings. Nobody picks up.",
+    "The most expensive voicemail greeting in the trade is on your ad line.",
+    "We hear this a lot: our ads bring in calls, but nobody answers.",
+    "How much ad spend went straight to voicemail this week?",
+    "Paid leads went to voicemail today while you were driving."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You spend money on a Google click. The phone rings. Nobody picks up.",
+    "That homeowner has water pouring through their ceiling. They do not leave a voicemail. They just tap the next plumber on Google.",
+    "Now you paid for the lead, handed the job to the guy down the street, and your van sits empty tomorrow morning.",
+    "I talk to plumbers who spend real money on marketing every month. Half that budget burns because the office phone rings while everyone is busy.",
+    "We built Pipeline Reception to catch every call. It answers instantly, qualifies the job, and books it straight into your schedule. We can set you up in a day.\n\nBook a demo at pipelinereception.com"
+  ],
+  "caption": "Every missed call on a paid lead is money thrown out the van window.\n\nHomeowners clicking ads usually have an active leak. They will not wait two hours for a callback.\n\nHow much of your ad spend do you think gets lost to voicemail?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumbingcontractor",
+    "#plumbers",
+    "#plumbinglife",
+    "#contractorlife",
+    "#tradesbusiness"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-01 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
