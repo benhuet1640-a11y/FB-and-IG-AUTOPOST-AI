@@ -1,0 +1,38 @@
+{
+  "topic": "Handling the second call on a busy office line",
+  "hook_options": [
+    "Your office phone rings. Line one is talking. Line two starts blinking.",
+    "A busy signal loses just as many plumbing jobs as an unanswered phone.",
+    "We keep hearing this from office managers: three calls hit at once every morning.",
+    "What happens when two homeowners call your shop at the exact same minute?",
+    "Two calls ring at the exact same second. Your office can only pick up one."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "Your office phone rings. Line one is talking. Line two starts blinking.",
+    "Your office manager is on the phone booking a main line clear. She can't just hang up. Line two rolls to voicemail. The caller doesn't leave a message. They just hang up and call the next shop on their phone.",
+    "Say that second caller has a leaking water heater in their garage. By the time your office wraps up the first call and checks the missed call log, that homeowner already booked someone else. That job is gone.",
+    "We built Pipeline Reception to catch the overflow. When your line is tied up, our AI answers right away, qualifies the job, and books it straight into your schedule. We can get you set up in a day.\n\nBook a demo at pipelinereception.com"
+  ],
+  "caption": "Most plumbers lose calls when their office line is already busy.\n\nCallers looking for fast plumbing help rarely wait on hold or leave a message anymore.\n\nHow many lines does your shop run before a call rolls over to voicemail?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumbingcontractor",
+    "#plumbers",
+    "#homeservices",
+    "#contractorlife",
+    "#plumbingcompany"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "dark",
+  "slot": "2026-11-01 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg"
+  ]
+}
