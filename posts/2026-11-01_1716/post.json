@@ -1,0 +1,30 @@
+{
+  "topic": "Handling Saturday emergency calls in local neighborhoods",
+  "hook_options": [
+    "You're in a crawlspace. Phone rings. You let it go.",
+    "The plumber who picks up on Saturday gets the job.",
+    "We hear the same thing from plumbers: nobody leaves a message.",
+    "How many emergency calls went to voicemail while you were under a house today?",
+    "Calls you missed that went to the guy down the street."
+  ],
+  "hook_type": "scene",
+  "headline": "You're in a crawlspace. Phone rings. You let it go.",
+  "caption": "By the time you crawl out and call them back, they've already booked the next guy in the search results.\n\nPipeline Reception answers every call 24/7, qualifies the lead, and books the job right into your schedule. We can set you up in a day.\n\nHow do you usually handle weekend calls when you are under a house?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#tradesbusiness"
+  ],
+  "format": "photo",
+  "local": true,
+  "kind": "ad",
+  "art_style": "photo",
+  "theme": "dark",
+  "photo": "fran1-plumber-228010_1920 (1).jpg",
+  "slot": "2026-11-01 12:00",
+  "images": [
+    "photo.jpg"
+  ]
+}
