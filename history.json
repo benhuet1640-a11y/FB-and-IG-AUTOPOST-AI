@@ -327,5 +327,21 @@
     "posted_at": "2026-11-01T23:36:56.159566+00:00",
     "instagram": "17992423170117034",
     "facebook": "1455738530948421_122098393317536726"
+  },
+  {
+    "id": "2026-11-02_1346",
+    "kind": "carousel",
+    "topic": "Handling price shopper calls on a busy day",
+    "hook": "You are in a crawlspace. The phone rings. It is another price shopper.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-02 08:30",
+    "posted_at": "2026-11-02T13:47:01.271784+00:00",
+    "instagram": "18107882747203478",
+    "facebook": "1455738530948421_122098867695536726"
   }
 ]
