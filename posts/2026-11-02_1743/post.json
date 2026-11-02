@@ -1,0 +1,31 @@
+{
+  "topic": "Handling price shopper calls on a busy route",
+  "hook_options": [
+    "You're in a crawlspace. Phone rings. It's a price shopper.",
+    "The plumber who quotes the fastest rarely gets the margin.",
+    "We hear the same thing from plumbers all the time: I spend half my day on calls that go nowhere.",
+    "How much time do you waste on tire kickers every day?",
+    "Calls from people who just want a cheap estimate slow you down."
+  ],
+  "hook_type": "scene",
+  "tweet": "You're in a crawlspace. Phone rings. It's someone asking for a ballpark price on a water heater swap. You can't talk. They hang up. Pipeline Reception answers, qualifies the lead, and books the real jobs on your schedule. We set you up in a day. Book a demo at pipelinereception.com",
+  "caption": "Not every phone call is worth your time.\nPipeline Reception filters out the price shoppers so you stay focused on profitable jobs.\nHow many hours do you lose talking to people who never book?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbinglife",
+    "#contractorlife",
+    "#tradesbusiness",
+    "#plumbingcompany",
+    "#smallbusinessowner"
+  ],
+  "format": "tweet",
+  "local": false,
+  "kind": "ad",
+  "art_style": "tweet",
+  "theme": "light",
+  "slot": "2026-11-02 12:00",
+  "images": [
+    "slide_01.jpg"
+  ]
+}
