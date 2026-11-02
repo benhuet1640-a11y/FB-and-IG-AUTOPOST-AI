@@ -1,0 +1,39 @@
+{
+  "topic": "Handling ladder work and missed calls",
+  "hook_options": [
+    "You're halfway up an extension ladder. The phone in your pocket starts buzzing.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I can't climb a ladder and answer the phone.",
+    "How many calls hit voicemail while you were up on a roof today?",
+    "Calls missed this week while you were up on a ladder"
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're halfway up an extension ladder. The phone in your pocket starts buzzing.",
+    "You let it go to voicemail because you have both hands on the rungs.",
+    "By the time you climb down and call back, they've already hired the next guy on Google.",
+    "That is a standard repair left on the table. It happens multiple times a week.",
+    "Pipeline Reception answers every call, qualifies the lead, and books the job straight into your schedule. We can set you up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Missing calls while you're up on a ladder or in a crawlspace hurts.\nHow many voicemails did you turn into callbacks this week?\npipelinereception.com",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbingcontractor",
+    "#contractorlife"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-02 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
