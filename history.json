@@ -350,5 +350,21 @@
     "posted_at": "2026-11-02T13:47:01.271784+00:00",
     "instagram": "18107882747203478",
     "facebook": "1455738530948421_122098867695536726"
+  },
+  {
+    "id": "2026-11-02_1743",
+    "kind": "ad",
+    "topic": "Handling price shopper calls on a busy route",
+    "hook": "You're in a crawlspace. Phone rings. It's someone asking for a ballpark price on a water heater swap. You can't talk. They hang up. Pipeline Reception answers, qualifies the lead, and books the real jobs on your schedule. We set you up in a day. Book a demo at pipelinereception.com",
+    "format": "tweet",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "tweet",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-02 12:00",
+    "posted_at": "2026-11-02T17:44:06.911000+00:00",
+    "instagram": "18111395417523237",
+    "facebook": "1455738530948421_122099029245536726"
   }
 ]
