@@ -366,5 +366,21 @@
     "posted_at": "2026-11-02T17:44:06.911000+00:00",
     "instagram": "18111395417523237",
     "facebook": "1455738530948421_122099029245536726"
+  },
+  {
+    "id": "2026-11-02_2324",
+    "kind": "carousel",
+    "topic": "Handling ladder work and missed calls",
+    "hook": "You're halfway up an extension ladder. The phone in your pocket starts buzzing.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-02 18:00",
+    "posted_at": "2026-11-02T23:25:03.818396+00:00",
+    "instagram": "18129423835871266",
+    "facebook": "1455738530948421_122099274405536726"
   }
 ]
