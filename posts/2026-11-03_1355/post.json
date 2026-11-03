@@ -1,0 +1,39 @@
+{
+  "topic": "Handling overflow calls on the main office line",
+  "hook_options": [
+    "You hear the office line ring twice. Then the hold music starts.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear this a lot: one person in the office can't answer both lines at once.",
+    "How many calls go to hold while your office person is already on a call?",
+    "Lost calls on hold turn straight into lost revenue."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You hear the office line ring twice. Then the hold music starts.",
+    "Your office manager is deep in dispatch. Another customer hangs up instead of waiting.",
+    "That caller dials the next plumbing company on the list and books the water heater replacement.",
+    "Pipeline Reception answers your overflow calls when the team is tied up, qualifies the lead, and puts it in your schedule. We can set you up in a day.",
+    "Book a demo at pipelinereception.com"
+  ],
+  "caption": "When the main office line backs up, the next call just hangs up.\n\nHow do you handle overflow when dispatch gets slammed?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbingcompany",
+    "#contractorlife"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-03 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
