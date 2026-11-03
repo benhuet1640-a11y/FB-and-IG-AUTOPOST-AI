@@ -419,5 +419,21 @@
     "posted_at": "2026-11-03T13:56:20.639460+00:00",
     "instagram": "18211754935317137",
     "facebook": "1455738530948421_122099857503536726"
+  },
+  {
+    "id": "2026-11-03_1750",
+    "kind": "ad",
+    "topic": "Handling price shopper calls during peak hours",
+    "hook": "You're under a sink. Phone rings. You let it go.",
+    "format": "photo",
+    "photo": "pexels-bulat843-1243575272-33388390.jpg",
+    "hook_type": "scene",
+    "art_style": "photo",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-03 12:00",
+    "posted_at": "2026-11-03T17:50:53.333694+00:00",
+    "instagram": "17993235456100178",
+    "facebook": "1455738530948421_122100005355536726"
   }
 ]
