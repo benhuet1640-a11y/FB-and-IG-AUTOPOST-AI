@@ -435,5 +435,20 @@
     "posted_at": "2026-11-03T17:50:53.333694+00:00",
     "instagram": "17993235456100178",
     "facebook": "1455738530948421_122100005355536726"
+  },
+  {
+    "id": "2026-11-03_2301",
+    "kind": "carousel",
+    "topic": "Handling commercial supply line calls in older Pittsburgh buildings",
+    "hook": "You are in a basement fixing a supply line and your phone rings.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": true,
+    "slot": "2026-11-03 18:00",
+    "posted_at": "2026-11-03T23:01:57.719101+00:00",
+    "facebook": "1455738530948421_122100201231536726"
   }
 ]
