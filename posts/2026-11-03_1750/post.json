@@ -1,0 +1,32 @@
+{
+  "topic": "Handling price shopper calls during peak hours",
+  "hook_options": [
+    "You're under a sink. Phone rings. You let it go.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I hate quoting prices on the run.",
+    "How many price shoppers called your shop today?",
+    "Three calls from price shoppers while you were knee-deep in a main line."
+  ],
+  "hook_type": "scene",
+  "headline": "You're under a sink. Phone rings. You let it go.",
+  "caption": "Price shoppers want a number right now while you are busy fixing a leak.\n\nPipeline Reception answers the calls your team can't get to, filters the tire kickers, and books the real jobs straight into your schedule.\n\nWe can get you set up in a day. Book a demo at pipelinereception.com.\n\nHow do you handle price shoppers when you are out in the field?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#smallbusinessowner",
+    "#tradesbusiness"
+  ],
+  "format": "photo",
+  "local": false,
+  "kind": "ad",
+  "art_style": "photo",
+  "theme": "dark",
+  "photo": "pexels-bulat843-1243575272-33388390.jpg",
+  "slot": "2026-11-03 12:00",
+  "images": [
+    "photo.jpg"
+  ]
+}
