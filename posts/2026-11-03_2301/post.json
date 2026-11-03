@@ -1,0 +1,41 @@
+{
+  "topic": "Handling commercial supply line calls in older Pittsburgh buildings",
+  "hook_options": [
+    "You are in a basement fixing a supply line and your phone rings.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I cannot answer the phone while I am wrenching.",
+    "How many commercial calls hit voicemail while you were under a sink today?",
+    "Four missed calls from landlords while you were stuck on a job."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You are in a basement fixing a supply line and your phone rings.",
+    "That landlord with the busted commercial supply line is not waiting around for a callback.",
+    "He is dialing the next number on his list by the time you climb back into the van.",
+    "Pipeline Reception answers every call, qualifies the lead, and books it straight into your schedule.",
+    "We can get you set up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Commercial landlords do not leave voicemails. They just move to the next plumber.\n\nHow many calls did you miss today while you were under a sink?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbingcontractor",
+    "#pittsburgh",
+    "#412",
+    "#smallbusinessowner",
+    "#tradesbusiness"
+  ],
+  "format": "thread",
+  "local": true,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-03 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
