@@ -508,5 +508,20 @@
     "slot": "2026-11-04 12:00",
     "posted_at": "2026-11-04T17:38:50.344722+00:00",
     "facebook": "1455738530948421_122100841965536726"
+  },
+  {
+    "id": "2026-11-04_2318",
+    "kind": "carousel",
+    "topic": "Handling drain cleaning overflow calls",
+    "hook": "You are neck-deep in a main line cleanout and the office phone rings.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-04 18:00",
+    "posted_at": "2026-11-04T23:18:24.796203+00:00",
+    "facebook": "1455738530948421_122101025649536726"
   }
 ]
