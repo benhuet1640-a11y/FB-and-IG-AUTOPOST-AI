@@ -479,5 +479,20 @@
     "slot": "2026-11-04 08:30",
     "posted_at": "2026-11-04T14:39:38.709136+00:00",
     "facebook": "1455738530948421_122100742023536726"
+  },
+  {
+    "id": "2026-11-04_1738",
+    "kind": "ad",
+    "topic": "Handling supply line replacement calls while in a crawlspace",
+    "hook": "You're in a crawlspace. Phone rings.",
+    "format": "photo",
+    "photo": "905513-plumbing-1433606_1920.jpg",
+    "hook_type": "scene",
+    "art_style": "photo",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-04 12:00",
+    "posted_at": "2026-11-04T17:38:50.344722+00:00",
+    "facebook": "1455738530948421_122100841965536726"
   }
 ]
