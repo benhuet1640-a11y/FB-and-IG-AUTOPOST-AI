@@ -1,0 +1,41 @@
+{
+  "topic": "Handling sump pump install calls",
+  "hook_options": [
+    "You're hauling a sump pump up basement stairs. Phone rings.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: 'I can't answer the phone while my hands are full.'",
+    "How many calls hit voicemail while you were wrestling a pit today?",
+    "You missed three calls this week while you were elbow-deep in a basin."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're hauling a sump pump up basement stairs. Phone rings.",
+    "You let it go to voicemail because you can't drop the unit.",
+    "That caller doesn't leave a message. They just call the next name on the search results.",
+    "You lose the install. And the repeat business.",
+    "Pipeline Reception covers the calls your team can't get to, so you never miss a job. We can set you up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Basement installs pay the bills.\nToo bad the phone rings right when you pick up the heavy stuff.\n\nHow many calls did you miss today while your hands were full?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#smallbusinessowner",
+    "#homeservices"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "dark",
+  "slot": "2026-11-04 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
