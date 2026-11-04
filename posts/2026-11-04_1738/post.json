@@ -1,0 +1,31 @@
+{
+  "topic": "Handling supply line replacement calls while in a crawlspace",
+  "hook_options": [
+    "You're in a crawlspace. Phone rings.",
+    "The plumber who answers gets the job.",
+    "We hear plumbers say they miss half their calls.",
+    "How many jobs did voicemail steal this week?",
+    "Calls come in while you are under the house."
+  ],
+  "hook_type": "scene",
+  "headline": "You're in a crawlspace. Phone rings.",
+  "caption": "By the time you crawl out and wipe your hands, they already called the next guy on Google.\n\nPipeline Reception answers your calls so you never miss a lead. We can set you up in a day.\n\nWhat is your most annoying time of day for the phone to ring?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbingcontractor",
+    "#plumbingservice",
+    "#smallbusinessowner",
+    "#tradesbusiness"
+  ],
+  "format": "photo",
+  "local": false,
+  "kind": "ad",
+  "art_style": "photo",
+  "theme": "light",
+  "photo": "905513-plumbing-1433606_1920.jpg",
+  "slot": "2026-11-04 12:00",
+  "images": [
+    "photo.jpg"
+  ]
+}
