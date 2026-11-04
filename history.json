@@ -464,5 +464,20 @@
     "slot": "2026-11-03 18:00",
     "posted_at": "2026-11-03T23:01:57.719101+00:00",
     "facebook": "1455738530948421_122100201231536726"
+  },
+  {
+    "id": "2026-11-04_1439",
+    "kind": "carousel",
+    "topic": "Handling sump pump install calls",
+    "hook": "You're hauling a sump pump up basement stairs. Phone rings.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-04 08:30",
+    "posted_at": "2026-11-04T14:39:38.709136+00:00",
+    "facebook": "1455738530948421_122100742023536726"
   }
 ]
