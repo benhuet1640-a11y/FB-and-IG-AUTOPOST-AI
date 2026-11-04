@@ -1,0 +1,41 @@
+{
+  "topic": "Handling drain cleaning overflow calls",
+  "hook_options": [
+    "You are neck-deep in a main line cleanout and the office phone rings.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I cannot answer the phone and run the snake.",
+    "How many emergency main line calls hit voicemail while you were clearing a clog today?",
+    "Four calls you missed this week that went to the guy down the street."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You are neck-deep in a main line cleanout and the office phone rings.",
+    "You let it go to voicemail because your hands are covered in grease and roots.",
+    "That homeowner hangs up on the beep and dials the next number on Google.",
+    "If a main line job is worth four hundred dollars and three callers hang up every week, you do the math.",
+    "Pipeline Reception answers every call your team cannot reach, day or night, and books jobs straight into your schedule. We can set you up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Ever lose a big drain cleanout job just because your hands were in the pipe?\n\nHow do you handle calls when you are stuck on a messy job?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#smallbusinessowner",
+    "#contractorlife"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-04 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
