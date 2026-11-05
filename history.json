@@ -552,5 +552,20 @@
     "slot": "2026-11-05 08:30",
     "posted_at": "2026-11-05T14:33:48.990519+00:00",
     "facebook": "1455738530948421_122101572705536726"
+  },
+  {
+    "id": "2026-11-05_1744",
+    "kind": "ad",
+    "topic": "Voicemail loses the job while you're on a call",
+    "hook": "The plumber who answers gets the job. You're elbow-deep in a water heater, the call drops to voicemail, and they call the next guy. Pipeline Reception answers every call 24/7 and books the job. We can set you up in a day. Book a demo at pipelinereception.com",
+    "format": "tweet",
+    "photo": null,
+    "hook_type": "truth",
+    "art_style": "tweet",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-05 12:00",
+    "posted_at": "2026-11-05T17:44:36.141836+00:00",
+    "facebook": "1455738530948421_122101698195536726"
   }
 ]
