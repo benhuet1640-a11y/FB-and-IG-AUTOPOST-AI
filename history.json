@@ -523,5 +523,20 @@
     "slot": "2026-11-04 18:00",
     "posted_at": "2026-11-04T23:18:24.796203+00:00",
     "facebook": "1455738530948421_122101025649536726"
+  },
+  {
+    "id": "2026-11-05_1433",
+    "kind": "carousel",
+    "topic": "Missed calls that book the other guy",
+    "hook": "Who answers the phone wins the job. Not skill. Not price.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "truth",
+    "art_style": "thread",
+    "person": null,
+    "local": true,
+    "slot": "2026-11-05 08:30",
+    "posted_at": "2026-11-05T14:33:48.990519+00:00",
+    "facebook": "1455738530948421_122101572705536726"
   }
 ]
