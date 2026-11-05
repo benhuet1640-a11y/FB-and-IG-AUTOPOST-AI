@@ -1,0 +1,41 @@
+{
+  "topic": "Handling garbage disposal replacement calls",
+  "hook_options": [
+    "You're elbows deep in a garbage disposal swap. Phone rings.",
+    "The plumber who answers the phone gets the job.",
+    "We hear it every day: I can't swap a disposal and answer the phone.",
+    "How many disposal replacement calls hit voicemail today?",
+    "Every missed disposal call goes straight to the next truck."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're elbows deep in a garbage disposal swap. Phone rings in your pocket. You let it go.",
+    "That homeowner hangs up, dials the next plumber on Google, and books them instead.",
+    "If a disposal replacement is worth good money, missing three of those a week adds up fast.",
+    "Pipeline Reception answers every call your team can't get to, qualifies the lead, and puts it on your schedule. We can get you set up in a day.",
+    "Book a demo at pipelinereception.com"
+  ],
+  "caption": "Swapping disposals all day means missing calls.\nEvery missed ring is cash walking away to the next truck.\nHow many calls did you miss today?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbinglife",
+    "#contractorlife",
+    "#pittsburgh",
+    "#pittsburghpa",
+    "#412"
+  ],
+  "format": "thread",
+  "local": true,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-05 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
