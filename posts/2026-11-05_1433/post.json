@@ -1,0 +1,39 @@
+{
+  "topic": "Missed calls that book the other guy",
+  "hook_options": [
+    "You're up a ladder in Shadyside. Your pocket buzzes. You can't reach it.",
+    "Who answers the phone wins the job. Not skill. Not price.",
+    "We hear this a lot: you call back and they're already booked.",
+    "How many calls hit voicemail while you were on a job today?",
+    "A couple of calls this week went to voicemail and booked the guy down the street"
+  ],
+  "hook_type": "truth",
+  "tweets": [
+    "Who answers the phone wins the job. Not skill. Not price.",
+    "You're elbow-deep in a boiler in Lawrenceville. The phone buzzes. It goes to voicemail.",
+    "You call back an hour later. They're already booked with the guy who picked up. That's a paid job gone.",
+    "We built Pipeline Reception for that. It answers calls when your team can't, books appointments into your schedule, and qualifies leads so your crew only handles real jobs. It covers calls your team can't get to. We can get you set up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "You don't lose jobs to price. You lose them to voicemail.\nPipeline Reception answers nights and weekends and books jobs straight into your schedule.\nHow many calls did you miss this week? \u001f527",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumbers",
+    "#plumbinglife",
+    "#homeservices",
+    "#contractorlife",
+    "#pittsburgh",
+    "#412"
+  ],
+  "format": "thread",
+  "local": true,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-05 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg"
+  ]
+}
