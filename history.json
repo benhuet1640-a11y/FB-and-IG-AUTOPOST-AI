@@ -567,5 +567,20 @@
     "slot": "2026-11-05 12:00",
     "posted_at": "2026-11-05T17:44:36.141836+00:00",
     "facebook": "1455738530948421_122101698195536726"
+  },
+  {
+    "id": "2026-11-05_2319",
+    "kind": "carousel",
+    "topic": "Handling garbage disposal replacement calls",
+    "hook": "You're elbows deep in a garbage disposal swap. Phone rings in your pocket. You let it go.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": true,
+    "slot": "2026-11-05 18:00",
+    "posted_at": "2026-11-05T23:19:34.008001+00:00",
+    "facebook": "1455738530948421_122101869267536726"
   }
 ]
