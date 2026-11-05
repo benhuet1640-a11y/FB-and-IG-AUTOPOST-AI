@@ -1,0 +1,30 @@
+{
+  "topic": "Voicemail loses the job while you're on a call",
+  "hook_options": [
+    "You're elbow-deep in a water heater. Your phone buzzes in your pocket.",
+    "The plumber who answers gets the job.",
+    "We keep hearing from plumbers: calls stack up while they're on a job.",
+    "How many calls hit voicemail while you were on a job today?",
+    "3 calls this week that went straight to voicemail and booked elsewhere"
+  ],
+  "hook_type": "truth",
+  "tweet": "The plumber who answers gets the job. You're elbow-deep in a water heater, the call drops to voicemail, and they call the next guy. Pipeline Reception answers every call 24/7 and books the job. We can set you up in a day. Book a demo at pipelinereception.com",
+  "caption": "Phones hit voicemail while you're on a job. Pipeline Reception takes the calls your team can't get to, nights and weekends, and puts real jobs on your calendar.",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbinglife",
+    "#plumbers",
+    "#homeservices",
+    "#contractorlife"
+  ],
+  "format": "tweet",
+  "local": false,
+  "kind": "ad",
+  "art_style": "tweet",
+  "theme": "dark",
+  "slot": "2026-11-05 12:00",
+  "images": [
+    "slide_01.jpg"
+  ]
+}
