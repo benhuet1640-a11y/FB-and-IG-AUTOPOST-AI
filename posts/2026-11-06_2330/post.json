@@ -1,0 +1,41 @@
+{
+  "topic": "Handling toilet flange repair calls during a busy route",
+  "hook_options": [
+    "You are hauling tools to the van. Phone rings. Another flange job gone.",
+    "The plumber who answers first gets the toilet repair. Not the best one.",
+    "We keep hearing from plumbers who lose flange jobs to voicemail.",
+    "How many toilet repair calls hit voicemail while you were driving today?",
+    "Four flange calls you missed this week that went to the guy down the street"
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You are hauling tools to the van. Phone rings. Another flange job gone.",
+    "If a toilet flange replacement is worth good money and you miss three calls a week while driving between jobs, that is cash left on the table.",
+    "By the time you call them back from the next house, they have already hired the next guy on Google.",
+    "We built Pipeline Reception to fix this. It answers every call your team cannot reach, qualifies the lead, and books the job right into your schedule.",
+    "We can get you set up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Missing flange calls means handing paying customers to someone else.\n\nHow many voicemails do you clear out at the end of the day?\n\nDrop a number below.",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#smallbusinessowner",
+    "#homeservices"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-06 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
