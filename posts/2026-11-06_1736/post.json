@@ -1,0 +1,32 @@
+{
+  "topic": "Handling mainline clog calls during a busy day",
+  "hook_options": [
+    "You are ankle-deep in a mainline backup and the phone starts buzzing again.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I cannot answer the phone and clear a drain.",
+    "How many calls hit voicemail while you were snaking a main today?",
+    "Every missed call on a main backup goes straight to the guy down the street."
+  ],
+  "hook_type": "truth",
+  "headline": "The plumber who answers gets the job.",
+  "caption": "If you are knee-deep in a mainline backup and miss the phone, that job goes to the next shop on the list.\n\nPipeline Reception answers every call your team cannot reach, qualifies the lead, and books it straight onto your schedule.\n\nWe can set you up in a day.\n\nBook a demo at pipelinereception.com",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbingcontractor",
+    "#plumbingservice",
+    "#smallbusinessowner",
+    "#contractorlife"
+  ],
+  "format": "photo",
+  "local": false,
+  "kind": "ad",
+  "art_style": "photo",
+  "theme": "light",
+  "photo": "olek-buzunov-gd8HUp22NgM-unsplash.jpg",
+  "slot": "2026-11-06 12:00",
+  "images": [
+    "photo.jpg"
+  ]
+}
