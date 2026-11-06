@@ -589,5 +589,20 @@
     "slot": "2026-11-05 18:00",
     "posted_at": "2026-11-05T23:19:34.008001+00:00",
     "facebook": "1455738530948421_122101869267536726"
+  },
+  {
+    "id": "2026-11-06_1358",
+    "kind": "carousel",
+    "topic": "Handling water shut-off valve replacement calls in Oakland basements",
+    "hook": "You're in a basement fixing a valve. Phone rings.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": true,
+    "slot": "2026-11-06 08:30",
+    "posted_at": "2026-11-06T13:59:07.900310+00:00",
+    "facebook": "1455738530948421_122102352861536726"
   }
 ]
