@@ -640,5 +640,20 @@
     "slot": "2026-11-06 12:00",
     "posted_at": "2026-11-06T17:37:16.330583+00:00",
     "facebook": "1455738530948421_122102476173536726"
+  },
+  {
+    "id": "2026-11-06_2330",
+    "kind": "carousel",
+    "topic": "Handling toilet flange repair calls during a busy route",
+    "hook": "You are hauling tools to the van. Phone rings. Another flange job gone.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-06 18:00",
+    "posted_at": "2026-11-06T23:30:53.244465+00:00",
+    "facebook": "1455738530948421_122102664531536726"
   }
 ]
