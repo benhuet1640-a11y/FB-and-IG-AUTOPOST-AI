@@ -611,5 +611,20 @@
     "slot": "2026-11-06 08:30",
     "posted_at": "2026-11-06T13:59:07.900310+00:00",
     "facebook": "1455738530948421_122102352861536726"
+  },
+  {
+    "id": "2026-11-06_1736",
+    "kind": "ad",
+    "topic": "Handling mainline clog calls during a busy day",
+    "hook": "The plumber who answers gets the job.",
+    "format": "photo",
+    "photo": "olek-buzunov-gd8HUp22NgM-unsplash.jpg",
+    "hook_type": "truth",
+    "art_style": "photo",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-06 12:00",
+    "posted_at": "2026-11-06T17:37:16.330583+00:00",
+    "facebook": "1455738530948421_122102476173536726"
   }
 ]
