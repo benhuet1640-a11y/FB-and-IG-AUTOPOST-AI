@@ -1,0 +1,41 @@
+{
+  "topic": "Handling water shut-off valve replacement calls in Oakland basements",
+  "hook_options": [
+    "You're in a basement fixing a valve and your phone starts ringing.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I can't answer the phone and do the job.",
+    "How many calls hit voicemail while you were on a job today?",
+    "Four calls you missed this week that went to the next guy."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're in a basement fixing a valve. Phone rings.",
+    "You let it go to voicemail because your hands are full of copper and torch.",
+    "By the time you crawl up the stairs and call them back, they already hired someone else.",
+    "That happens three times a week and your schedule stays half full.",
+    "Pipeline Reception answers every call your team can't get to and books the job right into your calendar. We can get you set up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Basement work means missed calls.\nHow many jobs slipped away this week while you were under a sink?\nDrop a number below.",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbingcompany",
+    "#contractorlife",
+    "#pittsburgh",
+    "#pittsburghpa"
+  ],
+  "format": "thread",
+  "local": true,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "dark",
+  "slot": "2026-11-06 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
