@@ -662,5 +662,20 @@
     "slot": "2026-11-06 18:00",
     "posted_at": "2026-11-06T23:30:53.244465+00:00",
     "facebook": "1455738530948421_122102664531536726"
+  },
+  {
+    "id": "2026-11-07_1421",
+    "kind": "carousel",
+    "topic": "Handling incoming calls while driving the van between jobs",
+    "hook": "You are doing 65 in the van. The phone rings on the dash.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-07 08:30",
+    "posted_at": "2026-11-07T14:21:46.678501+00:00",
+    "facebook": "1455738530948421_122103277905536726"
   }
 ]
