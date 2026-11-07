@@ -677,5 +677,20 @@
     "slot": "2026-11-07 08:30",
     "posted_at": "2026-11-07T14:21:46.678501+00:00",
     "facebook": "1455738530948421_122103277905536726"
+  },
+  {
+    "id": "2026-11-07_1714",
+    "kind": "ad",
+    "topic": "Handling office phone coverage during lunch breaks",
+    "hook": "A quick lunch break shouldn't cost you a job.",
+    "format": "photo",
+    "photo": "variousphotography-bath-1937412_1920.jpg",
+    "hook_type": "truth",
+    "art_style": "photo",
+    "person": null,
+    "local": true,
+    "slot": "2026-11-07 12:00",
+    "posted_at": "2026-11-07T17:15:17.849451+00:00",
+    "facebook": "1455738530948421_122103391833536726"
   }
 ]
