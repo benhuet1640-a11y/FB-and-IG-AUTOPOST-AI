@@ -1,0 +1,38 @@
+{
+  "topic": "Returning voicemails from the truck at the end of the day",
+  "hook_options": [
+    "5:30 PM. You're parked in the truck finally dialing your voicemails back.",
+    "If a customer leaves a voicemail, they're already calling the next shop.",
+    "We hear it constantly: 'By the time I call back, they booked someone else.'",
+    "How many callbacks today ended with 'sorry, we already found somebody'?",
+    "Three voicemails returned at 5 PM. Three jobs already lost to another shop."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "5:30 PM. You're parked in the truck finally dialing your voicemails back.",
+    "First callback: 'Thanks, but someone is already on their way.'\n\nSecond callback: rings out to voicemail.\n\nThird callback: 'We got it taken care of an hour ago.'",
+    "Homeowners with a leak don't wait around. They dial down the list until someone picks up and puts them on the calendar.\n\nVoicemail doesn't hold the job. It just gives them time to call the next plumber.",
+    "That's why we built Pipeline Reception.\n\nOur AI receptionist covers the calls your team can't get to, qualifies the job, and books it straight into your schedule. We can get you set up in a day.\n\nBook a demo at pipelinereception.com"
+  ],
+  "caption": "Nobody sits by the phone waiting for a plumbing callback.\n\nWhen water is leaking, the first shop that answers gets the job. Calling people back at 5 PM is usually two hours too late.\n\nHow many callbacks do you or your team have to make at the end of the day?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbingcontractor",
+    "#plumbinglife",
+    "#smallbusinessowner",
+    "#tradesbusiness"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "dark",
+  "slot": "2026-11-07 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg"
+  ]
+}
