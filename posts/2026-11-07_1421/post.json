@@ -1,0 +1,38 @@
+{
+  "topic": "Handling incoming calls while driving the van between jobs",
+  "hook_options": [
+    "You are doing 65 in the van. The phone rings on the dash.",
+    "Plumbing leads do not wait for you to pull the van over.",
+    "We hear this a lot: you cannot answer calls and drive safely between jobs.",
+    "How many calls hit your voicemail while driving between jobs today?",
+    "Three calls missed between jobs that went straight to another plumber."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You are doing 65 in the van. The phone rings on the dash.",
+    "You cannot look at your schedule. You cannot write down an address while steering. So you let it roll to voicemail and plan to call back at the next stop.",
+    "By the time you put the van in park and dial, they already booked the next guy. People with plumbing problems do not wait for a callback.",
+    "Pipeline Reception covers the calls your team cannot get to. It answers 24/7, qualifies the job, and books it straight into your schedule. We can get you set up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Trying to take calls while driving the van is a bad mix.\nEither you pull over and burn route time, or let it ring and lose the customer.\nHow do you handle incoming calls when you are behind the wheel? \ud83d\udd27",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbingcontractor",
+    "#homeservices",
+    "#tradesbusiness",
+    "#smallbusinessowner"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-07 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg"
+  ]
+}
