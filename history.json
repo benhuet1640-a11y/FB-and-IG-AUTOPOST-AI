@@ -699,5 +699,20 @@
     "slot": "2026-11-07 12:00",
     "posted_at": "2026-11-07T17:15:17.849451+00:00",
     "facebook": "1455738530948421_122103391833536726"
+  },
+  {
+    "id": "2026-11-07_2312",
+    "kind": "carousel",
+    "topic": "Returning voicemails from the truck at the end of the day",
+    "hook": "5:30 PM. You're parked in the truck finally dialing your voicemails back.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-07 18:00",
+    "posted_at": "2026-11-07T23:12:33.849887+00:00",
+    "facebook": "1455738530948421_122103592815536726"
   }
 ]
