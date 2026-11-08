@@ -743,5 +743,20 @@
     "slot": "2026-11-08 08:30",
     "posted_at": "2026-11-08T14:21:40.870568+00:00",
     "facebook": "1455738530948421_122104087689536726"
+  },
+  {
+    "id": "2026-11-08_1713",
+    "kind": "ad",
+    "topic": "Handling shower valve replacement calls during a service route",
+    "hook": "You're soldering a shower valve. Phone rings. You let it go.",
+    "format": "photo",
+    "photo": "u_5w684v1p3n-tool-10213827_1920.png",
+    "hook_type": "scene",
+    "art_style": "photo",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-08 12:00",
+    "posted_at": "2026-11-08T17:14:22.032864+00:00",
+    "facebook": "1455738530948421_122104187751536726"
   }
 ]
