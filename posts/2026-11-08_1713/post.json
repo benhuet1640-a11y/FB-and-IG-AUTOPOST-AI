@@ -1,0 +1,32 @@
+{
+  "topic": "Handling shower valve replacement calls during a service route",
+  "hook_options": [
+    "You're soldering a shower valve. Phone rings. You let it go.",
+    "The plumber who picks up gets the job.",
+    "We hear it all the time from plumbers: calls slip by on the road.",
+    "How many calls hit voicemail while your hands were full today?",
+    "Missed calls don't wait around for a callback."
+  ],
+  "hook_type": "scene",
+  "headline": "You're soldering a shower valve. Phone rings. You let it go.",
+  "caption": "Your hands are full and the phone rings. It goes to voicemail.\nMost callers won't wait for a callback. They just call the next shop.\nPipeline Reception covers the calls your team can't get to and books jobs right into your schedule. We can get you set up in a day.\nBook a demo at pipelinereception.com",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#contractorlife",
+    "#tradesbusiness"
+  ],
+  "format": "photo",
+  "local": false,
+  "kind": "ad",
+  "art_style": "photo",
+  "theme": "light",
+  "photo": "u_5w684v1p3n-tool-10213827_1920.png",
+  "slot": "2026-11-08 12:00",
+  "images": [
+    "photo.jpg"
+  ]
+}
