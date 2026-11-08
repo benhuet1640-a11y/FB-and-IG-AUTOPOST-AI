@@ -1,0 +1,39 @@
+{
+  "topic": "Handling garbage disposal replacement calls on a tight route",
+  "hook_options": [
+    "You are holding a wrench under a sink. The phone rings again.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I miss calls on the tools.",
+    "How many disposal replacement calls hit voicemail while you were under a sink today?",
+    "Four calls you missed this week that went to the guy down the street"
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You are holding a wrench under a sink. The phone rings again. You let it go to voicemail.",
+    "By the time you wipe your hands and call back twenty minutes later, they already hired the next guy on Google.",
+    "That is money down the drain just because you were doing the actual work.",
+    "Pipeline Reception answers every call your team can't get to, qualifies the lead, and books the job into your schedule. We can set you up in a day.\n\nBook a demo at pipelinereception.com"
+  ],
+  "caption": "Ever lose a job just because your hands were busy? Most homeowners don't leave second messages. How do you handle incoming calls when you're elbow-deep in a service call?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcompany",
+    "#smallbusinessowner",
+    "#tradesbusiness"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-08 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg"
+  ]
+}
