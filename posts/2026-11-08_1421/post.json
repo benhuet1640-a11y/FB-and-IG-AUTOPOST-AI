@@ -1,0 +1,40 @@
+{
+  "topic": "Handling gas line repair calls during a tight schedule",
+  "hook_options": [
+    "You're testing a gas line leak. Phone rings. Straight to voicemail.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear this a lot: you can't answer the phone and test lines at the same time.",
+    "How many gas line calls hit voicemail while you were on a job today?",
+    "Every call you miss goes straight to the guy down the street."
+  ],
+  "hook_type": "truth",
+  "hook_type_reasoning": "Using a blunt hard truth about winning jobs based on speed rather than quality, leaning into our best-performing angle types.",
+  "tweets": [
+    "The plumber who answers gets the job. Not the best one.",
+    "You're out on a gas line repair. The phone buzzes in your tool belt. You can't drop your tools right then.",
+    "By the time you wipe your hands and call back an hour later, they already booked someone else.",
+    "That is another job gone because your hands were busy.",
+    "Pipeline Reception answers your office line so you never miss a call while you work. We can set you up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Most homeowners don't wait around for a callback.\nHow do you handle the phone when your hands are busy?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbingcontractor",
+    "#contractorlife",
+    "#tradesbusiness"
+  ],
+  "format": "thread",
+  "local": true,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "dark",
+  "slot": "2026-11-08 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
