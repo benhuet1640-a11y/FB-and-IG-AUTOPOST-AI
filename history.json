@@ -765,5 +765,20 @@
     "slot": "2026-11-08 12:00",
     "posted_at": "2026-11-08T17:14:22.032864+00:00",
     "facebook": "1455738530948421_122104187751536726"
+  },
+  {
+    "id": "2026-11-08_2312",
+    "kind": "carousel",
+    "topic": "Handling garbage disposal replacement calls on a tight route",
+    "hook": "You are holding a wrench under a sink. The phone rings again. You let it go to voicemail.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-08 18:00",
+    "posted_at": "2026-11-08T23:12:30.249314+00:00",
+    "facebook": "1455738530948421_122104397325536726"
   }
 ]
