@@ -721,5 +721,20 @@
     "slot": "2026-11-07 18:00",
     "posted_at": "2026-11-07T23:12:33.849887+00:00",
     "facebook": "1455738530948421_122103592815536726"
+  },
+  {
+    "id": "2026-11-08_1421",
+    "kind": "carousel",
+    "topic": "Handling gas line repair calls during a tight schedule",
+    "hook": "The plumber who answers gets the job. Not the best one.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "truth",
+    "art_style": "thread",
+    "person": null,
+    "local": true,
+    "slot": "2026-11-08 08:30",
+    "posted_at": "2026-11-08T14:21:40.870568+00:00",
+    "facebook": "1455738530948421_122104087689536726"
   }
 ]
