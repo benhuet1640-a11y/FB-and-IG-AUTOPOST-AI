@@ -838,5 +838,20 @@
     "slot": "2026-11-09 12:00",
     "posted_at": "2026-11-09T17:48:43.697059+00:00",
     "facebook": "1455738530948421_122105076183536726"
+  },
+  {
+    "id": "2026-11-09_2323",
+    "kind": "carousel",
+    "topic": "Handling leak detection calls during a busy route",
+    "hook": "You are in a crawlspace. The phone rings. You let it go.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-09 18:00",
+    "posted_at": "2026-11-09T23:24:10.183419+00:00",
+    "facebook": "1455738530948421_122105362719536726"
   }
 ]
