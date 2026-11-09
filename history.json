@@ -787,5 +787,20 @@
     "slot": "2026-11-08 18:00",
     "posted_at": "2026-11-08T23:12:30.249314+00:00",
     "facebook": "1455738530948421_122104397325536726"
+  },
+  {
+    "id": "2026-11-09_1353",
+    "kind": "carousel",
+    "topic": "Handling water heater flush calls during a service route",
+    "hook": "You're flushing a tank. Phone rings. You keep working.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-09 08:30",
+    "posted_at": "2026-11-09T13:53:37.385193+00:00",
+    "facebook": "1455738530948421_122104918341536726"
   }
 ]
