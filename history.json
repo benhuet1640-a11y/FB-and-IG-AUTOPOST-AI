@@ -816,5 +816,20 @@
     "slot": "2026-11-09 08:30",
     "posted_at": "2026-11-09T13:53:37.385193+00:00",
     "facebook": "1455738530948421_122104918341536726"
+  },
+  {
+    "id": "2026-11-09_1748",
+    "kind": "ad",
+    "topic": "Handling bathroom fixture replacement calls during a service route",
+    "hook": "You are under a crawlspace. Phone rings. Straight to voicemail.",
+    "format": "photo",
+    "photo": "marian-florinel-condruz-C-oYJoIfgCs-unsplash.jpg",
+    "hook_type": "scene",
+    "art_style": "photo",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-09 12:00",
+    "posted_at": "2026-11-09T17:48:43.697059+00:00",
+    "facebook": "1455738530948421_122105076183536726"
   }
 ]
