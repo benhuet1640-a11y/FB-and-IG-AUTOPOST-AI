@@ -1,0 +1,39 @@
+{
+  "topic": "Handling water heater flush calls during a service route",
+  "hook_options": [
+    "You're flushing a tank. Phone rings. You keep working.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I can't answer the phone while servicing a tank.",
+    "How many tank flush calls hit voicemail while you were on a job today?",
+    "Four calls you missed this week that went to the guy down the street"
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're flushing a tank. Phone rings. You keep working.",
+    "By the time you wash your hands and check the missed call, they've already called the next guy.",
+    "That's another good job that just walked away because nobody picked up.",
+    "Pipeline Reception covers the calls your team can't get to. We can get you set up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Tank flush calls wait for nobody.\n\nHow many voicemails did you pull off your phone today?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#plumbingservice",
+    "#smallbusinessowner"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "dark",
+  "slot": "2026-11-09 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg"
+  ]
+}
