@@ -1,0 +1,41 @@
+{
+  "topic": "Handling leak detection calls during a busy route",
+  "hook_options": [
+    "You are in a crawlspace. The phone rings. You let it go.",
+    "The plumber who picks up gets the leak repair. Not the best one.",
+    "We hear the same thing from plumbers all the time: I miss too many leak calls while working.",
+    "How many leak detection calls went to voicemail while you were under a house today?",
+    "Three leak calls you missed today went to the next guy on Google."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You are in a crawlspace. The phone rings. You let it go.",
+    "It is a homeowner with a leak panic. They hang up on the beep and dial the next number on the list.",
+    "That is a service call walking straight to someone else because your hands were full.",
+    "Pipeline Reception catches those calls. It answers when your team cannot, takes the details, and books the job right into your schedule. We can set you up in a day.",
+    "Book a demo at pipelinereception.com"
+  ],
+  "caption": "Ever lose a good leak job because you were elbow-deep in a repair?\n\nMissing calls on the route costs real money every week.\n\nHow do you handle the phone when you are solo in the field?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbingcontractor",
+    "#plumbingservice",
+    "#smallbusinessowner",
+    "#tradesbusiness"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-09 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
