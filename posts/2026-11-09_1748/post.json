@@ -1,0 +1,32 @@
+{
+  "topic": "Handling bathroom fixture replacement calls during a service route",
+  "hook_options": [
+    "You are under a crawlspace. Phone rings twice. Straight to voicemail.",
+    "The plumber who picks up gets the vanity install. Not the best one.",
+    "We hear this a lot: I can't talk prices while pulling old pipe.",
+    "How many bathroom fixture jobs went to voicemail this week?",
+    "Missed plumbing calls while you are under the house add up fast."
+  ],
+  "hook_type": "scene",
+  "headline": "You are under a crawlspace. Phone rings. Straight to voicemail.",
+  "caption": "Bathroom fixture replacement calls keep hitting voicemail while you are under the house.\n\nPipeline Reception answers every call, qualifies the leads, and books jobs straight into your schedule. We can set you up in a day.\n\nBook a demo at pipelinereception.com",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#homeservices",
+    "#contractorlife"
+  ],
+  "format": "photo",
+  "local": false,
+  "kind": "ad",
+  "art_style": "photo",
+  "theme": "dark",
+  "photo": "marian-florinel-condruz-C-oYJoIfgCs-unsplash.jpg",
+  "slot": "2026-11-09 12:00",
+  "images": [
+    "photo.jpg"
+  ]
+}
