@@ -860,5 +860,20 @@
     "slot": "2026-11-09 18:00",
     "posted_at": "2026-11-09T23:24:10.183419+00:00",
     "facebook": "1455738530948421_122105362719536726"
+  },
+  {
+    "id": "2026-11-10_1433",
+    "kind": "carousel",
+    "topic": "Handling sump pump inspection calls during a service route",
+    "hook": "You're in a crawlspace. Phone rings. You let it go.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-10 08:30",
+    "posted_at": "2026-11-10T14:34:06.613958+00:00",
+    "facebook": "1455738530948421_122106128751536726"
   }
 ]
