@@ -875,5 +875,20 @@
     "slot": "2026-11-10 08:30",
     "posted_at": "2026-11-10T14:34:06.613958+00:00",
     "facebook": "1455738530948421_122106128751536726"
+  },
+  {
+    "id": "2026-11-10_1715",
+    "kind": "ad",
+    "topic": "Handling water heater replacement calls on a busy route",
+    "hook": "Hauling a tank up basement stairs and the phone rings.",
+    "format": "photo",
+    "photo": "timur-shakerzianov-VAGbjhkxg6I-unsplash.jpg",
+    "hook_type": "scene",
+    "art_style": "photo",
+    "person": null,
+    "local": true,
+    "slot": "2026-11-10 12:00",
+    "posted_at": "2026-11-10T17:15:38.141878+00:00",
+    "facebook": "1455738530948421_122106262905536726"
   }
 ]
