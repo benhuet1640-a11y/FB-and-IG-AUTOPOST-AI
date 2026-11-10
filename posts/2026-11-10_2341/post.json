@@ -1,0 +1,39 @@
+{
+  "topic": "Handling garbage disposal repair calls during a service route",
+  "hook_options": [
+    "You are in the middle of a garbage disposal swap. Phone rings.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I miss calls on every job.",
+    "How many calls hit voicemail while you were on a route today?",
+    "Calls you missed this week while your hands were inside a cabinet"
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You are in the middle of a garbage disposal swap. Phone rings. Your hands are covered in grease.",
+    "You let it go to voicemail. By the time you wipe your hands and call back an hour later, they already booked the next guy.",
+    "That is a service call gone to someone else just because you were working.",
+    "Pipeline Reception covers the calls your team cannot get to. It answers every single call, qualifies the lead, and books the job.",
+    "We can set you up in a day. Book a demo at pipelinereception.com."
+  ],
+  "caption": "A missed call on a simple swap is money straight to the guy down the street.\n\nHow do you handle the phone when your hands are busy?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbinglife",
+    "#contractorlife",
+    "#tradesbusiness"
+  ],
+  "format": "thread",
+  "local": true,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-10 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
