@@ -1,0 +1,23 @@
+{
+  "topic": "Handling water heater replacement calls on a busy route",
+  "hook_options": [
+    "You are hauling a tank up basement stairs and the phone rings.",
+    "The plumber who picks up first gets the water heater job.",
+    "We hear it all day: you cannot quote a tank while wrenching on a pipe.",
+    "How many emergency tank replacements went to voicemail this week?",
+    "Missed calls while you were replacing a tank cost you jobs."
+  ],
+  "hook_type": "scene",
+  "headline": "Hauling a tank up basement stairs and the phone rings.",
+  "caption": "Third time today your phone buzzed while you were elbow deep in a tank swap.\n\nMost folks with a leaking water heater will not wait for a callback. They just call the next shop on the list.\n\nPipeline Reception answers your calls and books jobs straight into your schedule when you are busy on a site. We can set you up in a day.\n\nBook a demo at pipelinereception.com.\n\nHow many calls do you miss in a typical week?",
+  "format": "photo",
+  "local": true,
+  "kind": "ad",
+  "art_style": "photo",
+  "theme": "light",
+  "photo": "timur-shakerzianov-VAGbjhkxg6I-unsplash.jpg",
+  "slot": "2026-11-10 12:00",
+  "images": [
+    "photo.jpg"
+  ]
+}
