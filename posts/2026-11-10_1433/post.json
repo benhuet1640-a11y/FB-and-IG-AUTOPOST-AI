@@ -1,0 +1,41 @@
+{
+  "topic": "Handling sump pump inspection calls during a service route",
+  "hook_options": [
+    "You're in a crawlspace. Phone rings. You let it go.",
+    "The plumber who picks up gets the dispatch. Not the best one.",
+    "We hear this a lot: I miss the sump pump calls while I'm on a job.",
+    "How many sump pump calls hit voicemail while you were working today?",
+    "You missed sump pump calls while you were busy."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're in a crawlspace. Phone rings. You let it go.",
+    "It's a homeowner asking about a sump pump check. They want someone out today.",
+    "You call them back two hours later when you're back in the van.",
+    "They're already booked with the company that answered on the first ring.",
+    "Pipeline Reception handles the calls your team can't get to, qualifies leads, and books jobs into your schedule. We can get you set up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Sump pump calls are the ones you can't afford to miss when you're under a house.\n\nHow do you usually handle missed calls when you're stuck on a job?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#plumbingservice",
+    "#plumbingcompany"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-10 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
