@@ -963,5 +963,20 @@
     "slot": "2026-11-11 12:00",
     "posted_at": "2026-11-11T17:35:14.107246+00:00",
     "facebook": "1455738530948421_122107441779536726"
+  },
+  {
+    "id": "2026-11-11_2312",
+    "kind": "carousel",
+    "topic": "Handling boiler service calls in older Mount Lebanon basements",
+    "hook": "You're bleeding an old boiler in a Mount Lebanon basement.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": true,
+    "slot": "2026-11-11 18:00",
+    "posted_at": "2026-11-11T23:13:14.838239+00:00",
+    "facebook": "1455738530948421_122107693809536726"
   }
 ]
