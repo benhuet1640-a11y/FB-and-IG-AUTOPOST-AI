@@ -948,5 +948,20 @@
     "slot": "2026-11-11 08:30",
     "posted_at": "2026-11-11T14:26:07.539457+00:00",
     "facebook": "1455738530948421_122107234941536726"
+  },
+  {
+    "id": "2026-11-11_1734",
+    "kind": "ad",
+    "topic": "Handling sewer camera inspection calls during a tight route",
+    "hook": "You're running a sewer camera down a line. Phone rings. You let it go. That caller hangs up and dials the next plumber in the book. Pipeline Reception answers every call, books the job, and we set you up in a day. Book a demo at pipelinereception.com",
+    "format": "tweet",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "tweet",
+    "person": null,
+    "local": true,
+    "slot": "2026-11-11 12:00",
+    "posted_at": "2026-11-11T17:35:14.107246+00:00",
+    "facebook": "1455738530948421_122107441779536726"
   }
 ]
