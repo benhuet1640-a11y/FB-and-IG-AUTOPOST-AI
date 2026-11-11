@@ -919,5 +919,20 @@
     "slot": "2026-11-10 18:00",
     "posted_at": "2026-11-10T23:41:46.772192+00:00",
     "facebook": "1455738530948421_122106574281536726"
+  },
+  {
+    "id": "2026-11-11_1425",
+    "kind": "carousel",
+    "topic": "Whoever picks up gets the job",
+    "hook": "The guy who picks up books the job. Not the best one.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "truth",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-11 08:30",
+    "posted_at": "2026-11-11T14:26:07.539457+00:00",
+    "facebook": "1455738530948421_122107234941536726"
   }
 ]
