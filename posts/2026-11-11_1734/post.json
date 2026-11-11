@@ -1,0 +1,31 @@
+{
+  "topic": "Handling sewer camera inspection calls during a tight route",
+  "hook_options": [
+    "You're running a sewer camera down a line. Phone rings. You let it go.",
+    "The plumber who picks up the phone gets the mainline job.",
+    "We hear the same thing from plumbers: I miss the big ticket calls while down in a line.",
+    "How many mainline jobs hit voicemail while you were scoping a pipe today?",
+    "Sewer jobs you missed this week went to the next guy."
+  ],
+  "hook_type": "scene",
+  "tweet": "You're running a sewer camera down a line. Phone rings. You let it go. That caller hangs up and dials the next plumber in the book. Pipeline Reception answers every call, books the job, and we set you up in a day. Book a demo at pipelinereception.com",
+  "caption": "Mainline jobs pay too well to send to voicemail.\nHow do you handle calls when you're deep in a pipe?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumbers",
+    "#plumbinglife",
+    "#contractorlife",
+    "#smallbusinessowner",
+    "#pittsburgh",
+    "#412"
+  ],
+  "format": "tweet",
+  "local": true,
+  "kind": "ad",
+  "art_style": "tweet",
+  "theme": "dark",
+  "slot": "2026-11-11 12:00",
+  "images": [
+    "slide_01.jpg"
+  ]
+}
