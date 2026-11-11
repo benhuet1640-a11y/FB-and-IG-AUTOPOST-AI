@@ -1,0 +1,41 @@
+{
+  "topic": "Handling boiler service calls in older Mount Lebanon basements",
+  "hook_options": [
+    "You're bleeding a boiler in Mount Lebanon. Phone vibrates. You can't touch it.",
+    "No homeowner with water on their floor listens to your voicemail message.",
+    "We hear it constantly: 'I can't answer calls while troubleshooting older boilers.'",
+    "How many jobs did you lose this week because your hands were filthy?",
+    "How many emergency calls did you miss today while stuck in a tight basement?"
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're bleeding an old boiler in a Mount Lebanon basement.\n\nHands covered in grime. Phone vibrates in your pocket.\n\nYou have to let it ring.",
+    "By the time you wipe your hands and pull off your gloves, it stopped ringing.\n\nNo voicemail left. Just a missed call from a local number.",
+    "Homeowners with water pooling on the floor don't wait for a callback. They tap the next plumber on Google, get an answer, and book the job.\n\nYou lose that work before you even get your gloves off.",
+    "Your office can't catch every overlapping line, and you can't stay glued to your phone while doing real work.\n\nYou shouldn't have to choose between doing the job right and answering the phone.",
+    "We built Pipeline Reception to back up your team.\n\nOur AI answers right away, qualifies the lead, and books the job into your schedule 24/7. We can set you up in a day.\n\nBook a demo at pipelinereception.com"
+  ],
+  "caption": "Most homeowners hang up before your voicemail beep even finishes.\nWhen water is leaking, the first shop to pick up gets the work.\nHow many missed calls showed up on your office log this week?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumbingcontractor",
+    "#plumbinglife",
+    "#homeservices",
+    "#tradesbusiness",
+    "#pittsburgh",
+    "#412"
+  ],
+  "format": "thread",
+  "local": true,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-11 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
