@@ -1,0 +1,40 @@
+{
+  "topic": "Whoever picks up gets the job",
+  "hook_options": [
+    "Under a sink. Your phone vibrates. You keep working.",
+    "The guy who picks up books the job. Not the best one.",
+    "We hear this a lot: I can't pick up the phone and finish the job.",
+    "How many calls hit voicemail while you were elbow-deep today?",
+    "Calls this week that went to the other plumber."
+  ],
+  "hook_type": "truth",
+  "tweets": [
+    "The guy who picks up books the job. Not the best one.",
+    "You're elbow-deep under a sink. The phone buzzes in your pocket. You keep working.",
+    "That caller hits voicemail. They don't wait around. They call the first number that answers.",
+    "Three minutes later that job's on someone else's schedule. Your truck drives past a job you never saw.",
+    "We built Pipeline Reception to stop that. Our receptionist answers every call 24/7, books right into your schedule, and qualifies leads so your team only handles real jobs. It helps your crew, never replaces them. We can set you up in a day.\nBook a demo at pipelinereception.com"
+  ],
+  "caption": "Phone buzzes in your pocket while you're on a job.\nWe answer, qualify, and book straight into the schedule your office uses.\nWe can set you up in a day. How many calls did you miss?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbinglife",
+    "#plumbingservice",
+    "#homeservices",
+    "#tradesbusiness"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-11 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg",
+    "slide_05.jpg"
+  ]
+}
