@@ -1036,5 +1036,20 @@
     "slot": "2026-11-12 12:00",
     "posted_at": "2026-11-12T17:32:05.398772+00:00",
     "facebook": "1455738530948421_122108385027536726"
+  },
+  {
+    "id": "2026-11-12_2323",
+    "kind": "carousel",
+    "topic": "The callback that never happens",
+    "hook": "How many callbacks did you lose to voicemail this week? Book a demo at pipelinereception.com",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "question",
+    "art_style": "thread",
+    "person": null,
+    "local": true,
+    "slot": "2026-11-12 18:00",
+    "posted_at": "2026-11-12T23:24:09.436479+00:00",
+    "facebook": "1455738530948421_122108497983536726"
   }
 ]
