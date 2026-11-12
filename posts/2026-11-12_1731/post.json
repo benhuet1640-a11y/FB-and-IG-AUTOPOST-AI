@@ -1,0 +1,30 @@
+{
+  "topic": "Handling cast iron stack replacement calls during a service route",
+  "hook_options": [
+    "You're cutting a cast iron stack. Phone rings. You let it go.",
+    "The plumber who picks up first gets the repipe job.",
+    "We hear it every day: plumbers losing repipe jobs to voicemail.",
+    "How many cast iron replacement calls went to voicemail today?",
+    "Repipe jobs are lost every week because nobody picked up."
+  ],
+  "hook_type": "scene",
+  "headline": "You're cutting a cast iron stack. Phone rings.",
+  "caption": "Sliding down into a dark basement to cut out a cracked cast iron stack and the phone starts buzzing. You wipe the grease off your glove, but by the time you dig it out, they've already hung up and called the next guy on Google.\n\nThat is a five-figure repipe job walking right out the door.\n\nPipeline Reception answers your calls when you are busy on a job so every single call gets answered and booked straight into your schedule.\n\nWe can get you set up in a day. Book a demo at pipelinereception.com.",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbingcompany",
+    "#plumbingcontractor",
+    "#tradesbusiness"
+  ],
+  "format": "photo",
+  "local": true,
+  "kind": "ad",
+  "art_style": "photo",
+  "theme": "light",
+  "photo": "pexels-6419128.jpg",
+  "slot": "2026-11-12 12:00",
+  "images": [
+    "photo.jpg"
+  ]
+}
