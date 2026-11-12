@@ -1,0 +1,39 @@
+{
+  "topic": "Handling backflow preventer test calls on a service route",
+  "hook_options": [
+    "You're testing a backflow preventer. Phone rings. You let it go.",
+    "The plumber who picks up gets the job. Not the best one.",
+    "Can't answer the phone and test at the same time.",
+    "How many calls hit voicemail while you were testing a backflow valve today?",
+    "A few calls you missed this week while you were stuck on a backflow test"
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're testing a backflow preventer. Phone rings. You let it go.",
+    "If a commercial property needs annual testing and your phone goes to voicemail, they'll call the next number on Google.",
+    "That commercial account ends up with someone else.",
+    "Pipeline Reception picks up calls your team can't get to, qualifies the lead, and books the job into your schedule. We can get you set up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Commercial testing pays well when you actually catch the phone.\n\nHow many service calls hit voicemail while you're out on a backflow test?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#plumbingservice",
+    "#smallbusinessowner"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "dark",
+  "slot": "2026-11-12 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg"
+  ]
+}
