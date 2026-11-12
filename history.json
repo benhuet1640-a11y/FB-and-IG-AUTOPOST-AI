@@ -1007,5 +1007,20 @@
     "slot": "2026-11-12 08:30",
     "posted_at": "2026-11-12T14:32:17.248999+00:00",
     "facebook": "1455738530948421_122108302821536726"
+  },
+  {
+    "id": "2026-11-12_1731",
+    "kind": "ad",
+    "topic": "Handling cast iron stack replacement calls during a service route",
+    "hook": "You're cutting a cast iron stack. Phone rings.",
+    "format": "photo",
+    "photo": "pexels-6419128.jpg",
+    "hook_type": "scene",
+    "art_style": "photo",
+    "person": null,
+    "local": true,
+    "slot": "2026-11-12 12:00",
+    "posted_at": "2026-11-12T17:32:05.398772+00:00",
+    "facebook": "1455738530948421_122108385027536726"
   }
 ]
