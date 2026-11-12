@@ -1,0 +1,39 @@
+{
+  "topic": "The callback that never happens",
+  "hook_options": [
+    "You're elbow-deep under a sink. The phone rings. You let it go.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear this a lot from crews: they can't answer the phone and do the job.",
+    "How many callbacks did you lose to voicemail this week?",
+    "Missed calls go to the guy down the street"
+  ],
+  "hook_type": "question",
+  "tweets": [
+    "How many callbacks did you lose to voicemail this week? Book a demo at pipelinereception.com",
+    "You're on a ladder. Phone buzzes in your pocket. It goes to voicemail. Book a demo at pipelinereception.com",
+    "Customer hangs up and calls the next plumber. That's a booked job on their route, not yours. Book a demo at pipelinereception.com",
+    "Pipeline Reception picks up those calls 24/7, books appointments into your schedule, and qualifies leads so you only chase real jobs. It covers the calls your team can't get to. We can set you up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "If you don't pick up, someone else will. We hear this a lot from crews around town. Pipeline Reception can answer and push booked jobs straight into your calendar. We can set you up in a day. How many callbacks did you miss this week? \u0001\u0001\u0001\u0001\ud83d\udcde",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumbers",
+    "#plumbingservice",
+    "#contractorlife",
+    "#homeservices",
+    "#plumbingcompany",
+    "#pittsburgh"
+  ],
+  "format": "thread",
+  "local": true,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-12 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg"
+  ]
+}
