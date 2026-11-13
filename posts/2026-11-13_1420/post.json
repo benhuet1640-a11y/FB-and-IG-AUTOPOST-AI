@@ -1,0 +1,38 @@
+{
+  "topic": "Price shoppers burying the office line",
+  "hook_options": [
+    "You're on a ladder. The office line lights up. No one can grab it.",
+    "If your office can't answer, someone else will take the call.",
+    "We hear this a lot: schedulers get buried by price shoppers all day.",
+    "How many calls did your scheduler drop today while you were on the tools?",
+    "Three calls the office never qualified this morning, and maybe one was a real job."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're on a ladder. The office line lights up. No one can grab it.",
+    "The scheduler puts people on hold, takes notes, then gets distracted by the next call.",
+    "Real leads pile up while price shoppers chew the day. Techs get pulled off jobs. You call back too late.",
+    "We built Pipeline Reception to handle the calls your team can't get to. It answers 24/7, filters the tire kickers, and books real jobs straight into your schedule. It doesn't replace staff. We can set you up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Office on hold while you're on the ladder.\nPipeline Reception filters the tire kickers and books the real jobs into your calendar.\nHow many calls did your team miss this week?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbinglife",
+    "#homeservices",
+    "#contractorlife"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "dark",
+  "slot": "2026-11-13 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg"
+  ]
+}
