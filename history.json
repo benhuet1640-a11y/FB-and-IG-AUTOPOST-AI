@@ -1073,5 +1073,20 @@
     "slot": "2026-11-13 08:30",
     "posted_at": "2026-11-13T14:20:53.416704+00:00",
     "facebook": "1455738530948421_122108796465536726"
+  },
+  {
+    "id": "2026-11-13_1717",
+    "kind": "ad",
+    "topic": "Handling garbage disposal replacement calls on a busy route",
+    "hook": "You're hauling a disposal out of a tight cabinet. Phone rings. You let it go. They call the next plumber. Pipeline Reception answers the calls you miss and books the job right into your schedule. We can set you up in a day. Book a demo at pipelinereception.com",
+    "format": "tweet",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "tweet",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-13 12:00",
+    "posted_at": "2026-11-13T17:17:38.122651+00:00",
+    "facebook": "1455738530948421_122108862729536726"
   }
 ]
