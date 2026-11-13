@@ -1051,5 +1051,20 @@
     "slot": "2026-11-12 18:00",
     "posted_at": "2026-11-12T23:24:09.436479+00:00",
     "facebook": "1455738530948421_122108497983536726"
+  },
+  {
+    "id": "2026-11-13_1420",
+    "kind": "carousel",
+    "topic": "Price shoppers burying the office line",
+    "hook": "You're on a ladder. The office line lights up. No one can grab it.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-13 08:30",
+    "posted_at": "2026-11-13T14:20:53.416704+00:00",
+    "facebook": "1455738530948421_122108796465536726"
   }
 ]
