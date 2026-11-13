@@ -1,0 +1,30 @@
+{
+  "topic": "Handling garbage disposal replacement calls on a busy route",
+  "hook_options": [
+    "You're hauling a disposal out of a tight cabinet. Phone rings.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I can't answer the phone and do the job.",
+    "How many calls hit voicemail while you were on a job today?",
+    "Four calls you missed this week that went to the guy down the street"
+  ],
+  "hook_type": "scene",
+  "tweet": "You're hauling a disposal out of a tight cabinet. Phone rings. You let it go. They call the next plumber. Pipeline Reception answers the calls you miss and books the job right into your schedule. We can set you up in a day. Book a demo at pipelinereception.com",
+  "caption": "Most missed calls never turn into voicemails.\nThey just dial your competitor.\nHow many leads slipped away while you were under the sink this week?",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbinglife",
+    "#plumbingcontractor",
+    "#contractorlife",
+    "#tradesbusiness"
+  ],
+  "format": "tweet",
+  "local": false,
+  "kind": "ad",
+  "art_style": "tweet",
+  "theme": "dark",
+  "slot": "2026-11-13 12:00",
+  "images": [
+    "slide_01.jpg"
+  ]
+}
