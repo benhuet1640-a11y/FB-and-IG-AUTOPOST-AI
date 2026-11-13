@@ -1,0 +1,39 @@
+{
+  "topic": "Handling supply line replacement calls while on a service route",
+  "hook_options": [
+    "You're torched from a supply line swap. Phone buzzes again.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I can't answer the phone and do the job.",
+    "How many calls hit voicemail while you were on a job today?",
+    "Calls you missed this week went to the guy down the street"
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're torched from a supply line swap. Phone buzzes again.",
+    "You let it go to voicemail because your hands are full of tools.",
+    "That caller hangs up and dials the next number on the list.",
+    "Pipeline Reception answers every call your team can't get to, qualifies the lead, and books the job. We can set you up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Missed calls add up fast when you're busy on the tools.\nHow many new customers went to voicemail this week?\nDrop your thoughts below.",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbers",
+    "#plumbingcontractor",
+    "#plumbingservice",
+    "#smallbusinessowner",
+    "#contractorlife"
+  ],
+  "format": "thread",
+  "local": false,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-13 18:00",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg"
+  ]
+}
