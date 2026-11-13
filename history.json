@@ -1102,5 +1102,20 @@
     "slot": "2026-11-13 12:00",
     "posted_at": "2026-11-13T17:17:38.122651+00:00",
     "facebook": "1455738530948421_122108862729536726"
+  },
+  {
+    "id": "2026-11-13_2331",
+    "kind": "carousel",
+    "topic": "Handling supply line replacement calls while on a service route",
+    "hook": "You're torched from a supply line swap. Phone buzzes again.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": false,
+    "slot": "2026-11-13 18:00",
+    "posted_at": "2026-11-13T23:31:33.303158+00:00",
+    "facebook": "1455738530948421_122108957199536726"
   }
 ]
