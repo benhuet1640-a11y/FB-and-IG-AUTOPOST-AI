@@ -1,0 +1,39 @@
+{
+  "topic": "Handling PEX repipe calls during a busy service route",
+  "hook_options": [
+    "You're hauling old poly out of a basement in Shadyside. Phone rings.",
+    "The plumber who answers gets the job. Not the best one.",
+    "We hear the same thing from plumbers all the time: I can't answer the phone and do the job.",
+    "How many calls hit voicemail while you were on a repipe today?",
+    "You missed calls this week that went to the guy down the street."
+  ],
+  "hook_type": "scene",
+  "tweets": [
+    "You're hauling old poly out of a basement in Shadyside. Phone rings. You let it go.",
+    "That homeowner needs a full repipe. They aren't leaving a message. They're dialing the next number on Google.",
+    "By the time you wipe your hands and check your voicemail at lunch, they've already booked with someone else.",
+    "Pipeline Reception answers every call your team can't get to, qualifies the lead, and books the job. We can get you set up in a day. Book a demo at pipelinereception.com"
+  ],
+  "caption": "Chasing parts all over town is hard enough without missing high ticket calls.\n\nHow do you usually handle the phone when your hands are full?\n\n\ud83d\udccd Pittsburgh, PA",
+  "hashtags": [
+    "#plumbingbusiness",
+    "#plumber",
+    "#plumbingcontractor",
+    "#contractorlife",
+    "#smallbusinessowner",
+    "#pittsburgh",
+    "#412"
+  ],
+  "format": "thread",
+  "local": true,
+  "kind": "carousel",
+  "art_style": "thread",
+  "theme": "light",
+  "slot": "2026-11-14 08:30",
+  "images": [
+    "slide_01.jpg",
+    "slide_02.jpg",
+    "slide_03.jpg",
+    "slide_04.jpg"
+  ]
+}
