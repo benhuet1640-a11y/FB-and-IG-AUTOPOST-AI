@@ -1117,5 +1117,20 @@
     "slot": "2026-11-13 18:00",
     "posted_at": "2026-11-13T23:31:33.303158+00:00",
     "facebook": "1455738530948421_122108957199536726"
+  },
+  {
+    "id": "2026-11-14_1421",
+    "kind": "carousel",
+    "topic": "Handling PEX repipe calls during a busy service route",
+    "hook": "You're hauling old poly out of a basement in Shadyside. Phone rings. You let it go.",
+    "format": "thread",
+    "photo": null,
+    "hook_type": "scene",
+    "art_style": "thread",
+    "person": null,
+    "local": true,
+    "slot": "2026-11-14 08:30",
+    "posted_at": "2026-11-14T14:22:07.162559+00:00",
+    "facebook": "1455738530948421_122109224397536726"
   }
 ]
